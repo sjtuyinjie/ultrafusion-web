@@ -1,3 +1,3 @@
-# nidar-web.github.io
+# Ultra-Fusion project webpage
 
-Static project page for **NIdaR** (anonymous submission template).
+Static project page for **Ultra-Fusion** at [here](https://sjtuyinjie.github.io/ultrafusion-web/).
