@@ -1,0 +1,600 @@
+body {
+  font-family: 'Noto Sans', sans-serif;
+  color: #123245;
+  background:
+    radial-gradient(circle at 8% -8%, rgba(0, 100, 150, 0.12), transparent 36%),
+    radial-gradient(circle at 92% 10%, rgba(84, 174, 210, 0.1), transparent 34%),
+    linear-gradient(180deg, #f6fbff 0%, #fcfeff 36%, #ffffff 100%);
+}
+
+:root {
+  --uf-primary: #006496;
+  --uf-primary-deep: #014e76;
+  --uf-primary-soft: #ecf6fb;
+  --uf-text-strong: #123245;
+  --uf-text-muted: #4f6b79;
+  --uf-border-soft: rgba(0, 100, 150, 0.14);
+  --uf-shadow-soft: 0 14px 36px rgba(0, 40, 70, 0.08);
+}
+
+.uf-hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.uf-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 15% 0%, rgba(0, 100, 150, 0.18), transparent 42%),
+    radial-gradient(circle at 88% 16%, rgba(120, 201, 235, 0.17), transparent 36%);
+  pointer-events: none;
+}
+
+.uf-hero-body {
+  position: relative;
+  z-index: 1;
+  padding-top: 3.8rem;
+  padding-bottom: 3.4rem;
+}
+
+.publication-title {
+    font-family: 'Google Sans', sans-serif;
+    max-width: 1400px;
+    margin: 0 auto 0.75rem auto;
+    line-height: 1.15;
+    text-wrap: balance;
+    letter-spacing: -0.02em;
+    color: #0f2f43;
+}
+
+.conference-authors {
+  letter-spacing: 0.04em;
+  color: var(--uf-primary-deep) !important;
+  opacity: 0.9;
+}
+
+.hero .link-block .button.is-dark {
+  background: linear-gradient(135deg, #0d4967 0%, #006496 50%, #2b88b5 100%);
+  border: 0;
+  box-shadow: 0 10px 26px rgba(0, 70, 108, 0.24);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+}
+
+.hero .link-block .button.is-dark:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 30px rgba(0, 70, 108, 0.3);
+  filter: saturate(1.08);
+}
+
+.hero .link-block .button.is-dark[disabled] {
+  opacity: 0.9;
+  cursor: not-allowed;
+}
+
+.section-title {
+  color: var(--uf-primary) !important;
+  font-weight: 800 !important;
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.01em;
+}
+
+.section-title-compact {
+  margin-bottom: 0 !important;
+}
+
+.content-card {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(244, 251, 255, 0.9));
+  border: 1px solid var(--uf-border-soft);
+  border-radius: 16px;
+  box-shadow: var(--uf-shadow-soft);
+  padding: 1.35rem 1.45rem 1.4rem;
+}
+
+.content-card .content p,
+.content-card .content li {
+  color: var(--uf-text-strong);
+}
+
+.content-card .content strong {
+  color: var(--uf-primary-deep);
+}
+
+.publication-video,
+.bal-container-small {
+  border: 1px solid rgba(0, 100, 150, 0.16);
+  box-shadow: 0 12px 28px rgba(0, 40, 70, 0.16);
+}
+
+.section {
+  width: 100%;
+  padding-top: 2.65rem;
+  padding-bottom: 2.65rem;
+}
+
+.nidar-slogan-sub {
+  color: var(--uf-text-muted);
+}
+
+
+.footer .icon-link {
+    font-size: 25px;
+    color: #000;
+}
+
+.link-block a {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.dnerf {
+  font-variant: small-caps;
+}
+
+
+.teaser .hero-body {
+  padding-top: 0;
+  padding-bottom: 3rem;
+}
+
+.teaser {
+  font-family: 'Google Sans', sans-serif;
+}
+
+
+.hero-wide-container {
+  max-width: 1500px !important;
+}
+
+.benchmark-wide-container {
+  max-width: 1500px !important;
+}
+
+.publication-banner {
+  max-height: parent;
+
+}
+
+
+
+.publication-banner video {
+  position: relative;
+  left: auto;
+  top: auto;
+  transform: none;
+  object-fit: fit;
+}
+
+.publication-header .hero-body {
+}
+
+.publication-authors {
+    font-family: 'Google Sans', sans-serif;
+}
+
+.publication-venue {
+    color: #555;
+    width: fit-content;
+    font-weight: bold;
+}
+
+.publication-awards {
+    color: #ff3860;
+    width: fit-content;
+    font-weight: bolder;
+}
+
+.publication-authors {
+}
+
+.publication-authors a {
+   color: hsl(204, 86%, 53%) !important;
+}
+
+.publication-authors a:hover {
+    text-decoration: underline;
+}
+
+.author-block {
+  display: inline-block;
+}
+
+.publication-banner img {
+}
+
+.publication-authors {
+  /*color: #4286f4;*/
+}
+
+.publication-video {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%;
+
+    overflow: hidden;
+    border-radius: 10px !important;
+}
+
+.publication-video iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.publication-body img {
+}
+
+.results-carousel {
+  overflow: hidden;
+
+}
+
+.results-carousel .item {
+  margin: 5px;
+  overflow: hidden;
+  border: 1px solid #bbb;
+  border-radius: 10px;
+  padding: 0;
+  font-size: 0;
+}
+
+.results-carousel video {
+  margin: 0;
+}
+
+
+.interpolation-panel {
+  background: #f5f5f5;
+  border-radius: 10px;
+}
+
+.interpolation-panel .interpolation-image {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.interpolation-video-column {
+}
+
+.interpolation-panel .slider {
+  margin: 0 !important;
+}
+
+.interpolation-panel .slider {
+  margin: 0 !important;
+}
+
+#interpolation-image-wrapper {
+  width: 100%;
+}
+#interpolation-image-wrapper img {
+  border-radius: 5px;
+}
+
+.bal-container-small {
+  position: relative;
+  width: 100%;
+  /* use aspect ratio instead of fixed height so window width determines height and images are fully visible */
+  /* padding-bottom creates a 16:9 ratio container */
+  padding-bottom: 56.25%;
+  height: auto;
+  cursor: grab;
+  overflow: hidden;
+  border-radius: 10px;
+  margin: 5px;
+}
+
+.bal-container-big {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  cursor: grab;
+  overflow: hidden;
+}
+
+.bal-after {
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.bal-before {
+  display: block;
+  position: absolute;
+  top: 0;
+  /* right: 0; */
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 15;
+  overflow: hidden;
+}
+
+.bal-before-inset {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.bal-after img,
+.bal-before img {
+  /* show whole image (letterbox if needed) instead of cropping */
+  object-fit: contain;
+  /* remove black letterbox bars; transparent lets page background show through */
+  background: transparent;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-position: 50% 50%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+.bal-beforePosition {
+  background: #121212;
+  color: #fff;
+  left: 0;
+  pointer-events: none;
+  border-radius: 0.2rem;
+  padding: 2px 10px;
+}
+
+.bal-afterPosition {
+  background: #121212;
+  color: #fff;
+  right: 0;
+  pointer-events: none;
+  border-radius: 0.2rem;
+  padding: 2px 10px;
+}
+
+.beforeLabel {
+  position: absolute;
+  bottom: 0;
+  margin: 1rem;
+  font-size: 1em;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+.afterLabel {
+  position: absolute;
+  bottom: 0;
+  margin: 1rem;
+  font-size: 1em;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+.bal-handle {
+  height: 41px;
+  width: 41px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -20px;
+  margin-top: -21px;
+  border: 2px solid #fff;
+  border-radius: 1000px;
+  z-index: 20;
+  pointer-events: none;
+  box-shadow: 0 0 10px rgb(12, 12, 12);
+}
+
+.handle-left-arrow,
+.handle-right-arrow {
+  width: 0;
+  height: 0;
+  border: 6px inset transparent;
+  position: absolute;
+  top: 50%;
+  margin-top: -6px;
+}
+
+.handle-left-arrow {
+  border-right: 6px solid #fff;
+  left: 50%;
+  margin-left: -17px;
+}
+
+.handle-right-arrow {
+  border-left: 6px solid #fff;
+  right: 50%;
+  margin-right: -17px;
+}
+
+.bal-handle::before {
+  bottom: 50%;
+  margin-bottom: 20px;
+  box-shadow: 0 0 10px rgb(12, 12, 12);
+}
+
+.bal-handle::after {
+  top: 50%;
+  margin-top: 20.5px;
+  box-shadow: 0 0 5px rgb(12, 12, 12);
+}
+
+.bal-handle::before,
+.bal-handle::after {
+  content: " ";
+  display: block;
+  width: 2px;
+  background: #fff;
+  height: 9999px;
+  position: absolute;
+  left: 50%;
+  margin-left: -1.5px;
+}
+
+.title.is-3{
+  color: var(--uf-primary);
+}
+
+/* --- NIDAR section title with logo (Isaac Sim / nuScenes) --- */
+.title-with-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 0.75rem;
+}
+
+/* "with [logo] Platform" kept on one line, wraps as a unit after the main title text */
+.title-sub-line {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  gap: 0;
+}
+.title-sub-line::before {
+  content: "with\00a0";
+  font-size: 0.8em;
+  font-weight: 700;
+  color: #0b6fa4;
+}
+
+.title-with-logo .subtitle-with {
+  font-size: 0.8em;
+  font-weight: 700;
+  color: #0b6fa4;
+  white-space: nowrap;
+}
+
+.section-logo {
+  height: 28px;
+  width: auto;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 4px;
+}
+
+/* logo wrapper inside the h2 title */
+.logo-before {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+  margin: 0 2px 0 6px;
+}
+
+/* zero-shot icon in comparison header */
+.zeroshot-icon {
+  height: 18px;
+  width: auto;
+  vertical-align: middle;
+  margin-left: 3px;
+  display: inline-block;
+}
+
+/* --- Comparison group header row (3x4 grid) --- */
+.comparison-group-header {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  margin: 0 0 0.25rem 0;
+  padding: 0 0.75rem;
+}
+
+.comparison-group-cell {
+  text-align: center;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: #1f3b4d;
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 1023px) {
+  .comparison-group-header {
+    display: none; /* avoid mismatch when Bulma stacks columns */
+  }
+}
+
+/* --- Teaser slogan section --- */
+.nidar-slogan-section {
+  padding-top: 2.5rem;
+  padding-bottom: 1.5rem;
+  background: linear-gradient(135deg, #f0f8ff 0%, #fafffe 60%, #fff8f0 100%);
+}
+
+.nidar-slogan {
+  font-family: 'Google Sans', sans-serif;
+  font-weight: 800;
+  font-size: clamp(13px, 2vw, 22px);
+  line-height: 1.25;
+  margin: 0 auto 0.4rem auto;
+  letter-spacing: 0.2px;
+  color: unset;
+}
+
+.nidar-slogan span {
+  display: inline;
+  padding: 0 2px;
+}
+
+/* Each word gets an explicit color; use !important to beat Bulma/title overrides */
+.nidar-slogan .s1 { color: #006496 !important; }
+.nidar-slogan .s2 { color: #3b82f6 !important; }
+.nidar-slogan .s3 { color: #8b5cf6 !important; }
+.nidar-slogan .s4 { color: #ef4444 !important; }
+.nidar-slogan .s5 {
+  background: linear-gradient(90deg, #f59e0b 0%, #10b981 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent !important;
+}
+.nidar-slogan .s-dot { color: #10b981 !important; }
+
+.nidar-slogan-sub {
+  font-family: 'Noto Sans', sans-serif;
+  font-size: clamp(11px, 1.2vw, 14px);
+  color: #555;
+  max-width: 580px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+/*
+Optionally, if you want the container to shrink to the image's natural height
+instead of using a fixed 16:9 ratio, you can remove the padding-bottom rule
+above and instead set the height in script after the image loads:
+
+let img = document.querySelector('#example1 .bal-after img');
+img.onload = () => {
+  img.closest('.bal-container-small').style.height = img.offsetHeight + 'px';
+};
+
+or restructure the HTML so the image isn't absolutely positioned. The
+transparent background ensures no visible black edges even if the container
+ratio does not match the image.
+*/

@@ -1,0 +1,1346 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+    content="Ultra-Fusion: An Ultra-Resilient Tightly-Coupled Multi-Sensor Fusion SLAM Framework under Sensor Degradation and Spatiotemporal Uncertainty for Intelligent Transportation Systems.">
+  <meta name="keywords" content="SLAM, multi-sensor fusion, localization, intelligent transportation systems, LiDAR, visual-inertial odometry, GNSS, wheel odometry">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ultra-Fusion: Ultra-Resilient Multi-Sensor Fusion SLAM for ITS</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <style>
+    .ultrafusion-title span {
+      background-size: 420% 420%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradientShift 1.8s ease-in-out infinite, titleGlow 1.2s ease-in-out infinite;
+    }
+
+    .ultrafusion-title .ultra-word {
+      background-image: linear-gradient(135deg, rgb(0, 70, 120) 0%, rgb(0, 100, 150) 45%, rgb(90, 170, 210) 100%);
+    }
+
+    .ultrafusion-title .hyphen-word {
+      background-image: linear-gradient(135deg, rgb(0, 80, 130) 0%, rgb(0, 100, 150) 50%, rgb(110, 190, 230) 100%);
+    }
+
+    .ultrafusion-title .fusion-word {
+      background-image: linear-gradient(135deg, rgb(0, 65, 115) 0%, rgb(0, 100, 150) 45%, rgb(100, 180, 220) 100%);
+    }
+
+    @keyframes gradientShift {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    @keyframes titleGlow {
+      0%,
+      100% {
+        filter: brightness(1) saturate(1);
+      }
+
+      50% {
+        filter: brightness(1.28) saturate(1.3);
+      }
+    }
+
+    .viewer-section-wrap {
+      width: 100%;
+      max-width: min(1180px, 96vw);
+      margin: 0 auto;
+    }
+
+    .viewer-dual-layout {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.25rem;
+      align-items: start;
+      width: 100%;
+    }
+
+    @media (max-width: 900px) {
+      .viewer-dual-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .viewer-panel {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .viewer-panel-title {
+      margin: 0 0 0.5rem;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #1b3d57;
+      text-align: left;
+    }
+
+    .viewer-canvas-wrapper {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      min-height: 240px;
+      max-height: min(36vw, 420px);
+      border-radius: 12px;
+      overflow: hidden;
+      background: linear-gradient(180deg, #0b1620 0%, #13293b 100%);
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.22);
+    }
+
+    .viewer-canvas-wrapper canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .viewer-panel-viewport {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .viewer-status {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 0.5rem 0.75rem;
+      color: #f2f7ff;
+      font-size: 0.85rem;
+      text-align: left;
+      background: rgba(6, 14, 22, 0.72);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .viewer-actions {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 0.5rem;
+    }
+
+    .viewer-retry-button {
+      border: none;
+      border-radius: 999px;
+      padding: 0.35rem 0.9rem;
+      font-size: 0.9rem;
+      color: #ffffff;
+      background: #1f6ca8;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .viewer-retry-button:hover {
+      background: #2d7fbe;
+    }
+
+    .viewer-retry-button[hidden] {
+      display: none;
+    }
+
+    .viewer-tips {
+      margin-top: 0.65rem;
+      color: #204a66;
+      font-size: 0.96rem;
+    }
+  </style>
+  <!-- <link rel="icon" href="./static/images/favicon.svg"> -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+  <script src="./static/js/script.js"></script>
+
+</head>
+
+<body>
+
+  <!-- <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://hypernerf.github.io">
+            HyperNeRF
+          </a>
+          <a class="navbar-item" href="https://nerfies.github.io">
+            Nerfies
+          </a>
+          <a class="navbar-item" href="https://latentfusion.github.io">
+            LatentFusion
+          </a>
+          <a class="navbar-item" href="https://photoshape.github.io">
+            PhotoShape
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav> -->
+
+
+  <section class="hero uf-hero">
+    <div class="hero-body uf-hero-body">
+      <div class="container hero-wide-container">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">
+              <span class="ultrafusion-title" style="font-weight: bolder;">
+                <span class="ultra-word">Ultra</span><span class="hyphen-word">-</span><span class="fusion-word">Fusion</span>
+              </span>: An Ultra-Resilient Tightly-Coupled Multi-Sensor Fusion SLAM Framework Under Sensor Degradation and Spatiotemporal Uncertainty for Intelligent Transportation Systems
+            </h1>
+            <h3 class="title is-4 conference-authors">IEEE Transactions on Intelligent Transportation Systems (Under Review)</h3>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">Anonymous Authors</span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">Anonymous Institution(s)</span>
+            </div>
+            <div class="column has-text-centered">
+              <span class="link-block">
+                <button class="external-link button is-normal is-rounded is-dark" disabled>
+                  <span class="icon">
+                    <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper (TBD)</span>
+                </button>
+              </span>
+              <span class="link-block">
+                <button class="external-link button is-normal is-rounded is-dark" disabled>
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code (TBD)</span>
+                </button>
+              </span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- <section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <video id="teaser" autoplay muted loop playsinline height="100%">
+        <source src="./static/videos/teaser.mp4"
+                type="video/mp4">
+      </video>
+      <h2 class="subtitle has-text-centered">
+        <span class="dnerf">Nerfies</span> turns selfie videos from your phone into
+        free-viewpoint
+        portraits.
+      </h2>
+    </div>
+  </div>
+</section> -->
+
+
+  <!-- <section class="hero is-light is-small">
+    <div class="hero-body">
+      <div class="container">
+        <div id="results-carousel" class=" carousel results-carousel">
+          <div class="item item-room">
+            <video poster="" id="room" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/room_video_comp3.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+  
+          <div class="item item-garden">
+            <video poster="" id="garden" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/garden_video_comp3.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="item item-bicycle">
+            <video poster="" id="bicycle" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/bicycle_video_comp3.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="item item-bonsai">
+            <video poster="" id="bonsai" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/bonsai_video_comp3.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="item item-counter">
+            <video poster="" id="counter" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/counter_video_comp3.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="item item-kitchen">
+            <video poster="" id="kitchen" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/kitchen_video_comp3.mp4" type="video/mp4">
+            </video>
+          </div>
+        <div class="item item-train">
+          <video poster="" id="train" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/train_video_comp3.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-struck">
+          <video poster="" id="toby" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/truck_video_comp3.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-stump">
+          <video poster="" id="stump" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/stump_video_comp3.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        </div>
+        <p>The caption displays both the file size and the Structural Similarity Index (SSIM)</p>
+      </div>
+    </div>
+  </section> -->
+
+  <!-- Slogan section -->
+  <section class="section nidar-slogan-section">
+    <div class="container is-max-desktop has-text-centered">
+      <p class="nidar-slogan">
+        <span class="s1">Robust</span>&nbsp;<span class="s3">Fusion</span>&nbsp;<span class="s4">for</span>&nbsp;<span class="s5">Degraded Multi-Sensor Localization</span><span class="s-dot"></span>
+      </p>
+      <p class="nidar-slogan-sub">A unified timestamp-ordered estimator for resilient localization across sensors, platforms, and challenging transportation scenarios.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <!-- Teaser image -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <figure class="image">
+            <img src="./static/images/teaser4.png" alt="Ultra-Fusion teaser">
+          </figure>
+        </div>
+      </div>
+
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths content-card">
+          <h2 class="title is-3 section-title">TL;DR</h2>
+          <div class="content has-text-justified">
+            <p>
+              <strong>Ultra-Fusion</strong> is an ultra-resilient tightly-coupled multi-sensor fusion SLAM framework for intelligent transportation systems.
+              It unifies RGB, IMU, depth, wheel, GNSS, and LiDAR measurements within a timestamp-ordered sliding-window estimator,
+              enabling robust localization under sensor degradation and spatiotemporal uncertainty.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths content-card">
+          <h2 class="title is-3 section-title">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              Reliable localization is a fundamental capability for intelligent transportation systems, including autonomous driving, legged robots,
+              and aerial vehicles. Although multi-sensor fusion has become a promising paradigm for robust localization, practical systems remain
+              fragile when sensors degrade, such as under poor illumination, LiDAR degeneracy, wheel slippage, or GNSS denial, and when
+              spatiotemporal calibration is imperfect.
+            </p>
+            <p>
+              To address these challenges, we propose <strong>Ultra-Fusion</strong>, an ultra-resilient tightly-coupled multi-sensor fusion SLAM
+              framework built upon a unified timestamp-ordered estimator. Ultra-Fusion combines condition-aware initialization,
+              continuous-time LiDAR--inertial geometric modeling, degradation-aware factor scheduling, and online refinement of sensor time offsets
+              and extrinsic parameters. We further introduce the <strong>M3DGR</strong> benchmark and conduct a large-scale evaluation of
+              <strong>60 representative SLAM systems</strong>. Extensive experiments on M3DGR, M2DGR-Plus, KAIST, GrandTour, and MARS-LVIG
+              demonstrate consistent state-of-the-art performance across wheeled robots, legged platforms, and autonomous vehicles.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths content-card">
+          <h2 class="title is-3 section-title">Contributions</h2>
+          <div class="content has-text-justified">
+            <ul>
+              <li>
+                We propose <strong>Ultra-Fusion</strong>, a tightly-coupled multi-sensor fusion SLAM framework that unifies asynchronous sensing streams
+                within a timestamp-ordered sliding-window estimator, enabling tighter cross-modal interaction than modular coordination schemes.
+              </li>
+              <li>
+                We introduce a <strong>condition-aware and spatiotemporally consistent estimation strategy</strong> that combines dynamic and
+                low-excitation initialization, continuous-time LiDAR modeling, and online refinement of selected time-offset and extrinsic parameters.
+              </li>
+              <li>
+                We develop a <strong>degradation-aware tightly-coupled fusion mechanism</strong> that performs factor-level scheduling, gating,
+                and down-weighting directly within the unified optimization problem, and we validate it through large-scale benchmarking across
+                M3DGR, M2DGR-Plus, KAIST, GrandTour, and MARS-LVIG.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths content-card">
+          <h2 class="title is-3 section-title">Pipeline</h2>
+          <div class="content has-text-centered">
+            <figure class="image">
+              <img src="./static/images/pipeline_test.png" alt="Ultra-Fusion pipeline overview">
+            </figure>
+            <p class="has-text-justified">
+              <strong>Ultra-Fusion pipeline.</strong> Heterogeneous sensor measurements are organized in timestamp order and fused in a common
+              sliding-window estimator with condition-aware initialization, continuous-time LiDAR modeling, degradation-aware factor scheduling,
+              and online spatiotemporal refinement.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container benchmark-wide-container">
+      <div class=" has-text-centered">
+        <div class="title-with-logo">
+          <h2 class="title is-3 section-title section-title-compact">Benchmark Highlights <span class="title-sub-line"><span class="logo-before"><img class="section-logo" src="./static/images/nuscenes_data.png" alt="M3DGR benchmark" loading="lazy"></span><span class="subtitle-with">M3DGR / M2DGR-Plus</span></span></h2>
+        </div>
+        <div class="columns is-centered">
+          <div class="column is-full">
+            <div class="content has-text-justified">
+              <p>
+                We evaluate Ultra-Fusion against representative vision-based, LiDAR-based, and fusion-based SLAM systems on challenging benchmark
+                sequences. <strong>The proposed framework consistently improves the balance between nominal accuracy and robustness under degradation,</strong>
+                especially in scenarios involving visual failure, LiDAR degeneracy, wheel slippage, GNSS denial, and calibration uncertainty.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="columns is-multiline is-centered">
+          <!-- Column group header -->
+          <div class="comparison-group-header">
+            <div class="comparison-group-cell">vision-based</div>
+            <div class="comparison-group-cell">LiDAR-based</div>
+            <div class="comparison-group-cell">fusion-based</div>
+            <div class="comparison-group-cell">ours</div>
+          </div>
+
+          <!-- 3x4 grid of comparisons -->
+
+          <!-- Example 1 (copy of original first column example) -->
+          <div class="column is-one-quarter">
+            <div id="example1" class="bal-container-small">
+              <div class="bal-after">
+                <img src="./static/images/render/lidar4d/4d40.png">
+                <div class="bal-afterPosition afterLabel" style="z-index:1;">ORB-SLAM3</div>
+              </div>
+              <div class="bal-before" style="width:50%;">
+                <div class="bal-before-inset" style="width: 539px;"><img src="./static/images/render/gt/gt40.png"><div class="bal-beforePosition beforeLabel">GT</div></div>
+              </div>
+              <div class="bal-handle" style="left:50%;"><span class=" handle-left-arrow"></span><span class="handle-right-arrow"></span></div>
+            </div>
+          </div>
+
+          <!-- Example 2 -->
+          <div class="column is-one-quarter">
+            <div id="example2" class="bal-container-small">
+              <div class="bal-after">
+                <img src="./static/images/render/lidarnerf/nerf40.png">
+                <div class="bal-afterPosition afterLabel">CT-LIO</div>
+              </div>
+              <div class="bal-before" style="width:99%;">
+                <div class="bal-before-inset" style="width: 539px;"><img src="./static/images/render/gt/gt40.png"><div class="bal-beforePosition beforeLabel">GT</div></div>
+              </div>
+              <div class="bal-handle" style="left:99%;"><span class=" handle-left-arrow"></span><span class="handle-right-arrow"></span></div>
+            </div>
+          </div>
+
+          <!-- Example 3 -->
+          <div class="column is-one-quarter">
+            <div id="example3" class="bal-container-small">
+              <div class="bal-after">
+                <img src="./static/images/render/lidarrt/rt40.png">
+                <div class="bal-afterPosition afterLabel" style="z-index:1;">Fast-LIVO2</div>
+              </div>
+              <div class="bal-before" style="width:99%;">
+                <div class="bal-before-inset" style="width: 539px;"><img src="./static/images/render/gt/gt40.png"><div class="bal-beforePosition beforeLabel">GT</div></div>
+              </div>
+              <div class="bal-handle" style="left:99%;"><span class=" handle-left-arrow"></span><span class="handle-right-arrow"></span></div>
+            </div>
+          </div>
+
+          <!-- Example 4 (duplicate of original Example 1 to make 4 columns) -->
+          <div class="column is-one-quarter">
+            <div id="example4" class="bal-container-small">
+              <div class="bal-after">
+                <img src="./static/images/render/NIDAR/our40.png">
+                <div class="bal-afterPosition afterLabel" style="z-index:1;">Ultra-Fusion</div>
+              </div>
+              <div class="bal-before" style="width:50%;">
+                <div class="bal-before-inset" style="width: 539px;"><img src="./static/images/render/gt/gt40.png"><div class="bal-beforePosition beforeLabel">GT</div></div>
+              </div>
+              <div class="bal-handle" style="left:50%;"><span class=" handle-left-arrow"></span><span class="handle-right-arrow"></span></div>
+            </div>
+          </div>
+
+          <!-- Example 5 (original Example 4) -->
+          <div class="column is-one-quarter">
+            <div id="example5" class="bal-container-small">
+              <div class="bal-after">
+                <img src="./static/images/render/lidar4d/4d17.png">
+                <div class="bal-afterPosition afterLabel" style="z-index:1;">VINS-Mono</div>
+              </div>
+              <div class="bal-before" style="width:57%;">
+                <div class="bal-before-inset" style="width: 628px;"><img src="./static/images/render/gt/gt17.png"><div class="bal-beforePosition beforeLabel">GT</div></div>
+              </div>
+              <div class="bal-handle" style="left:57%;"><span class=" handle-left-arrow"></span><span class="handle-right-arrow"></span></div>
+            </div>
+          </div>
+
+          <!-- Example 6 (original Example 5) -->
+          <div class="column is-one-quarter">
+            <div id="example6" class="bal-container-small">
+              <div class="bal-after">
+                <img src="./static/images/render/lidarnerf/nerf17.png">
+                <div class="bal-afterPosition afterLabel">HM-LIO</div>
+              </div>
+              <div class="bal-before" style="width:50%;">
+                <div class="bal-before-inset" style="width: 539px;"><img src="./static/images/render/gt/gt17.png"><div class="bal-beforePosition beforeLabel">GT</div></div>
+              </div>
+              <div class="bal-handle" style="left:50%;"><span class=" handle-left-arrow"></span><span class="handle-right-arrow"></span></div>
+            </div>
+          </div>
+
+          <!-- Example 7 (original Example 6) -->
+          <div class="column is-one-quarter">
+            <div id="example7" class="bal-container-small">
+              <div class="bal-after">
+                <img src="./static/images/render/lidarrt/rt17.png">
+                <div class="bal-afterPosition afterLabel">Ground-Fusion++</div>
+              </div>
+              <div class="bal-before" style="width:50%;">
+                <div class="bal-before-inset" style="width: 539px;"><img src="./static/images/render/gt/gt17.png"><div class="bal-beforePosition beforeLabel">GT</div></div>
+              </div>
+              <div class="bal-handle" style="left:50%;"><span class=" handle-left-arrow"></span><span class="handle-right-arrow"></span></div>
+            </div>
+          </div>
+
+          <!-- Example 8 (duplicate of original Example 4 to fill 4 columns) -->
+          <div class="column is-one-quarter">
+            <div id="example8" class="bal-container-small">
+              <div class="bal-after">
+                <img src="./static/images/render/NIDAR/our17.png">
+                <div class="bal-afterPosition afterLabel" style="z-index:1;">Ultra-Fusion</div>
+              </div>
+              <div class="bal-before" style="width:57%;">
+                <div class="bal-before-inset" style="width: 628px;"><img src="./static/images/render/gt/gt17.png"><div class="bal-beforePosition beforeLabel">GT</div></div>
+              </div>
+              <div class="bal-handle" style="left:57%;"><span class=" handle-left-arrow"></span><span class="handle-right-arrow"></span></div>
+            </div>
+          </div>
+
+          <!-- Example 9 (original Example 7) -->
+          <div class="column is-one-quarter">
+            <div id="example9" class="bal-container-small">
+              <div class="bal-after">
+                <img src="./static/images/render/lidar4d/4d2.png">
+                <div class="bal-afterPosition afterLabel">GVINS</div>
+              </div>
+              <div class="bal-before" style="width:62%;">
+                <div class="bal-before-inset" style="width: 539px;"><img src="./static/images/render/gt/gt2.png"><div class="bal-beforePosition beforeLabel">GT</div></div>
+              </div>
+              <div class="bal-handle" style="left:62%;"><span class=" handle-left-arrow"></span><span class="handle-right-arrow"></span></div>
+            </div>
+          </div>
+
+          <!-- Example 10 (original Example 8) -->
+          <div class="column is-one-quarter">
+            <div id="example10" class="bal-container-small">
+              <div class="bal-after">
+                <img src="./static/images/render/lidarnerf/nerf2.png">
+                <div class="bal-afterPosition afterLabel">IESKF-LIO</div>
+              </div>
+              <div class="bal-before" style="width:56%;">
+                <div class="bal-before-inset" style="width: 628px;"><img src="./static/images/render/gt/gt2.png"><div class="bal-beforePosition beforeLabel">GT</div></div>
+              </div>
+              <div class="bal-handle" style="left:56%;"><span class=" handle-left-arrow"></span><span class="handle-right-arrow"></span></div>
+            </div>
+          </div>
+
+          <!-- Example 11 (original Example 9) -->
+          <div class="column is-one-quarter">
+            <div id="example11" class="bal-container-small">
+              <div class="bal-after">
+                <img src="./static/images/render/lidarrt/rt2.png">
+                <div class="bal-afterPosition afterLabel">Coco-LIC</div>
+              </div>
+              <div class="bal-before" style="width:50%;">
+                <div class="bal-before-inset" style="width: 539px;"><img src="./static/images/render/gt/gt2.png"><div class="bal-beforePosition beforeLabel">GT</div></div>
+              </div>
+              <div class="bal-handle" style="left:50%;"><span class=" handle-left-arrow"></span><span class="handle-right-arrow"></span></div>
+            </div>
+          </div>
+
+          <!-- Example 12 (duplicate of original Example 7 to fill 4 columns) -->
+          <div class="column is-one-quarter">
+            <div id="example12" class="bal-container-small">
+              <div class="bal-after">
+                <img src="./static/images/render/NIDAR/our2.png">
+                <div class="bal-afterPosition afterLabel">Ultra-Fusion</div>
+              </div>
+              <div class="bal-before" style="width:62%;">
+                <div class="bal-before-inset" style="width: 539px;"><img src="./static/images/render/gt/gt2.png"><div class="bal-beforePosition beforeLabel">GT</div></div>
+              </div>
+              <div class="bal-handle" style="left:62%;"><span class=" handle-left-arrow"></span><span class="handle-right-arrow"></span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <script>
+    // new BeforeAfter({
+    //   id: '#example1'
+    // });
+    // new BeforeAfter({
+    //   id: '#example2'
+    // });
+    // new BeforeAfter({
+    //   id: '#example4'
+    // });
+    // new BeforeAfter({
+    //   id: '#example5'
+    // });
+    // new BeforeAfter({
+    //   id: '#example7'
+    // });
+    // new BeforeAfter({
+    //   id: '#example8'
+    // });
+    for (let i = 1; i <= 12; ++i) {
+      new BeforeAfter({ id: '#example' + i });
+    }
+
+  </script>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths content-card">
+          <div class="title-with-logo">
+            <h2 class="title is-3 section-title section-title-compact">Robustness Across Platforms <span class="title-sub-line"><span class="logo-before"><img class="section-logo" src="./static/images/isaacsim.png" alt="Cross-platform evaluation" loading="lazy"></span><span class="subtitle-with">KAIST / GrandTour / MARS-LVIG</span></span></h2>
+          </div>
+          <div class="content has-text-justified">
+            <p>
+              To validate deployment-oriented performance, we further evaluate Ultra-Fusion on high-speed driving, legged locomotion, and aerial
+              localization benchmarks. <strong>The results show that the proposed framework remains accurate and stable across long-term, degraded,
+              and cross-platform operating conditions, rather than being tuned to a single robot or sensing regime.</strong>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 1: Video + Trajectory Evaluation side by side (same width as Intensity Comparisons) -->
+    <div class="container">
+      <div class="columns" style="margin-top: 1rem; align-items: flex-start;">
+        <!-- Left: SLAM Process Video (wider) -->
+        <div class="column is-three-fifths">
+          <div class="publication-video">
+            <video id="slam-demo" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/images/3_10.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          <p class="has-text-centered" style="margin-top: 0.5rem;">
+            <strong>Robustness visualization.</strong> Representative qualitative examples of multi-sensor localization and mapping under challenging conditions.
+          </p>
+        </div>
+        <!-- Right: Trajectory Evaluation (narrower), matched height to video -->
+        <div class="column is-two-fifths" style="display: flex; flex-direction: column;">
+          <div id="evo-wrapper" style="flex: 1;">
+            <img src="./static/images/evo.png" alt="SLAM trajectory evaluation"
+              style="width: 100%; height: 0; display: block; border-radius: 6px;">
+          </div>
+          <p class="has-text-justified" style="margin-top: 0.5rem;">
+            <strong>Trajectory evaluation.</strong> Quantitative trajectory comparison and error analysis using the <a href="https://michaelgrupp.github.io/evo/" target="_blank" rel="noopener">evo toolbox</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      (function() {
+        function syncEvoHeight() {
+          var video = document.getElementById('slam-demo');
+          var wrapper = document.getElementById('evo-wrapper');
+          var img = wrapper ? wrapper.querySelector('img') : null;
+          if (!video || !img) return;
+          // publication-video uses padding-bottom:56.25%, so height = width * 0.5625
+          var videoCol = video.closest('.column');
+          if (!videoCol) return;
+          var videoH = videoCol.querySelector('.publication-video').offsetHeight;
+          if (videoH > 0) {
+            img.style.height = videoH + 'px';
+            img.style.objectFit = 'contain';
+            img.style.objectPosition = 'top';
+          }
+        }
+        window.addEventListener('load', syncEvoHeight);
+        window.addEventListener('resize', syncEvoHeight);
+        // Also try after a short delay for late renders
+        setTimeout(syncEvoHeight, 300);
+      })();
+    </script>
+
+    <!-- Row 2: Model demo video (same width as text description) -->
+    <!-- <div class="container is-max-desktop">
+      <div class="columns is-centered" style="margin-top: 1.5rem;">
+        <div class="column is-four-fifths">
+          <div class="publication-video">
+            <video id="model-demo" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/images/3_11.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          <p class="has-text-centered" style="margin-top: 0.5rem;">
+            <strong>Framework demonstration.</strong> Illustration of the Ultra-Fusion pipeline and its resilience to sensing degradation and calibration error.
+          </p>
+        </div>
+      </div>
+    </div> -->
+
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-12 content-card viewer-section-wrap">
+          <h2 class="title is-3 section-title">Online Point Cloud Demo</h2>
+          <div class="content has-text-justified">
+            <p>
+              This online visualization shows the color mapping result of <strong>Ultra-Fusion</strong> on the
+              <strong>MaRS-LVIG HKisland03</strong> sequence, reconstructed with <strong>Gaussian Splatting</strong>.
+              Left: colored point cloud from <code>assets/hkisland03_2.laz</code>.
+              Right: <strong>3D Gaussian Splatting</strong> from <code>assets/hkisland03_2.splat</code>.
+            </p>
+          </div>
+          <div class="viewer-dual-layout">
+            <div class="viewer-panel">
+              <p class="viewer-panel-title">Colored Point Cloud</p>
+              <div class="viewer-canvas-wrapper">
+                <div id="laz-viewer" class="viewer-panel-viewport" aria-label="HKisland03 LAZ point cloud viewer"></div>
+                <div id="laz-loading" class="viewer-status">Loading LAZ point cloud...</div>
+              </div>
+            </div>
+            <div class="viewer-panel">
+              <p class="viewer-panel-title">3D Gaussian Splatting</p>
+              <div class="viewer-canvas-wrapper">
+                <div id="gs-viewer" class="viewer-panel-viewport" aria-label="HKisland03 Gaussian splat viewer"></div>
+                <div id="gs-loading" class="viewer-status">Loading Gaussian splats...</div>
+              </div>
+            </div>
+          </div>
+          <div class="viewer-actions">
+            <button id="viewer-retry" class="viewer-retry-button" type="button" hidden>Retry</button>
+          </div>
+          <p class="viewer-tips has-text-left">
+            Each panel has independent controls: left-drag to rotate, wheel to zoom, right-drag to pan.
+            Left uses a web cache (<code>.points.bin</code>) decoded from the LAZ file for fast loading.
+            The right panel may take longer on first load while splats are processed.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- 
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Related Links</h2>
+
+        <div class="content has-text-justified">
+          <p>
+            Needs update
+          </p>
+         
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section> -->
+  
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{anonymous2026ultrafusion,
+  author    = {Anonymous Authors},
+  title     = {Ultra-Fusion: An Ultra-Resilient Tightly-Coupled Multi-Sensor Fusion SLAM Framework Under Sensor Degradation and Spatiotemporal Uncertainty for Intelligent Transportation Systems},
+  journal   = {IEEE Transactions on Intelligent Transportation Systems},
+  year      = {2026},
+}</code></pre>
+  </div>
+</section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="content has-text-centered">
+        <span class="icon-link" title="Paper (TBD)">
+          <i class="fas fa-file-pdf"></i>
+        </span>
+        <span class="icon-link" title="Code (TBD)">
+          <i class="fab fa-github"></i>
+        </span>
+      </div>
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+            <p>
+              This website is licensed under a <a rel="license"
+                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+                Commons Attribution-ShareAlike 4.0 International License</a>.
+            </p>
+            <p>
+              This website is a lightweight static template for an academic project page.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "./static/js/vendor/three.r170.module.js"
+      }
+    }
+  </script>
+
+  <script type="module">
+    import * as THREE from './static/js/vendor/three.module.js';
+    import { OrbitControls } from './static/js/vendor/OrbitControls.js';
+    import { PointsBinLoader } from './static/js/vendor/PointsBinLoader.js';
+    import { FileLoader } from './static/js/vendor/three.module.js';
+
+    var GS_MODULE_URL = './static/js/vendor/gaussian-splats-3d.module.js';
+
+    (function() {
+      var lazRoot = document.getElementById('laz-viewer');
+      var gsRoot = document.getElementById('gs-viewer');
+      var lazLoadingEl = document.getElementById('laz-loading');
+      var gsLoadingEl = document.getElementById('gs-loading');
+      var retryBtn = document.getElementById('viewer-retry');
+      if (!lazRoot || !gsRoot || !lazLoadingEl || !gsLoadingEl || !retryBtn) return;
+
+      var LAZ_LABEL = 'assets/hkisland03_2.laz';
+      var LAZ_POINTS_BIN_URL = './assets/hkisland03_2.points.bin';
+      var SPLAT_URL = './assets/hkisland03_2.splat';
+
+      var lazScene = null;
+      var lazCamera = null;
+      var lazRenderer = null;
+      var lazControls = null;
+      var lazAnimationId = null;
+      var lazResizeBound = false;
+
+      var gsViewer = null;
+      var gsModulePromise = null;
+      var pointsBinLoader = new PointsBinLoader();
+      var sharedSceneBounds = null;
+
+      var GS_SCENE_FALLBACK = {
+        center: new THREE.Vector3(-267.61072, 253.33105, -59.162037),
+        radius: 95
+      };
+
+      function setLazStatus(text, hideOverlay) {
+        if (text) lazLoadingEl.textContent = text;
+        lazLoadingEl.hidden = !!hideOverlay;
+      }
+
+      function setGsStatus(text, hideOverlay) {
+        if (text) gsLoadingEl.textContent = text;
+        gsLoadingEl.hidden = !!hideOverlay;
+      }
+
+      function showRetry(show) {
+        retryBtn.hidden = !show;
+      }
+
+      function clearLazViewer() {
+        if (lazAnimationId) {
+          cancelAnimationFrame(lazAnimationId);
+          lazAnimationId = null;
+        }
+        if (lazControls) {
+          lazControls.dispose();
+          lazControls = null;
+        }
+        if (lazRenderer) {
+          lazRenderer.dispose();
+          lazRenderer = null;
+        }
+        while (lazRoot.firstChild) {
+          lazRoot.removeChild(lazRoot.firstChild);
+        }
+        lazScene = null;
+        lazCamera = null;
+      }
+
+      function clearGsViewer() {
+        if (gsViewer) {
+          try {
+            gsViewer.dispose();
+          } catch (error) {
+            console.warn('GS viewer dispose failed:', error);
+          }
+          gsViewer = null;
+          return;
+        }
+        while (gsRoot.firstChild) {
+          gsRoot.removeChild(gsRoot.firstChild);
+        }
+      }
+
+      function onLazResize() {
+        if (!lazCamera || !lazRenderer) return;
+        var size = getPanelSize(lazRoot);
+        if (!size.width || !size.height) return;
+        lazCamera.aspect = size.width / size.height;
+        lazCamera.updateProjectionMatrix();
+        lazRenderer.setSize(size.width, size.height);
+      }
+
+      function animateLaz() {
+        lazAnimationId = requestAnimationFrame(animateLaz);
+        if (lazControls) lazControls.update();
+        if (lazRenderer && lazScene && lazCamera) {
+          lazRenderer.render(lazScene, lazCamera);
+        }
+      }
+
+      function fitLazCamera(geometry) {
+        if (!geometry.boundingSphere) {
+          geometry.computeBoundingSphere();
+        }
+        var center = geometry.boundingSphere.center;
+        var radius = geometry.boundingSphere.radius || 1;
+        lazControls.target.copy(center);
+        lazCamera.position.set(
+          center.x + radius * 1.6,
+          center.y + radius * 1.0,
+          center.z + radius * 1.5
+        );
+        lazCamera.near = Math.max(radius / 200, 0.01);
+        lazCamera.far = Math.max(radius * 80, 1000);
+        lazCamera.updateProjectionMatrix();
+        lazControls.update();
+      }
+
+      function getPanelSize(root) {
+        var wrap = root.closest('.viewer-canvas-wrapper') || root.parentElement;
+        var width = wrap ? wrap.clientWidth : 0;
+        var height = wrap ? wrap.clientHeight : 0;
+        if (!width || !height) {
+          width = Math.max(root.clientWidth, 320);
+          height = Math.max(root.clientHeight, 240);
+        }
+        if (!width) width = 320;
+        if (!height) height = Math.round(width * 0.75);
+        return { width: width, height: height };
+      }
+
+      function whenLayoutReady(root) {
+        return new Promise(function(resolve) {
+          var attempts = 0;
+          function check() {
+            var size = getPanelSize(root);
+            if (size.width > 0 && size.height > 0) {
+              resolve(size);
+              return;
+            }
+            attempts += 1;
+            if (attempts > 120) {
+              resolve({ width: 320, height: 240 });
+              return;
+            }
+            requestAnimationFrame(check);
+          }
+          check();
+        });
+      }
+
+      function initLazViewer(panelSize) {
+        lazScene = new THREE.Scene();
+        lazScene.background = new THREE.Color(0x0c1a27);
+        lazScene.add(new THREE.AmbientLight(0xffffff, 0.52));
+
+        var keyLight = new THREE.DirectionalLight(0xffffff, 0.8);
+        keyLight.position.set(1.2, 1.8, 2.4);
+        lazScene.add(keyLight);
+
+        var width = panelSize.width;
+        var height = panelSize.height;
+        lazCamera = new THREE.PerspectiveCamera(
+          60,
+          width / height,
+          0.01,
+          10000
+        );
+        lazCamera.position.set(0, 0, 2.2);
+
+        lazRenderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+        lazRenderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+        lazRenderer.setSize(width, height);
+        lazRenderer.domElement.style.width = '100%';
+        lazRenderer.domElement.style.height = '100%';
+        lazRoot.appendChild(lazRenderer.domElement);
+
+        lazControls = new OrbitControls(lazCamera, lazRenderer.domElement);
+        lazControls.enableDamping = true;
+        lazControls.dampingFactor = 0.08;
+        lazControls.rotateSpeed = 0.65;
+        lazControls.zoomSpeed = 1.0;
+        lazControls.panSpeed = 0.75;
+        lazControls.target.set(0, 0, 0);
+        lazControls.update();
+
+        if (!lazResizeBound) {
+          window.addEventListener('resize', onLazResize);
+          lazResizeBound = true;
+        }
+      }
+
+      function decimateGeometry(geometry, maxPoints) {
+        var posAttr = geometry.getAttribute('position');
+        var colAttr = geometry.getAttribute('color');
+        var count = posAttr.count;
+        if (count <= maxPoints) {
+          return geometry;
+        }
+
+        var stride = Math.ceil(count / maxPoints);
+        var newCount = Math.ceil(count / stride);
+        var positions = new Float32Array(newCount * 3);
+        var colors = colAttr ? new Float32Array(newCount * 3) : null;
+        var posArray = posAttr.array;
+        var colArray = colAttr ? colAttr.array : null;
+
+        for (var i = 0, j = 0; i < count; i += stride, j++) {
+          var si = i * 3;
+          var dj = j * 3;
+          positions[dj] = posArray[si];
+          positions[dj + 1] = posArray[si + 1];
+          positions[dj + 2] = posArray[si + 2];
+          if (colors && colArray) {
+            colors[dj] = colArray[si];
+            colors[dj + 1] = colArray[si + 1];
+            colors[dj + 2] = colArray[si + 2];
+          }
+        }
+
+        var decimated = new THREE.BufferGeometry();
+        decimated.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+        if (colors) {
+          decimated.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+        }
+        return decimated;
+      }
+
+      function showPointCloudGeometry(geometry, sourceLabel) {
+        geometry = decimateGeometry(geometry, 500000);
+        geometry.computeBoundingSphere();
+        sharedSceneBounds = {
+          center: geometry.boundingSphere.center.clone(),
+          radius: geometry.boundingSphere.radius || GS_SCENE_FALLBACK.radius
+        };
+
+        var count = geometry.getAttribute('position').count;
+        var radius = geometry.boundingSphere.radius || 1;
+        var pointMaterial = new THREE.PointsMaterial({
+          size: Math.max(radius * 0.003, 0.02),
+          sizeAttenuation: true,
+          vertexColors: !!geometry.getAttribute('color'),
+          color: 0xffffff,
+          opacity: 0.95,
+          transparent: true
+        });
+
+        var points = new THREE.Points(geometry, pointMaterial);
+        lazScene.add(points);
+        fitLazCamera(geometry);
+        setLazStatus(
+          'Loaded: ' + sourceLabel + ' (' + count.toLocaleString() + ' points)',
+          true
+        );
+        animateLaz();
+      }
+
+      function loadLazPointCloud() {
+        return whenLayoutReady(lazRoot).then(function(panelSize) {
+          return new Promise(function(resolve, reject) {
+            clearLazViewer();
+            initLazViewer(panelSize);
+            setLazStatus('Loading LAZ point cloud...');
+
+            pointsBinLoader.load(
+              LAZ_POINTS_BIN_URL,
+              function(geometry) {
+                setTimeout(function() {
+                  try {
+                    showPointCloudGeometry(geometry, LAZ_LABEL);
+                    resolve();
+                  } catch (error) {
+                    reject(error);
+                  }
+                }, 0);
+              },
+              function(event) {
+                if (event.total && event.loaded >= event.total) {
+                  setLazStatus('Download complete. Building point cloud...');
+                  return;
+                }
+                if (event.total) {
+                  var progress = Math.min((event.loaded / event.total) * 100, 100);
+                  setLazStatus('Loading LAZ... ' + progress.toFixed(1) + '%');
+                } else {
+                  setLazStatus('Loading LAZ... ' + Math.round(event.loaded / 1024 / 1024) + ' MB');
+                }
+              },
+              function(error) {
+                reject(error || new Error('Failed to load LAZ point cloud'));
+              }
+            );
+          });
+        });
+      }
+
+      function getGaussianSplats3D() {
+        if (!gsModulePromise) {
+          gsModulePromise = import(GS_MODULE_URL);
+        }
+        return gsModulePromise;
+      }
+
+      function resolveGsScene() {
+        return Promise.resolve({
+          url: SPLAT_URL,
+          label: 'assets/hkisland03_2.splat',
+          sphericalHarmonicsDegree: 0
+        });
+      }
+
+      function fitGsCamera(viewer) {
+        if (!viewer || !viewer.camera) return;
+
+        var bounds = sharedSceneBounds || GS_SCENE_FALLBACK;
+        var center = bounds.center;
+        var radius = bounds.radius || GS_SCENE_FALLBACK.radius;
+        var distance = Math.max(radius * 2.2, 30);
+
+        viewer.camera.far = Math.max(radius * 40, 8000);
+        viewer.camera.near = Math.max(radius / 800, 0.02);
+        viewer.camera.updateProjectionMatrix();
+
+        viewer.camera.position.set(
+          center.x + distance * 0.55,
+          center.y + distance * 0.35,
+          center.z + distance * 0.75
+        );
+
+        if (viewer.controls) {
+          viewer.controls.target.copy(center);
+          viewer.controls.update();
+        } else {
+          viewer.camera.lookAt(center);
+        }
+
+        if (viewer.forceRenderNextFrame) {
+          viewer.forceRenderNextFrame();
+        }
+      }
+
+      function resizeGsViewer() {
+        if (!gsViewer || !gsViewer.renderer) return;
+        var size = getPanelSize(gsRoot);
+        if (!size.width || !size.height) return;
+        gsViewer.renderer.setSize(size.width, size.height);
+        if (gsViewer.camera) {
+          gsViewer.camera.aspect = size.width / size.height;
+          gsViewer.camera.updateProjectionMatrix();
+        }
+        if (gsViewer.forceRenderNextFrame) {
+          gsViewer.forceRenderNextFrame();
+        }
+      }
+
+      function loadGaussianScene() {
+        return whenLayoutReady(gsRoot).then(function() {
+          return getGaussianSplats3D();
+        }).then(function(GaussianSplats3D) {
+          var SceneRevealMode = GaussianSplats3D.SceneRevealMode;
+          var SplatLoader = GaussianSplats3D.SplatLoader;
+          return resolveGsScene().then(function(scene) {
+            clearGsViewer();
+            setGsStatus('Loading ' + scene.label + '...');
+
+            gsViewer = new GaussianSplats3D.Viewer({
+              rootElement: gsRoot,
+              cameraUp: [0, 1, 0],
+              selfDrivenMode: true,
+              useBuiltInControls: true,
+              showLoadingUI: false,
+              inMemoryCompressionLevel: 0,
+              optimizeSplatData: true,
+              sphericalHarmonicsDegree: scene.sphericalHarmonicsDegree,
+              antialiased: false,
+              sharedMemoryForWorkers: false,
+              gpuAcceleratedSort: false,
+              integerBasedSort: false,
+              sceneRevealMode: SceneRevealMode.Instant,
+              renderMode: GaussianSplats3D.RenderMode.Always
+            });
+
+            // Use FileLoader (XHR) for reliable download on GitHub Pages CDN.
+            // The library's internal fetch + ReadableStream often stalls at 99.97% for large .splat files.
+            return new Promise(function(resolve, reject) {
+              var loader = new FileLoader();
+              loader.setResponseType('arraybuffer');
+              loader.load(
+                scene.url,
+                function(buffer) {
+                  setGsStatus('Processing Gaussian splats...');
+                  SplatLoader.loadFromFileData(buffer, 1, 0, false, 0, undefined, undefined, undefined)
+                    .then(function(splatBuffer) {
+                      return gsViewer.addSplatBuffers([splatBuffer], [{
+                        splatAlphaRemovalThreshold: 1
+                      }], true, false, false, false, false);
+                    })
+                    .then(function() {
+                      fitGsCamera(gsViewer);
+                      resizeGsViewer();
+                      gsViewer.start();
+                      setGsStatus('Loaded: ' + scene.label, true);
+                      resolve();
+                    })
+                    .catch(reject);
+                },
+                function(event) {
+                  if (event.total) {
+                    var progress = Math.min((event.loaded / event.total) * 100, 100);
+                    setGsStatus('Loading ' + scene.label + '... ' + progress.toFixed(0) + '%');
+                  } else {
+                    setGsStatus('Loading ' + scene.label + '... ' + Math.round(event.loaded / 1024 / 1024) + ' MB');
+                  }
+                },
+                function(err) {
+                  reject(err || new Error('Failed to load splat file'));
+                }
+              );
+            });
+          });
+        });
+      }
+
+      function loadAllViewers() {
+        showRetry(false);
+        gsModulePromise = null;
+        sharedSceneBounds = null;
+        setLazStatus('Loading LAZ point cloud...');
+        setGsStatus('Waiting for point cloud...');
+
+        return loadLazPointCloud()
+          .then(function() {
+            setGsStatus('Loading Gaussian splats...');
+            return loadGaussianScene();
+          })
+          .catch(function(error) {
+            console.error('Viewer load failed:', error);
+            var message = (error && error.message) ? error.message : String(error);
+            if (!lazRenderer) {
+              setLazStatus('Failed to load LAZ point cloud.' + (message ? ' (' + message + ')' : ''));
+            }
+            if (!gsViewer) {
+              setGsStatus('Failed to load Gaussian splats.' + (message ? ' (' + message + ')' : ''));
+            }
+            showRetry(true);
+          });
+      }
+
+      function handleLoadError(error) {
+        console.error('Failed to load viewers:', error);
+        showRetry(true);
+      }
+
+      retryBtn.addEventListener('click', function() {
+        loadAllViewers().catch(handleLoadError);
+      });
+
+      function startViewers() {
+        try {
+          loadAllViewers().catch(handleLoadError);
+        } catch (error) {
+          console.error('Viewer initialization failed:', error);
+          setLazStatus('Viewer initialization failed.');
+          setGsStatus('Viewer initialization failed.');
+          showRetry(true);
+        }
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', startViewers);
+      } else {
+        startViewers();
+      }
+    })();
+  </script>
+
+</body>
+
+</html>

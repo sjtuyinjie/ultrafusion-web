@@ -1,0 +1,1482 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%2345678901234567890123456789012345678901234567890123456789012345678901234567890
+%        1         2         3         4         5         6         7         8
+
+\documentclass[letterpaper, 10 pt, conference]{ieeeconf}  % Comment this line out if you need a4paper
+
+%\documentclass[a4paper, 10pt, conference]{ieeeconf}      % Use this line for a4 paper
+
+% \usepackage[UTF8]{ctex}
+\usepackage{CJKutf8}
+\usepackage{cite}
+\usepackage{bm}
+\usepackage{makecell}
+\usepackage{amsmath} % assumes amsmath package installed
+\usepackage{amssymb}  % assumes amsmath package installed
+% \usepackage[dvipsnames]{xcolor}
+% \usepackage{xcolor}
+\usepackage{amsfonts}
+\usepackage{ multicol} % 在导言区添加
+
+% The following packages can be found on http:\\www.ctan.org
+\usepackage{graphics} % for pdf, bitmapped graphics files
+\usepackage{graphicx}
+\usepackage{epsfig} % for postscript graphics files
+\usepackage{mathptmx} % assumes new font selection scheme installed
+\usepackage{times} % assumes new font selection scheme installed
+\usepackage{subcaption} % 在导言区
+\usepackage{tikz}
+\usetikzlibrary{calc}
+
+% For Lie group symbols
+\newcommand{\SE}{\text{SE}}
+\newcommand{\se}{\mathfrak{se}}
+
+
+% 在 preamble 添加以下包
+% \usepackage{algorithm}
+% \usepackage{algpseudocode}
+
+
+\usepackage{mathrsfs}
+\usepackage{indentfirst}
+\usepackage{multirow}
+\usepackage{adjustbox}
+
+\usepackage{color}      % 用于颜色定义
+\usepackage{pifont}     % 用于 \ding 命令
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{bbding}
+
+\usepackage[table,dvipsnames,xcdraw]{xcolor} % used by tables
+
+\usepackage{colortbl} % used by tables
+\usepackage{diagbox} % used in the table with the backslashbox
+\usepackage{siunitx}
+
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=green,urlcolor=blue,]{hyperref}
+
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+% 补充导言区
+\usepackage{subcaption}
+
+% highlighting for first, second and third best results
+
+% green-lightgreen-yellow-white
+\colorlet{colorFst}{Green!25}       % first
+\colorlet{colorSnd}{SpringGreen!45} % second
+\colorlet{colorTrd}{Yellow!30}      % third
+\colorlet{colorLow}{darkgray!30}    % low-light color
+\definecolor{R1}{HTML}{E97451}
+\definecolor{R2}{HTML}{008080}
+\definecolor{R3}{HTML}{0047AB}
+\colorlet{cmt}{darkgray!80}    % low-light color
+\colorlet{supp}{darkgray!50}    % low-light color
+
+\newcommand{\blackx}{{\color{black}\ding{55}}}
+
+\newcommand{\fs}{\cellcolor{colorFst}}   % first
+\newcommand{\nd}{\cellcolor{colorSnd}}      % second
+\newcommand{\rd}{\cellcolor{colorTrd}}      % third
+
+\newcommand{\dsfs}{\cellcolor{red!40}\bf}   % first
+\newcommand{\dsnd}{\cellcolor{orange!40}}      % second
+% \newcommand{\rd}{\cellcolor{yellow!40}}      % third
+
+\newcommand{\lo}{\color{colorLow}}          % low-light
+
+
+\IEEEoverridecommandlockouts                              % This command is only needed if 
+                                                          % you want to use the \thanks command
+
+\overrideIEEEmargins                                      % Needed to meet printer requirements.
+
+%In case you encounter the following error:
+%Error 1010 The PDF file may be corrupt (unable to open PDF file) OR
+%Error 1000 An error occurred while parsing a contents stream. Unable to analyze the PDF file.
+%This is a known problem with pdfLaTeX conversion filter. The file cannot be opened with acrobat reader
+%Please use one of the alternatives below to circumvent this error by uncommenting one or the other
+%\pdfobjcompresslevel=0
+%\pdfminorversion=4
+
+% See the \addtolength command later in the file to balance the column lengths
+% on the last page of the document
+
+% The following packages can be found on http:\\www.ctan.org
+%\usepackage{graphics} % for pdf, bitmapped graphics files
+%\usepackage{epsfig} % for postscript graphics files
+%\usepackage{mathptmx} % assumes new font selection scheme installed
+%\usepackage{times} % assumes new font selection scheme installed
+%\usepackage{amsmath} % assumes amsmath package installed
+%\usepackage{amssymb}  % assumes amsmath package installed
+
+% \title{\LARGE \bf
+% NIdaR: NIR-guided Intrinsic Decomposition for LiDAR Intensity Reconstruction
+% }
+
+
+% \usepackage{xcolor}
+% \definecolor{nidarcolor}{RGB}{76, 81, 191} % Deep Indigo
+
+% \title{\LARGE \bf
+% \textcolor{nidarcolor}{NIdaR}: NIR-guided Intrinsic Decomposition for LiDAR Intensity Reconstruction
+% }
+
+\usepackage{xcolor}
+\definecolor{nidarcolor}{RGB}{0, 128, 128} % Deep Teal
+
+% \title{\LARGE \bf
+% \textcolor{nidarcolor}{NIdaR}: NIR-guided Intrinsic Decomposition for LiDAR Intensity Reconstruction
+% }
+
+% \author{\centering
+% {Project Page:} 
+% \href{https://nidar.github.io/}{{https://nidar.github.io}}
+% }
+
+
+% \usepackage{xcolor}
+% \definecolor{nidarcolor}{RGB}{0, 102, 204} % Cobalt Blue
+
+% \title{\LARGE \bf
+% \textcolor{nidarcolor}{NIdaR}: NIR-guided Intrinsic Decomposition for LiDAR Intensity Reconstruction
+% }
+
+% \definecolor{nircolor}{RGB}{130,40,90}    % Deep Infrared Purple
+% \definecolor{dacolor}{RGB}{25,70,140}     % Deep Engineering Blue
+
+% \title{\LARGE \bf
+% \textcolor{nircolor}{NIR}\textcolor{dacolor}{da}R:
+% NIR-guided Intrinsic Decomposition for LiDAR Intensity Reconstruction
+% }
+
+% \definecolor{nircolor}{RGB}{120,40,100}   % Infrared Purple
+% \definecolor{darcolor}{RGB}{20,70,140}    % Engineering Blue
+
+% \definecolor{nircolor}{RGB}{150,50,50}    % Infrared Red
+% \definecolor{darcolor}{RGB}{50,80,120}    % Slate Blue
+\definecolor{nircolor}{RGB}{0,100,150} 
+
+% {130,30,80}    % Dark Crimson
+\definecolor{darcolor}{RGB}{0,100,150}    % Deep Cyan Blue
+
+\title{\LARGE \bf
+\textcolor{nircolor}{NI}\textcolor{darcolor}{da}\textcolor{nircolor}{R}:
+NIR-guided Intrinsic Decomposition for LiDAR Intensity Reconstruction
+}
+
+
+% Towards Reliable Sensor-Fusion Ground SLAM: A Comprehensive Benchmark and Modular Framework
+
+% Towards Reliable Sensor-Fusion Ground SLAM with \\ Comprehensive Benchmarking 
+% \author{Deteng Zhang, Junjie Zhang, Yan Sun, Tao Li and Jie Yin*
+% % 这里overleaf后期对应的位置会报错，所以先注释掉
+% % \thanks{ All authors are with
+% % TBD. $^*$ Corresponding Author: Jie Yin ({\tt\small sjtu_yinjie@163.com}). }%
+% % \thanks{This work was supported by xxxx.}
+% }
+
+
+% \author{%
+% Deteng Zhang$^{1\dagger}$, Junjie Zhang$^{2\dagger}$, Yan Sun$^3$, Tao Li$^4$, and Jie Yin$^{5}$*%
+% \thanks{$^\dagger$ These authors contributed equally.}%
+% \thanks{$^\*$ Corresponding Author: Jie Yin ({\tt\small robot\_yinjie@outlook.com}).}%
+% }
+
+% \author{Junjie Zhang$^{1}$, Deteng Zhang$^{2}$, Yan Sun$^{3}$, Tao Li$^{4}$, Hao Yin$^{4}$, Hongzhao Xie$^{4}$ and Jie Yin$^{4}$*
+% \thanks{$^*$ Corresponding Author: Jie Yin ({\tt\small robot\_yinjie@outlook.com}). }
+% \thanks{ $^{1}$ is
+% Chongqin University, $^{2}$ is Harbin Institute of Technology, $^{3}$ is Nankai University, $^{4}$ is Shanghai Jiao Tong University. }%
+% }
+
+% \author{Deteng Zhang$^{1\dagger}$, Jun Zhang$^{2\dagger}$, Yan Sun$^{3}$, Tao Li$^{4}$, Hao Yin$^{5}$, Hongzhao Xie$^{5}$ and Jie Yin$^{5}$* 
+% \thanks{$^*$ Corresponding author: \textbf{Jie Yin ({\tt\small \textcolor{magenta}{robot\_yinjie@outlook.com}})}}
+% \thanks{$^\dagger$ Equal contribution. $^{1}$Independent, $^{2}$Chongqing University, $^{3}$Nankai University, $^{4}$Zhejiang University of Technology,
+% $^{5}$Shanghai Jiao Tong University}%
+% }
+
+% \author{Junjie Zhang$^{1\dagger}$, Deteng Zhang$^{2\dagger}$, Yan Sun$^{3}$, Tao Li$^{4}$, and Jie Yin$^{4}$*
+% \thanks{$^\dagger$ Equal first authorship.}  
+% \thanks{$^*$ Corresponding Author: Jie Yin ({\tt\small robot\_yinjie@outlook.com}). }
+% \thanks{$^{1}$ Chongqing University, $^{2}$ Harbin Institute of Technology, $^{3}$ Nankai University, $^{4}$ Shanghai Jiao Tong University. }%
+% }
+\begin{document}
+
+
+
+\maketitle
+\thispagestyle{empty}
+\pagestyle{empty}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{abstract}
+
+Recent progress in LiDAR simulation has significantly improved geometric fidelity and point cloud distribution realism, but the simulation of intensity information remains underdeveloped. Intensity plays a critical role in perception tasks, yet most existing simulation pipelines either omit intensity entirely or depend on reconstruction-based methods that require real intensity ground truth for supervised training. Such reliance incurs high data acquisition costs, limits scalability, and restricts generalization across sensors and scenes. As a result, a general, scalable, and platform-agnostic solution for LiDAR intensity simulation is still lacking.
+
+To address this gap, we propose \href{https://github.com/sjtuyinjie/M3DGR}{NIdaR}, a \emph{plug-and-play} intensity synthesis module that augments arbitrary LiDAR simulators and re-simulation pipelines. NIdaR infers physically consistent intensity from low-cost RGB inputs and geometry, requiring \emph{no per-scene training/optimization} and \emph{no intensity ground truth during deployment}. We implement NIdaR as a hierarchical UNet+DeepLabV3 intrinsic decomposition network with lightweight distribution calibration, achieving millisecond-level feed-forward inference while avoiding the hours-level scene fitting cost of reconstruction-based baselines. Extensive experiments on nuScenes, Waymo and KITTI-360 verify the effectiveness and cross-scene generalization of NIdaR, and we further validate its scalability by integrating it into Isaac Sim, UE5, and generative simulation pipelines. Our approach provides a unified solution that equips existing LiDAR simulation systems with realistic intensity generation capability. To benefit the research community, we will release our codes upon paper acceptance.
+
+
+
+% Considerable advancements have been achieved in methods tailored for LiDAR simulation, yet a significant gap remains in the simulation of intensity information for LiDAR data. Although reconstruction-based schemes and graphics engine-based approaches have shown promising potential in editability and the realism of point cloud distribution, the research community faces two key barriers in acquiring intensity information: On one hand, most LiDAR simulation methods lack intensity information, i.e., there is a lack of a general scheme for obtaining intensity information. On the other hand, although reconstruction-based schemes can obtain simulated intensity through training on real intensity ground truth, they must rely on intensity ground truth, which incurs high acquisition costs and requires scene-specific training.
+
+% To bridge these gaps, we make three key contributions: First, we propose \href{https://github.com/sjtuyinjie/M3DGR}{NIdaR}, a general intensity generation scheme that infers intensity values from low-cost RGB information. Second, based on this scheme, we design a novel UNet+DeepLabV3 hierarchical inference model, which reduces the inference time of a single image from the minute level to the millisecond level while ensuring inference accuracy. Third, we validate the proposed NIdaR scheme through inference on the KITTI-360, nuScenes, and Waymo datasets, and integrate it into the Isaac Sim and UE5 simulation platforms as well as generative schemes. This work successfully endows all LiDAR simulation methods with intensity information. Codes\textbf{}\footnote{\href{https://github.com/sjtuyinjie/Ground-Fusion2}{https://github.com/sjtuyinjie/Ground-Fusion2}} are publicly available.
+
+
+% To bridge these gaps, we make three key contributions: First, we introduce \href{https://github.com/sjtuyinjie/M3DGR}{M3DGR} dataset: a sensor-rich benchmark with systematically induced degradation patterns including visual challenge, LiDAR degeneracy, wheel slippage and GNSS denial. Second, we conduct a comprehensive evaluation of forty SLAM systems on M3DGR, providing critical insights into their robustness and limitations under challenging real-world conditions. Third, we develop a resilient modular multi-sensor fusion framework named \href{https://github.com/sjtuyinjie/Ground-Fusion2}{Ground-Fusion++}, which demonstrates robust performance by coupling GNSS, RGB-D, LiDAR, IMU (Inertial Measurement Unit) and wheel odometry. Codes \textbf{}\footnote{\href{https://github.com/sjtuyinjie/Ground-Fusion2}{https://github.com/sjtuyinjie/Ground-Fusion2}} and datasets \textbf{}\footnote{\href{https://github.com/sjtuyinjie/M3DGR}{https://github.com/sjtuyinjie/M3DGR}} are publicly available.
+
+
+
+
+\end{abstract}
+
+% \begin{figure*}[t]
+% \centering
+% \includegraphics[width=0.47\linewidth]{fig/UE5.png}
+% \caption{\textbf{NIdaR infers LiDAR intensity from RGB without per-scene training.} Given an RGB image and point cloud geometry, NIdaR produces a pseudo-NIR image, decomposes it into reflectance and shading, and maps reflectance to the point cloud (with optional quantile remapping), yielding realistic intensity for any LiDAR simulator or reconstruction pipeline.}
+% \label{fig:teaser}
+% \vspace{-2mm}
+% \end{figure*}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{INTRODUCTION}
+
+LiDAR (Light Detection and Ranging) has emerged as an indispensable core sensor in autonomous driving~\cite{zhang2025towards}, robotics~\cite{yin2024ground}, and 3D scene reconstruction~\cite{cadena2016past}, owing to its ability to provide high-resolution and accurate spatial geometric information, as well as strong robustness against illumination variations. Unlike RGB cameras that capture visible-spectrum textures, LiDAR operates in the Near-Infrared (NIR) band and actively emits laser pulses to measure the environment, making it inherently less sensitive to lighting changes and suitable for diverse real-world scenarios.
+
+In addition to 3D spatial coordinates (X, Y, Z), LiDAR provides intensity measurements that characterize surface reflectivity under NIR illumination. Intensity is influenced by material properties, surface roughness, incident angle, and distance-dependent attenuation, thus encoding complementary semantic and physical information beyond geometry alone. Recent perception studies have demonstrated its practical importance in enhancing feature representation for 3D object detection~\cite{guo2026lidar}, improving semantic segmentation via calibrated reflectivity modeling~\cite{viswanath2025reflectivity}, and enabling intensity-informed people detection through joint geometric and reflectivity descriptors~\cite{belbachir2025advancing}. These results highlight that intensity is a critical modality for robust perception and cross-domain generalization.
+
+Although LiDAR simulation and novel view synthesis technologies have developed rapidly in recent years, most existing methods primarily focus on reconstructing geometric structure while overlooking accurate modeling of LiDAR intensity. Current intensity-related approaches can be roughly divided into three categories. Graphics engine-based simulators~\cite{dosovitskiy2017carla,koenig2004gazebo} generate intensity through ray tracing or manually designed reflectance parameters, but rely on simplified physical assumptions and handcrafted material settings, resulting in limited realism and weak cross-scene transferability. Reconstruction-based approaches such as NeRF~\cite{mildenhall2021nerf} and 3D Gaussian rendering~\cite{kerbl2023gaussian} incorporate intensity prediction into LiDAR re-simulation pipelines~\cite{zhang2023nerflidar,huang2023nfl}. However, they typically require real LiDAR intensity as supervision and perform per-scene fitting, incurring substantial training and rendering latency that limits scalability in large-scale simulation and iterative data generation. This dependence on ground-truth intensity further leads to high acquisition cost and scene-specific models, while implicitly learning intensity without explicitly modeling the underlying NIR reflectance mechanism. Parametric fitting models approximate intensity using simplified analytical formulations, but fail to capture complex material-dependent NIR reflectance variations. Consequently, simulated intensity from existing methods often deviates significantly from real measurements, indicating that a general, scalable, and physically consistent framework for LiDAR intensity generation remains lacking.
+
+
+
+
+\begin{figure}[t]
+\centering
+  \includegraphics[width=0.40\textwidth]{fig/first.png}
+  \caption{\textbf{Dynamic scenes of LiDAR point clouds in autonomous driving.} }
+  \label{fig:dynamic scenes}
+\vspace{-0.4cm}
+\end{figure} 
+
+To address this gap, this paper focuses on the critical problem of LiDAR intensity simulation and proposes a low-cost and highly general scheme named \textbf{NIdaR} (\textbf{N}IR-Inspired \textbf{I}ntrinsic \textbf{D}ecomposition for LiDAR Intensity \textbf{R}econstruction}) for directly inferring LiDAR intensity from RGB images. Our key insight is that although LiDAR operates in the NIR spectrum while cameras capture visible light, the intrinsic reflectance properties governing NIR response are correlated with visible-spectrum observations. Based on this observation, NIdaR first infers pseudo-NIR images from RGB inputs, then performs intrinsic decomposition to separate reflectivity and shading components, and finally maps the reflectivity to 3D point clouds via a distance-aware interpolation function, producing physically consistent intensity simulation.
+
+To enable efficient deployment, we further design a hierarchical intrinsic decomposition network that fuses UNet and DeepLabV3. The resulting pipeline is \emph{train-once, deploy-anywhere}: it is trained offline on a small set of real sequences using LiDAR intensity projection maps for supervision, and then runs with millisecond-level feed-forward inference \emph{without any per-scene optimization} while maintaining strong generalization across different materials and scenes. The main contributions of this work are summarized as follows:
+
+\begin{itemize}
+    \item We propose a general simulation framework NIdaR for inferring LiDAR intensity from RGB images, enabling physically consistent intensity generation \emph{without per-scene training/optimization} and without requiring intensity ground truth during deployment.
+    
+    \item We design a hierarchical UNet+DeepLabV3 intrinsic decomposition network tailored to NIR characteristics, achieving millisecond-level feed-forward intensity inference with strong cross-scene generalization.
+    
+    \item We realize universal integration of NIdaR into multiple LiDAR simulators, including Unreal Engine 5 (UE5) and Isaac-Sim, demonstrating its practicality, generality, and scalability.
+\end{itemize}
+
+
+
+\section{Related work}
+\subsection{Graphics Engine-Based LiDAR Simulators}
+
+Early LiDAR simulation efforts were based on graphics engines, with typical representatives including platforms such as CARLA, Webots, CoppeliaSim, Gazebo, and Isaac Sim~\cite{dosovitskiy2017carla,michel2020webots,rohmer2013vrep,koenig2004gazebo,nvidia2022isaacsim}. These simulators simulate the LiDAR scanning process through ray casting, output the 3D coordinates and distance information of points, and can simulate partial noise and raydrop phenomena. Among them, random raydrop usually originates from sensor noise, whereas physical raydrop is caused by low-reflectivity materials such as glass. To improve realism, some works learn more realistic point cloud distributions based on echo models and neural networks. For example, Isaac Sim achieves raydrop simulation for transparent objects such as glass by virtue of RTX ray tracing~\cite{nvidia2022isaacsim}. Nevertheless, despite their flexibility and deployment efficiency, these methods generally do not provide a physically reliable simulation of the LiDAR intensity channel.
+
+\subsection{LiDAR Simulators Based on 3D Reconstruction from Real Data}
+
+Engine-based simulation relies on manually constructed CAD scenes, which is labor-intensive and suffers from a notable domain gap to real data. To alleviate this issue, reconstruction-based approaches from real scans have been explored. SqueezeSegV2~\cite{wu2018squeezesegv2} leverages unsupervised domain adaptation to bridge synthetic-to-real discrepancies, while Fang et al.~\cite{fang2020augmented} propose a hybrid framework that fuses real background scans with synthetic foreground objects using a physically-aware LiDAR renderer. PCGen and LiDARsim~\cite{2022PCGenPC,2020LiDARsimRL} further learn raydrop characteristics via FPA and U-Net, respectively, reducing the sim-to-real gap.
+
+With the emergence of Neural Radiance Fields (NeRF)~\cite{qu2024implicit} and 3D Gaussian Splatting~\cite{kerbl2023gaussian}, methods such as NFL, NeRF-LiDAR, and UniSim~\cite{huang2023nfl,zhang2023nerflidar,yang2023unisim} introduce neural implicit representations for LiDAR re-simulation. NFL incorporates detailed physical modeling including multi-echo and intensity priors, while NeRF-LiDAR and UniSim exploit multi-modal cues for improved reconstruction, with later extensions supporting dynamic scenes. To improve efficiency, LiDAR-RT~\cite{2025lidarrt} combines 3D Gaussians with hardware ray tracing for real-time re-simulation and intensity rendering.
+Despite these advances, existing methods depend on real intensity measurements for supervision, limiting scalability and generalization across sensors and environments.
+
+
+\subsection{LiDAR Simulators Based on Data Generation}
+
+To break free from the limitations of physical models and sensors, some studies have turned to generative models. Point cloud generation works based on methods such as GAN, VAE, and diffusion models~\cite{goodfellow2014generative,kingma2013vae,ho2020denoising} have been proposed successively, including SnowflakeNet~\cite{xiang2021snowflakenet}, Pointflow~\cite{yang2019pointflow}, GECCO~\cite{tyszkiewicz2023gecco}, LiDARGen~\cite{zyrianov2022lidargen}, and R2DM~\cite{nakashima2024r2dm}. LiDARGen and R2DM~\cite{zyrianov2022lidargen,nakashima2024r2dm} use diffusion models to simulate raydrop and achieve controllable generation of LiDAR data.
+Although generative methods possess high generalization and data diversity, their physical realism is insufficient, especially lacking accurate modeling of LiDAR intensity.
+
+Table~\ref{sample_tab} summarizes the comparison. Notably, NIdaR requires only RGB input to support intensity simulation across all three paradigms, without per-scene training or ground-truth intensity labels.
+
+\begin{table}[t]
+    \centering
+    \caption{Comparison of LiDAR intensity simulation methods.}
+    \renewcommand{\arraystretch}{1.15}
+    \label{sample_tab}
+    % 使用 \resizebox 确保表格仅仅刚好填满一栏宽度
+    \resizebox{\columnwidth}{!}{%
+    \begin{tabular}{lcccc}
+        \hline
+        {Method} & {Paradigm} & \makecell[c]{{Intensity}\\{channel}} & \makecell[c]{\textbf{Per-scene}\\{fitting}} & \makecell[c]{{Scene-specific}\\{intensity sup.}} \\
+        \hline
+        % 手动换行或者精简描述以利用垂直空间而不是水平空间
+        \makecell[l]{Webots, Gazebo, UE5\\\cite{michel2020webots,koenig2004gazebo}} & Graphics & No & --- & --- \\
+        \makecell[l]{Isaac Sim (built-in)\\\cite{nvidia2022isaacsim}} & Graphics & Yes & No & No \\
+        \makecell[l]{PCGen, LiDARsim, \\LiDAR-NeRF, LiDAR-RT\\\cite{2022PCGenPC,2020LiDARsimRL,tao2023lidarnerf,zheng2024lidar4d,2025lidarrt}} & Recon. & Yes & Yes & Yes \\
+        lidar-generation~\cite{2018DeepGM} & Gen. & No & --- & --- \\
+        \textbf{NIdaR (Ours)} & \fs\textbf{All} & \fs\textbf{Yes} & \fs\textbf{No} & \fs\textbf{No} \\
+        \hline
+    \end{tabular}%
+    }
+    
+    {\footnotesize\textit{Note:} ``---'' indicates \emph{not applicable}. Here, \emph{per-scene fitting} refers to learning-based optimization on a target scene (e.g., NeRF/GS fitting), not manual scene authoring; if a method does not model the intensity channel, then both per-scene fitting and scene-specific intensity supervision are irrelevant.}
+    \vspace{-2mm}
+\end{table}
+
+\begin{figure*}[htbp]
+\centering
+\includegraphics[width=0.9\linewidth]{fig/pipeline}
+\caption{\textbf{NIdaR pipeline.} STN synthesizes pseudo-NIR from RGB. Next, intrinsic decomposition yields $R$ and $S$ via IIW-CRF or IUDI. Then, $R$ is mapped to the point cloud, after which distance interpolation and quantile remapping calibrate intensity.}
+\label{fig:pipeline}
+\vspace{-2mm}
+\end{figure*}
+
+% \section{Benchmark: Dataset and Baseline System}
+\section{Methodology}
+\vspace{-2mm}
+\subsection{Problem Formulation} 
+We consider the problem of simulating LiDAR intensity from readily available RGB imagery and point cloud geometry. The input consists of one or more RGB images with known camera intrinsics and extrinsics, and a 3D point cloud (e.g., from a simulator or reconstruction) with camera--LiDAR calibration. The output is a point cloud where each point is assigned a simulated intensity value. We assume that LiDAR intensity is physically related to surface reflectance under near-infrared (NIR) illumination. Accordingly, we approximate it by (1) inferring a pseudo-NIR image from RGB, (2) decomposing it into reflectance and shading, and (3) using reflectance as an intensity-related quantity after projection onto the point cloud and optional range alignment. Under the standard intrinsic image model, the observed pseudo-NIR image can be written as
+\begin{equation}
+I \approx R \cdot S,
+\label{eq:intrinsic_model}
+\end{equation}
+where $I$ is the pseudo-NIR image, $R$ denotes reflectance (albedo), and $S$ denotes shading. We use $R$ as the basis for intensity after mapping it to 3D points and applying an optional quantile-based remapping.
+
+\subsection{NIdaR Framework Overview} 
+As illustrated in Fig.~\ref{fig:pipeline}, NIdaR is organized around three core modules: (i) cross-spectral pseudo-NIR synthesis from RGB, (ii) our IUDI network (or alternatively IIW-CRF~\cite{bell2014intrinsic}) that disentangles reflectance and shading while being supervised by LiDAR intensity projections, and (iii) a distribution calibration module that aligns the predicted intensity statistics via quantile remapping. The final step of assigning intensities to a point cloud is a lightweight calibrated projection and is not the main focus. Importantly, inference does not require per-scene training. Therefore, the IUDI network and the remapping model are trained once (e.g., on Waymo) and then applied to new scenes and simulators.
+
+\subsection{Cross-spectral Pseudo-NIR Prior}
+LiDAR operates in the NIR band, while cameras capture visible light. We bridge this modality gap by synthesizing a pseudo-NIR image from RGB using the Spatial Transformer Network (STN) from the cs-stereo framework~\cite{cs-stereo2019,jaderberg2015stn}. Given an RGB image $I^{rgb}$, the pretrained STN produces a single-channel pseudo-NIR image:
+\begin{equation}
+I^{nir} = f_{\mathrm{stn}}(I^{rgb}).
+\label{eq:pseudo_nir}
+\end{equation}
+This stage is inference-only in NIdaR. Accordingly, we directly adopt the pretrained cs-stereo STN without fine-tuning.
+
+Qualitative comparisons on real datasets are presented in Sec.~\ref{sec:experiments} to keep this section focused on the methodology.
+
+\subsection{IUDI: NIR-guided Intrinsic Decomposition Network}
+\textbf{Intrinsic decomposition.} We decompose the pseudo-NIR image into reflectance $R$ and shading $S$ using our IUDI network (UNet-style encoder--decoder~\cite{ronneberger2015unet}), enforcing the intrinsic physical constraint:
+\begin{equation}
+I_{\mathrm{recon}} = R \odot S, \qquad
+\mathcal{L}_{\mathrm{recon}} = \lVert I_{\mathrm{recon}} - I^{nir}\rVert_1.
+\label{eq:recon}
+\end{equation}
+where $I_{\mathrm{recon}}$ is the reconstruction produced by the IUDI network and $\odot$ denotes element-wise multiplication.
+To mimic classical intrinsic priors while remaining differentiable, we incorporate edge-aware smoothness for reflectance and low-frequency priors for shading (matching our training implementation). Let $\nabla_x(\cdot)$ and $\nabla_y(\cdot)$ denote finite differences. Then,
+\begin{equation}
+w_x = \exp\!\big(-\gamma\,|\nabla_x I^{nir}|\big), \quad
+w_y = \exp\!\big(-\gamma\,|\nabla_y I^{nir}|\big),
+\label{eq:edge_weights}
+\end{equation}
+\begin{equation}
+\mathcal{L}_{R} =
+\mathbb{E}\!\left[w_x\,|\nabla_x R| + w_y\,|\nabla_y R|\right], \qquad
+\mathcal{L}_{S} = \lVert S - \mathrm{AvgPool}(S)\rVert_1,
+\label{eq:smooth}
+\end{equation}
+where $\nabla_x, \nabla_y$ are spatial gradients, $w_x,w_y$ are edge-aware weights computed from $I^{nir}$, and $\mathrm{AvgPool}(\cdot)$ is a local averaging operator that encourages $S$ to be low-frequency. We further stabilize the global brightness of $R$ using a mean (median-like) constraint
+\begin{equation}
+\mathcal{L}_{\mathrm{med}} = \left|\mathrm{mean}(R) - m_0\right|.
+\label{eq:median}
+\end{equation}
+where $m_0$ is the target mean reflectance level (empirically around $0.5$).
+
+\textbf{Intensity supervision with masks.} Intrinsic decomposition alone does not guarantee LiDAR-consistent intensity. We therefore introduce a hierarchical prediction head (DeepLabV3-style context aggregation~\cite{chen2017deeplabv3}) to predict an intensity map $\hat{I}$ from reflectance (optionally conditioned on shading). Supervision is provided by a LiDAR intensity projection map $I^{lidar}$, obtained by projecting LiDAR points to the camera plane. Because the LiDAR and camera fields of view may not align, we use a binary mask $M\in\{0,1\}^{H\times W}$ indicating valid projected pixels. The masked intensity loss is:
+\begin{equation}
+\mathcal{L}_{\mathrm{lidar}} =
+\frac{\lVert M\odot(\hat{I}-I^{lidar})\rVert_1}{\lVert M\rVert_1+\epsilon},
+\label{eq:lidar_mask}
+\end{equation}
+where $M$ is the valid-pixel mask from LiDAR projection, $I^{lidar}$ is the projected LiDAR intensity map, and $\epsilon$ is a small constant to avoid division by zero. We additionally employ an SSIM term~\cite{wang2004ssim} to preserve structure:
+\begin{equation}
+\mathcal{L}_{\mathrm{ssim}} = 1 - \mathrm{SSIM}(\hat{I}, I^{lidar}).
+\label{eq:ssim}
+\end{equation}
+where $\mathrm{SSIM}(\cdot,\cdot)$ is the structural similarity index computed on the intensity maps.
+
+\textbf{Overall objective.} The full training objective (consistent with our implementation) is:
+\begin{equation}
+\begin{aligned}
+\mathcal{L} =\ &\lambda_{\mathrm{recon}}\mathcal{L}_{\mathrm{recon}}
++ \lambda_{R}\mathcal{L}_{R}
++ \lambda_{S}\mathcal{L}_{S} \\
+&+ \lambda_{\mathrm{med}}\mathcal{L}_{\mathrm{med}}
++ \lambda_{\mathrm{lidar}}\mathcal{L}_{\mathrm{lidar}} ,
+\end{aligned}
+\label{eq:total_loss}
+\end{equation}
+where $\lambda_{\bullet}$ are scalar weights balancing reconstruction, smoothness, brightness, and LiDAR supervision. In practice, we warm up the LiDAR term by gradually increasing $\lambda_{\mathrm{lidar}}$ during training. In some variants we further add an SSIM term $\lambda_{\mathrm{ssim}}\mathcal{L}_{\mathrm{ssim}}$ and/or a VGG-based perceptual term $\lambda_{\mathrm{perc}}\mathcal{L}_{\mathrm{perc}}$~\cite{simonyan2014vgg}.
+
+\textbf{Traditional baseline (IIW-CRF).} For comparison, we also support IIW-CRF~\cite{bell2014intrinsic}, a traditional intrinsic method based on dense CRF optimization from ``Intrinsic Images in the Wild,'' which directly outputs $R$ and $S$ from $I^{nir}$.
+
+\subsection{Distribution Calibration via Quantile Remapping}
+Reflectance- or network-predicted intensity may exhibit a global histogram shift from real LiDAR intensity. We perform distribution calibration in two steps: a distance-dependent linear modulation followed by a learned quantile mapping.
+
+\textbf{Distance encoding.} We first apply a distance-dependent linear modulation to per-point intensity so that intensity varies with range in a simple, physically motivated way. Let $d = \|\mathbf{x}\|$ be the point distance and $t = (d - d_{\min})/(d_{\max} - d_{\min})$ the normalized distance in $[0,1]$ over a fixed range $[d_{\min}, d_{\max}]$. We set
+\begin{equation}
+i_d = R_{\max} + (R_{\min} - R_{\max})\, t, \quad \text{with } R_{\max} = i,
+\label{eq:dist_encode}
+\end{equation}
+where $i$ is the input intensity at the point. We classify each return as diffuse or retro-reflective from the predicted intensity at the point: if $i \le \tau$ we treat it as diffuse and set $R_{\min}=0$, otherwise as retro-reflective with $R_{\min} = r_{\mathrm{retro}}$ (fixed threshold $\tau$). We then clip $i_d$ to $[0,1]$. The distance-encoded intensity $i_d$ is used as the source for the learned quantile mapping below.
+
+\textbf{Quantile remapping.} Given distance-modulated intensity $i_d$ and a reference distribution (from real LiDAR) $\{r_n\}$, we compute quantiles at $\{q_k\}_{k=1}^{K}$ to obtain source and reference curves $Q_s$, $Q_r$, and define a piecewise-linear mapping:
+\begin{equation}
+g(i) = \mathrm{interp}\big(i, Q_s, Q_r\big), \quad
+i' = \mathrm{clip}(g(i),0,1),
+\label{eq:quantile}
+\end{equation}
+where $Q_s$ and $Q_r$ are the source and reference quantile curves evaluated at a fixed set of quantile levels $\{q_k\}_{k=1}^{K}$, and $\mathrm{interp}(\cdot,\cdot,\cdot)$ denotes piecewise-linear interpolation between these curves. The quantile model is trained on pairs $(i_d, i^{\mathrm{ref}})$ and at inference we apply Eq.~\ref{eq:quantile} to $i_d$. To match our implementation, we keep invalid (unobserved) points at zero and apply remapping only to valid intensities.
+
+\subsection{Point Cloud Intensity Assignment (Brief)}
+Finally, we assign per-point intensity by calibrated projection from 3D points to the image plane, sampling $R$ (or $\hat{I}$) at projected pixels, and fusing across multiple cameras when applicable. Using the camera coordinate convention in our implementation, for a 3D point in camera coordinates $(X_c,Y_c,Z_c)$ with depth $X_c>0$, we compute normalized coordinates $x_n=-Y_c/X_c$ and $y_n=-Z_c/X_c$, and project them as
+\begin{equation}
+u = f_x x_n + c_x,\qquad v = f_y y_n + c_y.
+\label{eq:proj}
+\end{equation}
+where $(f_x,f_y,c_x,c_y)$ are the camera intrinsics and $(u,v)$ are the resulting image-plane coordinates.
+This step is lightweight and simply lifts image-based reflectance/intensity to the 3D point cloud. Therefore, the core novelty lies in the pseudo-NIR prior, intrinsic decomposition, and distribution calibration.
+
+
+
+% === Table 1: NuScenes ===
+\begin{table*}[t!]
+    \small
+    \centering
+    \caption{Quantitative results on NuScenes with reconstruction methods.}
+    \renewcommand{\arraystretch}{1.2} 
+    \setlength{\tabcolsep}{2.5pt} 
+    \label{tab:Nuscenes_exp}
+    
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{l cccccccc c cccccccc}
+        \hline
+        \multirow{2}{*}{{Method/Scenario}} 
+        & \multicolumn{7}{c}{{scene0001-frame00006}}
+        &
+        & \multicolumn{7}{c}{{scene0004-frame00016}}
+        \\
+        \cline{2-8}  \cline{10-16}
+        & TFS↓ & TTime↓(h) & RMSE↓ & MedAE↓ & LPIPS↓ & SSIM↑ & PSNR↑ & 
+        & TFS↓ & TTime↓(h) & RMSE↓ & MedAE↓ & LPIPS↓ & SSIM↑ & PSNR↑ \\
+        \hline
+        LiDAR-NeRF 
+        & 20 & 0.52 & 7.6498 & 28.0431 & \nd{0.3713} & 0.5861 & 30.3280 &
+        & 20 & 0.52 & 7.7252 & 28.0275 & 0.3838 & 0.6186 & 30.3726\\
+        LiDAR4D 
+        & 20 & 3.51 & 8.1914 & 32.0000 & 0.4058 & 0.6317 & 29.8636 &
+        & 20 & 2.64 & 7.8921 & 28.0000 & 0.3695 & 0.6675 & 30.1869\\
+        LiDAR-RT 
+        & 20 & 0.86 & 7.9996 & 30.0430 & 0.4569 & 0.6264 & 30.0694 &
+        & 20 & 1.63 & 7.8641 & 28.0217 & 0.3915 & 0.6371 & 30.2178\\
+        NIdaR 
+        & 0 & 0.00 & \nd{7.7274} & \nd{25.0392} & 0.3932 & \nd{0.6661} & \nd{30.3701} &
+        & 0 & 0.00 & \nd{7.5271} & \nd{27.0314} & \nd{0.3385} & \nd{0.7098} & \nd{30.5982}\\
+        NIdaR-IUDI 
+        & 0 & 0.00 & \fs\bf{7.4855} & \fs\bf{22.0392} & \fs\bf{0.3211} & \fs\bf{0.7166} & \fs\bf{30.6464} &
+        & 0 & 0.00 & \fs\bf{7.4068} & \fs\bf{21.0431} & \bf\fs{0.2984} & \bf\fs{0.7370} & \bf\fs{30.7382}\\
+        \hline
+        \multicolumn{16}{l}{\scriptsize{TFS: training frames per scene, TTime: training time.}}
+    \end{tabular}%
+    }
+    \vspace{-4mm}
+\end{table*}
+
+% === Table 2: Waymo ===
+\begin{table*}[t!]
+    \small
+    \centering
+    \caption{Quantitative results on Waymo with reconstruction methods.}
+    \renewcommand{\arraystretch}{1.2} 
+    \setlength{\tabcolsep}{2.5pt} % 保持紧凑列间距
+    \label{tab:waymo_exp}
+    
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{l cccccccc c cccccccc} 
+        \hline
+        \multirow{2}{*}{{Method/Scenario}} 
+        & \multicolumn{7}{c}{{WS4-frame000000}}
+        &
+        & \multicolumn{7}{c}{{WS4-frame000184}}
+        \\
+        \cline{2-8}  \cline{10-16} 
+        & TFS↓ & TTime↓(h) & RMSE↓ & MedAE↓ & LPIPS↓ & SSIM↑ & PSNR↑ & 
+        & TFS↓ & TTime↓(h) & RMSE↓ & MedAE↓ & LPIPS↓ & SSIM↑ & PSNR↑ \\
+        \hline
+        LiDAR-RT 
+        & 50 & 3.48 & \fs\bf{0.1081} & \fs\bf{0.0431} & \fs\bf{0.1003} & \fs\bf{0.7891} & \fs\bf{19.3264} & 
+        & 50 & 3.79 & \fs\bf{0.0826} & \fs\bf{0.0275} & \fs\bf{0.0871} & \fs\bf{0.8133} & \fs\bf{21.6552} \\
+        NIdaR 
+        & 0 & 0.00 & 0.2571 & 0.1058 & 0.3464 & 0.5556 & 11.7973 & 
+        & 0 & 0.00 & 0.1588 & 0.0862 & 0.2984 & 0.5796 & 15.9845 \\
+        NIdaR-IUDI 
+        & 0 & 0.00 & \nd{0.1092} & \nd{0.0568} & \nd{0.2151} & \nd{0.6826} & \nd{19.2321} & 
+        & 0 & 0.00 & \nd{0.1132} & \nd{0.0431} & \nd{0.2757} & \nd{0.6891} & \nd{18.9212} \\
+        \hline
+        \multicolumn{16}{l}{\scriptsize{TFS: training frames per scene, TTime: training time.}} 
+    \end{tabular}%
+    }
+    \vspace{-4mm}
+\end{table*}
+
+% === Table 3: KITTI-360 ===
+\begin{table*}[t!]
+    \small
+    \centering
+    \caption{Quantitative results on KITTI-360 with reconstruction methods.}
+    \renewcommand{\arraystretch}{1.2} 
+    \setlength{\tabcolsep}{2.5pt} 
+    \label{tab:kitti360_exp}
+    
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{l cccccccc c cccccccc}
+        \hline
+        \multirow{2}{*}{{Method/Scenario}} 
+        & \multicolumn{7}{c}{{2013-05-28-drive-0000-sync-frame130}}
+        &
+        & \multicolumn{7}{c}{{2013-05-28-drive-0000-sync-frame440}}
+        \\
+        \cline{2-8}  \cline{10-16}
+        & TFS↓ & TTime↓(h) & RMSE↓ & MedAE↓ & LPIPS↓ & SSIM↑ & PSNR↑ & 
+        & TFS↓ & TTime↓(h) & RMSE↓ & MedAE↓ & LPIPS↓ & SSIM↑ & PSNR↑ \\
+        \hline
+        LiDAR-NeRF 
+        & 50 & 0.47 & 0.2326 & 0.1269 & 0.3194 & 0.4159 & 14.1705 &
+        & 50 & 0.38 & 0.2261 & 0.1418 & 0.3792 & 0.3734 & 14.4534\\
+        LiDAR4D 
+        & 50 & 2.04 & \fs\bf{0.0861} & \nd{0.0268} & \nd{0.1189} & \fs\bf{0.7491} & \fs\bf{21.2973} &
+        & 50 & 2.74 & \fs\bf{0.1101} & \fs\bf{0.0405} & 0.1707 & 0.6126 & \fs\bf{20.2996}\\
+        LiDAR-RT 
+        & 50 & 0.81 & \nd{0.1018} & \fs\bf{0.0250} & \fs\bf{0.1188} & 0.6740  & \nd{19.8460} & 
+        & 50 & 0.83 & 0.1286 & \nd{0.0414} & \nd{0.1699} & 0.5291 & 17.8115\\
+        NIdaR 
+        & 0 & 0.00 & 0.1388 & 0.0980 & 0.1339 & \nd{0.6902} & 17.1491 & 
+        & 0 & 0.00 & \nd{0.1153} & 0.0745 & \fs\bf{0.1693} & \fs\bf{0.7345} & \nd{18.7560}\\
+        NIdaR-IUDI 
+        & 0 & 0.00 & 0.1393 & 0.1098 & 0.1741 & 0.6845 & 17.1204 & 
+        & 0 & 0.00 & 0.1585 & 0.1333 & 0.2245 & \nd{0.6399} & 15.9958\\
+        \hline
+        \multicolumn{16}{l}{\scriptsize{TFS: training frames per scene, TTime: training time.}}
+    \end{tabular}%
+    }
+    \vspace{-4mm}
+\end{table*}
+
+
+\section{Experiments and Evaluations}
+\label{sec:experiments}
+\subsection{Experimental Setup}
+\vspace{-1mm}
+We evaluate NIdaR on three public benchmarks with LiDAR intensity ground truth, namely nuScenes~\cite{caesar2020nuscenes}, Waymo~\cite{sun2020waymo}, and KITTI-360~\cite{liao2022kitti360}. We compare against LiDAR-NeRF~\cite{tao2023lidarnerf}, LiDAR4D~\cite{zheng2024lidar4d}, and LiDAR-RT~\cite{2025lidarrt}. LiDAR-NeRF is NeRF-based, whereas LiDAR4D and LiDAR-RT adopt 3D Gaussian splatting~\cite{kerbl2023gaussian}. Accordingly, we use official implementations and train all baselines with their reported hyperparameters.
+
+Following prior work~\cite{wang2004ssim,zhang2018lpips}, we report MedAE, RMSE~\cite{chai2014rmse}, PSNR~\cite{huynh2008psnr}, SSIM~\cite{wang2004ssim}, and LPIPS~\cite{zhang2018lpips} between predicted and ground-truth LiDAR intensity projection maps. Moreover, we include two efficiency indicators, namely the number of frames required for per-scene training (TFS) and the training time (TTime).
+
+For training, the IUDI network and the quantile remapping model are optimized on a single RTX 3090 GPU using 17 scenarios from Waymo. The IUDI network takes pseudo-NIR images from Eq.~\ref{eq:pseudo_nir} and is supervised by LiDAR intensity projection maps with valid masks (Eq.~\ref{eq:lidar_mask}). We train for 10 epochs with a batch size of 8 using Adam with a learning rate of $10^{-4}$ and weight decay of $10^{-5}$. In practice, we set $\lambda_{\mathrm{recon}}=1.0$, $\lambda_{R,\mathrm{smooth}}=0.01$, and $\lambda_{\mathrm{lidar}}=0.5$, and we weight the intensity loss terms as $w_{\mathrm{L1}}=1.0$, $w_{\mathrm{L2}}=0.5$, and $w_{\mathrm{SSIM}}=0.2$ (Eq.~\ref{eq:total_loss}). Meanwhile, the pseudo-NIR stage uses the pretrained cs-stereo STN~\cite{cs-stereo2019} without fine-tuning.
+
+% \begin{table*}[h]
+%         \small
+%         \centering
+%         \caption{Quantitative results on Waymo with reconstruction methods.}
+%         \renewcommand{\arraystretch}{1.3} 
+%         \label{tab:waymo_exp}
+%         \begin{adjustbox}{width=1.7\columnwidth}
+
+%         \begin{tabular}{*{17}c}
+%             \hline
+%             \multirow{2}{*}{\makecell{Method/Scenario}} 
+%             & \multicolumn{7}{c}{\makecell{WS4-frame000000}}
+%             &
+%             & \multicolumn{7}{c}{\makecell{WS4-frame000184}}
+%             \\
+%             \cline{2-8}  \cline{10-16} % \cline{14-18}
+%             & TFS↓(frame)$^1$ & TTime↓(h)$^2$ & RMSE↓ & MedAE↓ & LPIPS ↓ & SSIM↑ & PSNR↑ & 
+%             % & RMSE↓ & MedAE↓ & LPIPS ↓ & SSIM↑ & PSNR↑ &
+%             & TFS(frame)↓ & TTime(h)↓ & RMSE↓ & MedAE↓ & LPIPS ↓ & SSIM↑ & PSNR↑ \\
+%             \hline
+%             \makecell{LiDAR-RT} 
+%             & {50} & 3.48 & \fs\bf{0.1081} & \fs\bf{0.0431} & \fs\bf{0.1003} & \fs\bf{0.7891} & \fs\bf{19.3264} & 
+%             % & 0.0925 & 0.0476 & & 0.5204 & 20.0790 & 
+%             & 50 & 3.79 & \fs\bf{0.0826} & \fs\bf{0.0275} & \fs\bf{0.0871} & \fs\bf{0.8133} & \fs\bf{21.6552} \\
+%             \makecell{NIdaR} 
+%             & {0} & {0.00} & 0.2571 & 0.1058 & 0.3464 & {0.5556} & 11.7973 & 
+%             % & 0.2957 & 0.1980 & & 0.5445 & 10.5809 & 
+%             & {0} & {0.00} & 0.1588 & 0.0862 & 0.2984 & 0.5796 & 15.9845 \\
+%             % \makecell{NIdaR-IUDI} 
+%             % & \fs\bf{0} & \fs\bf{0.00} & 0.1443 & 0.0627 & 0.2385 & 0.5783 & 16.8088 & 
+%             % % & 0.1165 & 0.0549 & 0.2132 & 0.6852 & 19.1302 & 
+%             % & \fs\bf{0} & \fs\bf{0.00} & 0.1347 & 0.0627 & 0.2364 & 0.5543 & 17.4085 \\
+%             \makecell{NIdaR-IUDI} 
+%             & {0} & {0.00} & \nd{0.1092} & \nd{0.0568} & \nd{0.2151} & \nd{0.6826} & \nd{19.2321} & 
+%             % & 0.1165 & 0.0549 & 0.2132 & 0.6852 & 19.1302 & 
+%             & {0} & {0.00} & \nd{0.1132} & \nd{0.0431} & \nd{0.2757} & \nd{0.6891} & \nd{18.9212} \\
+%             \hline
+%             \multicolumn{14}{l}{\footnotesize{$^1$ The number of frames required for scene-specific training.$^2$ Training Time.}}
+%         \end{tabular}
+%         \end{adjustbox}
+%         \vspace{-4mm}
+%     \end{table*}
+
+% \begin{table*}[h]
+%         \small
+%         \centering
+%         \caption{Quantitative results on KITTI-360 with reconstruction methods.}
+%         \renewcommand{\arraystretch}{1.3} 
+%         \label{tab:kitti360_exp}
+%         \begin{adjustbox}{width=1.7\columnwidth}
+
+%         \begin{tabular}{*{17}c}
+%             \hline
+%             \multirow{2}{*}{\makecell{Method/Scenario}} 
+%             & \multicolumn{7}{c}{\makecell{2013-05-28-drive-0000-sync-frame130}}
+%             &
+%             & \multicolumn{7}{c}{\makecell{2013-05-28-drive-0000-sync-frame440}}
+%             % &
+%             % & \multicolumn{4}{c}{\makecell{scene2140-2160-frame0}}
+%             % &
+%             % & \multicolumn{4}{c}{\makecell{average}}
+%             \\
+%             \cline{2-8}  \cline{10-16}
+%             & TFS↓(frame)$^1$ & TTime↓(h)$^2$ & RMSE↓ & MedAE↓ & LPIPS ↓ & SSIM↑ & PSNR↑ & 
+%             & TFS↓(frame) & TTime(h)↓ & RMSE↓ & MedAE↓ & LPIPS ↓ & SSIM↑ & PSNR↑ & \\
+%             \hline
+%             \makecell{LiDAR-NeRF} 
+%             & 50 & 0.47 & 0.2326 & 0.1269 & 0.3194 & 0.4159 & 14.1705 &
+%             & 50 & 0.38 & 0.2261 & 0.1418 & 0.3792 & 0.3734 & 14.4534\\
+%             \makecell{LiDAR4D} 
+%             & 50 & 2.04 & \fs\bf{0.0861} & \nd{0.0268} & \nd{0.1189} & \fs\bf{0.7491} & \fs\bf{21.2973} &
+%             & 50 & 2.74 & \fs\bf{0.1101} & \fs\bf{0.0405} & 0.1707 & 0.6126 & \fs\bf{20.2996}\\
+%             \makecell{LiDAR-RT} 
+%             & 50 & 0.81 & \nd{0.1018} & \fs\bf{0.0250} & \fs\bf{0.1188} & 0.6740  & \nd{19.8460} & 
+%             & 50 & 0.83 & 0.1286 & \nd{0.0414} & \nd{0.1699} & 0.5291 & 17.8115\\
+%             \makecell{NIdaR} 
+%             & {0} & {0.00} & 0.1388 & 0.0980 & 0.1339 & \nd{0.6902} & 17.1491 & 
+%             & {0} & {0.00} & \nd{0.1153} & 0.0745 & \fs\bf{0.1693} & \fs\bf{0.7345} & \nd{18.7560}\\
+%             % \makecell{NIdaR-IUDI} 
+%             % & \fs\bf{0} & \fs\bf{0.00} & 0.1529 & 0.1059 & 0.1464 & 0.6625 & 16.3071 & 
+%             % & \fs\bf{0} & \fs\bf{0.00} & 0.1623 & 0.1216 & 0.1858 & 0.6353 & 15.7898\\
+%             \makecell{NIdaR-IUDI} 
+%             & {0} & {0.00} & 0.1393 & 0.1098 & 0.1741 & 0.6845 & 17.1204 & 
+%             & {0} & {0.00} & 0.1585 & 0.1333 & 0.2245 & \nd{0.6399} & 15.9958\\
+%             \hline
+%             \multicolumn{14}{l}{\footnotesize{$^1$ The number of frames required for scene-specific training.$^2$ Training Time.}}
+%         \end{tabular}
+%         \end{adjustbox}
+%         \vspace{-4mm}
+%     \end{table*}
+
+% \begin{table*}[h]
+%         \small
+%         \centering
+%         \caption{Quantitative results on NuScenes with reconstruction methods.}
+%         \renewcommand{\arraystretch}{1.3} 
+%         \label{tab:Nuscenes_exp}
+%         \begin{adjustbox}{width=1.7\columnwidth}
+
+%         \begin{tabular}{*{17}c}
+%             \hline
+%             \multirow{2}{*}{\makecell{Method/Scenario}} 
+%             & \multicolumn{7}{c}{\makecell{scene0001-frame00006}}
+%             &
+%             & \multicolumn{7}{c}{\makecell{scene0004-frame00016}}
+%             \\
+%             \cline{2-8}  \cline{10-16}
+%             & TFS↓(frame)$^1$ & TTime↓(h)$^2$ & RMSE↓ & MedAE↓ & LPIPS ↓ & SSIM↑ & PSNR↑ & 
+%             & TFS(frame)↓ & TTime(h)↓ & RMSE↓ & MedAE↓ & LPIPS ↓ & SSIM↑ & PSNR↑  \\
+%             \hline
+%             \makecell{LiDAR-NeRF} 
+%             % & 20 & 0.52 & 0.0917 & 0.0431 & 0.1568 & 0.2528 & 21.3334 &
+%             & 20 & 0.52 & 7.6498 & 28.0431 & \nd{0.3713} & 0.5861 & 30.3280 &
+%             % & 20 & 0.52 & 0.0901 & 0.0275 & 0.1493 & 0.3839 & 21.7154\\
+%             & 20 & 0.52 & 7.7252 & 28.0275 & 0.3838 & 0.6186 & 30.3726\\
+%             \makecell{LiDAR4D} 
+%             & 20 & 3.51 & 8.1914 & 32.0000 & 0.4058 & 0.6317 & 29.8636 &
+%             & 20 & 2.64 & 7.8921 & 28.0000 & {0.3695} & 0.6675 & 30.1869\\
+%             \makecell{LiDAR-RT} 
+%             % & 20 & 0.86 & 0.1026 & 0.0430 & 0.1621 & 0.1411 & 19.7795 &
+%             & 20 & 0.86 & 7.9996 & 30.0430 & 0.4569 & 0.6264 & 30.0694 &
+%             % & 20 & 1.63 & 0.0620 & 0.0217 & 0.1463 & 0.2113 & 21.1535\\
+%             & 20 & 1.63 & 7.8641 & 28.0217 & 0.3915 & 0.6371 & 30.2178\\
+%             \makecell{NIdaR} 
+%             % & 0 & 0.00 & 0.1711 & 0.0392 & 0.1213 & 0.6581 & 15.3358 &
+%             & {0} & {0.00} & \nd{7.7274} & \nd{25.0392} & 0.3932 & \nd{0.6661} & \nd{30.3701} &
+%             % & 0 & 0.00 & 0.0842 & 0.0314 & 0.0564 & 0.7287 & 21.4947\\
+%             & {0} & {0.00} & \nd{7.5271} & \nd{27.0314} & \nd{0.3385} & \nd{0.7098} & \nd{30.5982}\\
+%             % \makecell{NIdaR-IUDI} 
+%             % % & 0 & 0.00 & 0.0870 & 0.0392 & 0.0425 & 0.7494 & 21.2087 &
+%             % & \fs\bf{0} & \fs\bf{0.00} & 7.6034 & 26.0392 & \fs\bf{0.3164} & 0.6892 & 30.5107 &
+%             % % & 0 & 0.00 & 0.1106 & 0.0431 & 0.0675 & 0.7282 & 19.1248\\
+%             % & \fs\bf{0} & \fs\bf{0.00} & 7.7421 & 33.0431 & 0.3299 & 0.6884 & 30.3536\\
+%             \makecell{NIdaR-IUDI} 
+%             % & 0 & 0.00 & 0.0870 & 0.0392 & 0.0425 & 0.7494 & 21.2087 &
+%             & {0} & {0.00} & \fs\bf{7.4855} & \fs\bf{22.0392} & \fs\bf{0.3211} & \fs\bf{0.7166} & \fs\bf{30.6464} &
+%             % & 0 & 0.00 & 0.1106 & 0.0431 & 0.0675 & 0.7282 & 19.1248\\
+%             & {0} & {0.00} & \fs\bf{7.4068} & \fs\bf{21.0431} & \bf\fs{0.2984} & \bf\fs{0.7370} & \bf\fs{30.7382}\\
+%             \hline
+%             \multicolumn{14}{l}{\footnotesize{$^1$ The number of frames required for scene-specific training.$^2$ Training Time.}}
+%         \end{tabular}
+%         \end{adjustbox}
+%         \vspace{-4mm}
+%     \end{table*}
+
+% filepath: f:\iros2026\NIdaR_latex\root.tex
+% ...existing code...
+
+% % === Table Waymo ===
+% \begin{table*}[t!]
+%     \small
+%     \centering
+%     \caption{Quantitative results on Waymo with reconstruction methods.}
+%     \renewcommand{\arraystretch}{1.2} % 稍微减小行高以保持紧凑
+%     \setlength{\tabcolsep}{2.5pt}     % 关键：减小列间距，让同样宽度下能容纳更大的字
+%     \label{tab:waymo_exp}
+    
+%     % 将宽度设为 \textwidth 以充分利用页面宽度
+%     \resizebox{\textwidth}{!}{%
+%     \begin{tabular}{l cccccccc c cccccccc} % 精简列定义
+%         \hline
+%         \multirow{2}{*}{\textbf{Method/Scenario}} 
+%         & \multicolumn{7}{c}{\textbf{WS4-frame000000}}
+%         &
+%         & \multicolumn{7}{c}{\textbf{WS4-frame000184}}
+%         \\
+%         \cline{2-8}  \cline{10-16} 
+%         & TFS↓ & TTime↓(h) & RMSE↓ & MedAE↓ & LPIPS↓ & SSIM↑ & PSNR↑ & 
+%         & TFS↓ & TTime↓(h) & RMSE↓ & MedAE↓ & LPIPS↓ & SSIM↑ & PSNR↑ \\
+%         \hline
+%         LiDAR-RT 
+%         & 50 & 3.48 & \fs\bf{0.1081} & \fs\bf{0.0431} & \fs\bf{0.1003} & \fs\bf{0.7891} & \fs\bf{19.33} & 
+%         & 50 & 3.79 & \fs\bf{0.0826} & \fs\bf{0.0275} & \fs\bf{0.0871} & \fs\bf{0.8133} & \fs\bf{21.66} \\
+%         NIdaR 
+%         & 0 & 0.00 & 0.2571 & 0.1058 & 0.3464 & 0.5556 & 11.80 & 
+%         & 0 & 0.00 & 0.1588 & 0.0862 & 0.2984 & 0.5796 & 15.98 \\
+%         NIdaR-IUDI 
+%         & 0 & 0.00 & \nd{0.1092} & \nd{0.0568} & \nd{0.2151} & \nd{0.6826} & \nd{19.23} & 
+%         & 0 & 0.00 & \nd{0.1132} & \nd{0.0431} & \nd{0.2757} & \nd{0.6891} & \nd{18.92} \\
+%         \hline
+%         \multicolumn{16}{l}{\scriptsize{TFS: Training Frames for Scene; TTime: Training Time.}} % 简化注脚以节省空间
+%     \end{tabular}%
+%     }
+%     \vspace{-4mm}
+% \end{table*}
+
+% % === Table KITTI-360 ===
+% \begin{table*}[t!]
+%     \small
+%     \centering
+%     \caption{Quantitative results on KITTI-360 with reconstruction methods.}
+%     \renewcommand{\arraystretch}{1.2} 
+%     \setlength{\tabcolsep}{2.5pt} 
+%     \label{tab:kitti360_exp}
+    
+%     \resizebox{\textwidth}{!}{%
+%     \begin{tabular}{l cccccccc c cccccccc}
+%         \hline
+%         \multirow{2}{*}{\textbf{Method/Scenario}} 
+%         & \multicolumn{7}{c}{\textbf{2013-05-28-drive-0000-sync-frame130}}
+%         &
+%         & \multicolumn{7}{c}{\textbf{2013-05-28-drive-0000-sync-frame440}}
+%         \\
+%         \cline{2-8}  \cline{10-16}
+%         & TFS↓ & TTime↓(h) & RMSE↓ & MedAE↓ & LPIPS↓ & SSIM↑ & PSNR↑ & 
+%         & TFS↓ & TTime↓(h) & RMSE↓ & MedAE↓ & LPIPS↓ & SSIM↑ & PSNR↑ \\
+%         \hline
+%         LiDAR-NeRF 
+%         & 50 & 0.47 & 0.2326 & 0.1269 & 0.3194 & 0.4159 & 14.17 &
+%         & 50 & 0.38 & 0.2261 & 0.1418 & 0.3792 & 0.3734 & 14.45\\
+%         LiDAR4D 
+%         & 50 & 2.04 & \fs\bf{0.0861} & \nd{0.0268} & \nd{0.1189} & \fs\bf{0.7491} & \fs\bf{21.30} &
+%         & 50 & 2.74 & \fs\bf{0.1101} & \fs\bf{0.0405} & 0.1707 & 0.6126 & \fs\bf{20.30}\\
+%         LiDAR-RT 
+%         & 50 & 0.81 & \nd{0.1018} & \fs\bf{0.0250} & \fs\bf{0.1188} & 0.6740  & \nd{19.85} & 
+%         & 50 & 0.83 & 0.1286 & \nd{0.0414} & \nd{0.1699} & 0.5291 & 17.81\\
+%         NIdaR 
+%         & 0 & 0.00 & 0.1388 & 0.0980 & 0.1339 & \nd{0.6902} & 17.15 & 
+%         & 0 & 0.00 & \nd{0.1153} & 0.0745 & \fs\bf{0.1693} & \fs\bf{0.7345} & \nd{18.76}\\
+%         NIdaR-IUDI 
+%         & 0 & 0.00 & 0.1393 & 0.1098 & 0.1741 & 0.6845 & 17.12 & 
+%         & 0 & 0.00 & 0.1585 & 0.1333 & 0.2245 & \nd{0.6399} & 16.00\\
+%         \hline
+%         \multicolumn{16}{l}{\scriptsize{TFS: Training Frames for Scene; TTime: Training Time.}}
+%     \end{tabular}%
+%     }
+%     \vspace{-4mm}
+% \end{table*}
+
+% % === Table NuScenes ===
+% \begin{table*}[t!]
+%     \small
+%     \centering
+%     \caption{Quantitative results on NuScenes with reconstruction methods.}
+%     \renewcommand{\arraystretch}{1.2} 
+%     \setlength{\tabcolsep}{2.5pt} 
+%     \label{tab:Nuscenes_exp}
+    
+%     \resizebox{\textwidth}{!}{%
+%     \begin{tabular}{l cccccccc c cccccccc}
+%         \hline
+%         \multirow{2}{*}{\textbf{Method/Scenario}} 
+%         & \multicolumn{7}{c}{\textbf{scene0001-frame00006}}
+%         &
+%         & \multicolumn{7}{c}{\textbf{scene0004-frame00016}}
+%         \\
+%         \cline{2-8}  \cline{10-16}
+%         & TFS↓ & TTime↓(h) & RMSE↓ & MedAE↓ & LPIPS↓ & SSIM↑ & PSNR↑ & 
+%         & TFS↓ & TTime↓(h) & RMSE↓ & MedAE↓ & LPIPS↓ & SSIM↑ & PSNR↑ \\
+%         \hline
+%         LiDAR-NeRF 
+%         & 20 & 0.52 & 7.6498 & 28.04 & \nd{0.3713} & 0.5861 & 30.33 &
+%         & 20 & 0.52 & 7.7252 & 28.03 & 0.3838 & 0.6186 & 30.37\\
+%         LiDAR4D 
+%         & 20 & 3.51 & 8.1914 & 32.00 & 0.4058 & 0.6317 & 29.86 &
+%         & 20 & 2.64 & 7.8921 & 28.00 & 0.3695 & 0.6675 & 30.19\\
+%         LiDAR-RT 
+%         & 20 & 0.86 & 7.9996 & 30.04 & 0.4569 & 0.6264 & 30.07 &
+%         & 20 & 1.63 & 7.8641 & 28.02 & 0.3915 & 0.6371 & 30.22\\
+%         NIdaR 
+%         & 0 & 0.00 & \nd{7.7274} & \nd{25.04} & 0.3932 & \nd{0.6661} & \nd{30.37} &
+%         & 0 & 0.00 & \nd{7.5271} & \nd{27.03} & \nd{0.3385} & \nd{0.7098} & \nd{30.60}\\
+%         NIdaR-IUDI 
+%         & 0 & 0.00 & \fs\bf{7.4855} & \fs\bf{22.04} & \fs\bf{0.3211} & \fs\bf{0.7166} & \fs\bf{30.65} &
+%         & 0 & 0.00 & \fs\bf{7.4068} & \fs\bf{21.04} & \bf\fs{0.2984} & \bf\fs{0.7370} & \bf\fs{30.74}\\
+%         \hline
+%         \multicolumn{16}{l}{\scriptsize{TFS: Training Frames for Scene; TTime: Training Time.}}
+%     \end{tabular}%
+%     }
+%     \vspace{-4mm}
+% \end{table*}
+
+% ...existing code...
+
+\subsection{Results on Public Benchmarks}
+\vspace{-1mm}
+Reconstruction-based baselines require per-scene training data. Therefore, we use 20 consecutive frames for nuScenes (each scenario contains 20 frames) and 50 consecutive point clouds for Waymo and KITTI-360. In contrast, NIdaR requires no per-scene training and runs directly on the chosen evaluation frames. For Waymo, we exclude rear-view point clouds due to missing camera images. For KITTI-360, we use only the front-view cameras and apply the same valid mask during evaluation, as in Fig.~\ref{fig:kitti360_exp}. 
+
+\begin{figure*}[htbp]
+    \centering
+    \renewcommand{\arraystretch}{0}  % 取消表格行间距，图片无上下留白
+    \begin{tabular}{@{}c@{\hspace{6mm}}l@{}}
+        \textbf{GT} &
+        \begin{minipage}{0.86\textwidth}
+            \centering
+            \begin{tikzpicture}[baseline=(image.base)]
+                \node[inner sep=0] (image) {\includegraphics[width=\linewidth,trim=0 256pt 0 0,clip]{fig/n6-nidarv1.jpg}};
+                \coordinate (blx) at ($(image.south west)!0.85!(image.south east)$);
+                \coordinate (tlx) at ($(image.north west)!0.85!(image.north east)$);
+                \coordinate (bl) at ($(blx)!0.18!(tlx)$);
+                \coordinate (trx) at ($(image.south west)!0.999!(image.south east)$);
+                \coordinate (trtx) at ($(image.north west)!0.999!(image.north east)$);
+                \coordinate (tr) at ($(trx)!0.98!(trtx)$);
+                \draw[red,line width=0.7pt] (bl) rectangle (tr);
+            \end{tikzpicture}
+        \end{minipage} \\
+        \textbf{LIDAR4D} &
+        \begin{minipage}{0.86\textwidth}
+            \centering
+            \begin{tikzpicture}[baseline=(image.base)]
+                \node[inner sep=0] (image) {\includegraphics[width=\linewidth,trim=0 0 0 256pt,clip]{fig/n6-lidar4d.jpg}};
+                \coordinate (blx) at ($(image.south west)!0.85!(image.south east)$);
+                \coordinate (tlx) at ($(image.north west)!0.85!(image.north east)$);
+                \coordinate (bl) at ($(blx)!0.18!(tlx)$);
+                \coordinate (trx) at ($(image.south west)!0.999!(image.south east)$);
+                \coordinate (trtx) at ($(image.north west)!0.999!(image.north east)$);
+                \coordinate (tr) at ($(trx)!0.98!(trtx)$);
+                \draw[red,line width=0.7pt] (bl) rectangle (tr);
+            \end{tikzpicture}
+        \end{minipage} \\
+        \textbf{LIDAR-RT} &
+        \begin{minipage}{0.86\textwidth}
+            \centering
+            \begin{tikzpicture}[baseline=(image.base)]
+                \node[inner sep=0] (image) {\includegraphics[width=\linewidth,trim=0 0 0 256pt,clip]{fig/n6-lidarrt.jpg}};
+                \coordinate (blx) at ($(image.south west)!0.85!(image.south east)$);
+                \coordinate (tlx) at ($(image.north west)!0.85!(image.north east)$);
+                \coordinate (bl) at ($(blx)!0.18!(tlx)$);
+                \coordinate (trx) at ($(image.south west)!0.999!(image.south east)$);
+                \coordinate (trtx) at ($(image.north west)!0.999!(image.north east)$);
+                \coordinate (tr) at ($(trx)!0.98!(trtx)$);
+                \draw[red,line width=0.7pt] (bl) rectangle (tr);
+            \end{tikzpicture}
+        \end{minipage} \\
+        \textbf{LIDAR-Nerf} &
+        \begin{minipage}{0.86\textwidth}
+            \centering
+            \begin{tikzpicture}[baseline=(image.base)]
+                \node[inner sep=0] (image) {\includegraphics[width=\linewidth,trim=0 0 0 256pt,clip]{fig/n6-lidarnerf.jpg}};
+                \coordinate (blx) at ($(image.south west)!0.85!(image.south east)$);
+                \coordinate (tlx) at ($(image.north west)!0.85!(image.north east)$);
+                \coordinate (bl) at ($(blx)!0.18!(tlx)$);
+                \coordinate (trx) at ($(image.south west)!0.999!(image.south east)$);
+                \coordinate (trtx) at ($(image.north west)!0.999!(image.north east)$);
+                \coordinate (tr) at ($(trx)!0.98!(trtx)$);
+                \draw[red,line width=0.7pt] (bl) rectangle (tr);
+            \end{tikzpicture}
+        \end{minipage} \\
+        \textbf{Ours} &
+        \begin{minipage}{0.86\textwidth}
+            \centering
+            \begin{tikzpicture}[baseline=(image.base)]
+                \node[inner sep=0] (image) {\includegraphics[width=\linewidth,trim=0 0 0 256pt,clip]{fig/n6-nidarv2.jpg}};
+                \coordinate (blx) at ($(image.south west)!0.85!(image.south east)$);
+                \coordinate (tlx) at ($(image.north west)!0.85!(image.north east)$);
+                \coordinate (bl) at ($(blx)!0.18!(tlx)$);
+                \coordinate (trx) at ($(image.south west)!0.999!(image.south east)$);
+                \coordinate (trtx) at ($(image.north west)!0.999!(image.north east)$);
+                \coordinate (tr) at ($(trx)!0.98!(trtx)$);
+                \draw[red,line width=0.7pt] (bl) rectangle (tr);
+            \end{tikzpicture}
+        \end{minipage}
+    \end{tabular}
+    \renewcommand{\arraystretch}{1.0}  % 恢复默认行间距
+    
+    \caption{Qualitative comparison on NuScenes with reconstruction methods. Red boxes highlight challenging regions where scene-specific reconstruction is under-constrained.} 
+    \label{fig:Nuscenes_exp}
+    \vspace{-4mm}
+\end{figure*}
+
+\begin{figure*}[htbp]
+    \centering
+    \renewcommand{\arraystretch}{0}  % 取消表格行间距，图片无上下留白
+    \begin{tabular}{@{}c@{\hspace{6mm}}l@{}}
+        \textbf{GT} &
+        \begin{minipage}{0.86\textwidth}
+            \centering
+            \begin{tikzpicture}[baseline=(image.base)]
+                \node[inner sep=0] (image) {\includegraphics[width=\linewidth,trim=0 256pt 0 0,clip]{fig/waymo0-nidar.jpg}};
+                \coordinate (blx) at ($(image.south west)!0.95!(image.south east)$);
+                \coordinate (tlx) at ($(image.north west)!0.95!(image.north east)$);
+                \coordinate (bl) at ($(blx)!0.38!(tlx)$);
+                \coordinate (trx) at ($(image.south west)!0.999!(image.south east)$);
+                \coordinate (trtx) at ($(image.north west)!0.999!(image.north east)$);
+                \coordinate (tr) at ($(trx)!0.98!(trtx)$);
+                \draw[red,line width=0.7pt] (bl) rectangle (tr);
+            \end{tikzpicture}
+        \end{minipage} \\
+        \textbf{LIDAR-RT} &
+        \begin{minipage}{0.86\textwidth}
+            \centering
+            \begin{tikzpicture}[baseline=(image.base)]
+                \node[inner sep=0] (image) {\includegraphics[width=\linewidth,trim=0 0 0 256pt,clip]{fig/waymo0-lidarrt.jpg}};
+                \coordinate (blx) at ($(image.south west)!0.95!(image.south east)$);
+                \coordinate (tlx) at ($(image.north west)!0.95!(image.north east)$);
+                \coordinate (bl) at ($(blx)!0.38!(tlx)$);
+                \coordinate (trx) at ($(image.south west)!0.999!(image.south east)$);
+                \coordinate (trtx) at ($(image.north west)!0.999!(image.north east)$);
+                \coordinate (tr) at ($(trx)!0.98!(trtx)$);
+                \draw[red,line width=0.7pt] (bl) rectangle (tr);
+            \end{tikzpicture}
+        \end{minipage} \\
+        \textbf{Ours} &
+        \begin{minipage}{0.86\textwidth}
+            \centering
+            \begin{tikzpicture}[baseline=(image.base)]
+                \node[inner sep=0] (image) {\includegraphics[width=\linewidth,trim=0 0 0 256pt,clip]{fig/waymo0-nidar.jpg}};
+                \coordinate (blx) at ($(image.south west)!0.95!(image.south east)$);
+                \coordinate (tlx) at ($(image.north west)!0.95!(image.north east)$);
+                \coordinate (bl) at ($(blx)!0.38!(tlx)$);
+                \coordinate (trx) at ($(image.south west)!0.999!(image.south east)$);
+                \coordinate (trtx) at ($(image.north west)!0.999!(image.north east)$);
+                \coordinate (tr) at ($(trx)!0.98!(trtx)$);
+                \draw[red,line width=0.7pt] (bl) rectangle (tr);
+            \end{tikzpicture}
+        \end{minipage}
+    \end{tabular}
+    \renewcommand{\arraystretch}{1.0}  % 恢复默认行间距
+    
+    \caption{Qualitative comparison on Waymo with reconstruction methods. Red boxes highlight fine-grained reflectance/intensity structures.} 
+    \label{fig:waymo_exp}
+    \vspace{-4mm}
+\end{figure*}
+
+\begin{figure}[t]
+    \centering
+    \renewcommand{\arraystretch}{0}
+    \setlength{\tabcolsep}{0pt} % 极限压缩间距
+    \begin{tabular}{@{}c c c@{}} 
+        &
+        \begin{minipage}{0.49\columnwidth}
+            \centering \scriptsize{W/O Mask}
+        \end{minipage} &
+        \begin{minipage}{0.49\columnwidth}
+            \centering \scriptsize{W/ Mask}
+        \end{minipage} \\[3mm]
+        
+        \rotatebox{90}{\scriptsize \textbf{GT}}\hspace{1pt} &
+        \begin{minipage}{0.49\columnwidth}
+            \centering
+            \includegraphics[width=\linewidth,trim=0 256pt 0 0,clip]{fig/kitti360_no_mask.png}
+        \end{minipage} &
+        \begin{minipage}{0.49\columnwidth}
+            \centering
+            \includegraphics[width=\linewidth,trim=0 256pt 0 0,clip]{fig/kitti360_mask.png}
+        \end{minipage} \\ 
+        
+        \rotatebox{90}{\scriptsize \textbf{Ours}}\hspace{1pt} &
+        \begin{minipage}{0.49\columnwidth}
+            \centering
+            \includegraphics[width=\linewidth,trim=0 0 0 256pt,clip]{fig/kitti360_no_mask.png}
+        \end{minipage} &
+        \begin{minipage}{0.49\columnwidth}
+            \centering
+            \includegraphics[width=\linewidth,trim=0 0 0 256pt,clip]{fig/kitti360_mask.png}
+        \end{minipage}
+    \end{tabular}
+    \renewcommand{\arraystretch}{1.0}
+    
+    \caption{Qualitative results on KITTI-360. Using valid masks during supervision improves boundary consistency and suppresses artifacts caused by camera--LiDAR FoV mismatch.} 
+    \label{fig:kitti360_exp}
+    \vspace{-4mm}
+\end{figure}
+% ...existing code...
+
+
+% filepath: f:\iros2026\NIdaR_latex\root.tex
+% ...existing code...
+% \begin{figure}[t]  % 改为 figure 环境 (单栏)，建议放在页顶 [t]
+%     \centering
+%     \renewcommand{\arraystretch}{0}
+%     \setlength{\tabcolsep}{1pt} % 减小列间距以节省空间
+%     \begin{tabular}{@{}c@{\hspace{1mm}}c@{\hspace{1mm}}c@{}} % 调整列间距
+%         % 标题行
+%         &
+%         \begin{minipage}{0.46\columnwidth} % 宽度改为 columnwidth 的一半左右
+%             \centering \scriptsize{W/O Mask} % 字体改小
+%         \end{minipage} &
+%         \begin{minipage}{0.46\columnwidth}
+%             \centering \scriptsize{W/ Mask}
+%         \end{minipage} \\[2mm]
+        
+%         % 第一行：GT - 旋转标签以节省水平空间，或者直接用小字体侧边显示
+%         \rotatebox{90}{\scriptsize \textbf{GT}} &
+%         \begin{minipage}{0.46\columnwidth}
+%             \centering
+%             % 保持原有的 trim 逻辑
+%             \includegraphics[width=\linewidth,trim=0 256pt 0 0,clip]{fig/kitti360_no_mask.png}
+%         \end{minipage} &
+%         \begin{minipage}{0.46\columnwidth}
+%             \centering
+%             \includegraphics[width=\linewidth,trim=0 256pt 0 0,clip]{fig/kitti360_mask.png}
+%         \end{minipage} \\[1mm] % 行间距微调
+        
+%         % 第二行：Ours
+%         \rotatebox{90}{\scriptsize \textbf{Ours}} &
+%         \begin{minipage}{0.46\columnwidth}
+%             \centering
+%             \includegraphics[width=\linewidth,trim=0 0 0 256pt,clip]{fig/kitti360_no_mask.png}
+%         \end{minipage} &
+%         \begin{minipage}{0.46\columnwidth}
+%             \centering
+%             \includegraphics[width=\linewidth,trim=0 0 0 256pt,clip]{fig/kitti360_mask.png}
+%         \end{minipage}
+%     \end{tabular}
+%     \renewcommand{\arraystretch}{1.0}
+    
+%     \caption{Qualitative results on KITTI-360.} 
+%     \label{fig:kitti360_exp}
+%     \vspace{-4mm}
+% \end{figure}
+% ...existing code...
+
+% ...existing code...
+% ...existing code...
+
+
+
+Tabs.~\ref{tab:Nuscenes_exp}, \ref{tab:waymo_exp}, and \ref{tab:kitti360_exp} summarize quantitative results on nuScenes~\cite{caesar2020nuscenes}, Waymo~\cite{sun2020waymo}, and KITTI-360~\cite{liao2022kitti360}, respectively. Meanwhile, Figs.~\ref{fig:Nuscenes_exp}, \ref{fig:waymo_exp}, and \ref{fig:kitti360_exp} provide qualitative comparisons.
+On nuScenes, where each scenario contains only 20 frames, reconstruction-based baselines are severely constrained by the limited per-scene optimization budget and often produce invalid, over-smoothed, or locally inconsistent intensity (Fig.~\ref{fig:Nuscenes_exp}). In contrast, NIdaR and NIdaR-IUDI remain stable and preserve sharper intensity boundaries aligned with object edges, yielding more plausible local contrast in the highlighted regions. We attribute this robustness to our NIR-guided intrinsic decomposition (which reduces view-dependent entanglement) together with lightweight distribution calibration (which mitigates global histogram shifts). On Waymo and KITTI-360, where longer sequences enable stronger per-scene fitting, reconstruction-based methods remain competitive. Nevertheless, our approach still produces visually coherent intensity patterns with fewer spurious artifacts while requiring no per-scene training, making it a favorable trade-off between realism and deployment cost for scalable simulation and data generation.
+
+\subsection{Ablation Studies}
+\label{sec:ablation}
+\vspace{-1mm}
+We further analyze the design choices of the proposed IUDI network. We first ablate the intrinsic backbone and the intensity head (Tab.~\ref{tab:ablation}). We then compare against the classical IIW-CRF baseline on the MIT Intrinsic Images dataset~\cite{grosse2009intrinsic} (Tab.~\ref{tab:Compare_ablation} and Fig.~\ref{Compare_ablation}).
+
+\begin{table}[t!]
+    \centering
+    \caption{IUDI structural ablation.}
+    \label{tab:ablation}
+    \renewcommand{\arraystretch}{1.2}
+    \setlength{\tabcolsep}{3pt}
+    \resizebox{0.86\columnwidth}{!}{%
+    \begin{tabular}{l c c c c}
+        \hline
+        \multirow{2}{*}{\textbf{Method}} & \multicolumn{4}{c}{\textbf{Average Performance}} \\
+        \cline{2-5} 
+         & RMSE↓ & MAE↓ & SSIM↑ & PSNR↑ \\
+        \hline
+        U-Net & \nd{0.23} & 0.19 & 0.23 & 12.89\\
+        Deeplabv3 & \nd{0.23} & \nd{0.18} & 0.25 & 13.01\\
+        U-Net+3Conv & \nd{0.23} & \nd{0.18} & 0.26 & 12.95\\
+        U-Net+4Conv & 0.24 & \nd{0.18} & 0.27 & 12.56\\
+        U-Net+U-Net & 0.25 & 0.21 & 0.25 & 12.21\\
+        Deeplabv3+3Conv & \fs\bf{0.22} & \fs\bf{0.17} & 0.29 & 13.35\\
+        Deeplabv3+4Conv & 0.24 & \nd{0.18} & 0.29 & 13.01\\
+        Deeplabv3+U-Net & \nd{0.23} & \fs\bf{0.17} & \nd{0.30} & 13.33\\
+        Deeplabv3+Deeplabv3 & \nd{0.23} & \fs\bf{0.17} & \nd{0.30} & \nd{13.40}\\
+        \textbf{Ours (U-Net+Deeplabv3)} & \fs\bf{0.22} & \fs\bf{0.17} & \fs\bf{0.32} & \fs\bf{13.65}\\
+        \hline
+    \end{tabular}%
+    }
+    \vspace{-4mm}
+\end{table}
+
+To determine the optimal architecture, we conduct a combinatorial ablation over the intrinsic backbone (UNet, DeepLabV3), the intensity head (Conv, UNet, DeepLabV3), and the head depth when using Conv. The Conv head denotes stacked $3\times3$ convolutions with BatchNorm and ELU. Accordingly, ``3Conv'' and ``4Conv'' indicate 3- and 4-layer stacks. Each configuration is trained for 10 epochs on 6 Waymo scenes~\cite{sun2020waymo} with identical loss weights. We evaluate using RMSE and MAE~\cite{chai2014rmse}, SSIM~\cite{wang2004ssim}, and PSNR~\cite{huynh2008psnr} on three held-out test scenes. As shown in Tab.~\ref{tab:ablation}, the hierarchical configuration U-Net+DeepLabV3 achieves the best overall performance.
+
+\begin{table}[!htbp]
+    \caption{IUDI and IIW-CRF on MIT Intrinsic dataset~\cite{grosse2009intrinsic}.}
+    \centering
+    \setlength{\tabcolsep}{2.5pt}
+    \resizebox{\columnwidth}{!}{%
+    \begin{tabular}{l c c c c c c}
+        \hline
+        \textbf{Methods} & \makecell{T-Infer$^1$\\(s/frame)} & RMSE↓ & MedAE↓ & LPIPS↓ & SSIM↑ & PSNR↑ \\ 
+        \hline
+        IIW-CRF~\cite{bell2014intrinsic} & 100.72 & 0.1465 & 0.1054 & 0.5491 & 0.6897 & 16.68\\ 
+        NIdaR-UD (Ours) & \fs \bf{0.0438} & \fs \bf{0.1394} & 0.1019 & 0.3684 & 0.6747 & 17.11\\ 
+        \hline
+    \end{tabular}%
+    }
+    \label{tab:Compare_ablation}
+    \begin{flushleft}
+        \scriptsize{$^1$ T-Infer: inference time per frame.}
+    \end{flushleft}
+    \vspace{-6mm}
+\end{table}
+
+% \begin{figure}[!htbp]
+%     \centering
+%     \setlength{\tabcolsep}{1pt}
+%     \begin{minipage}{0.48\columnwidth}
+%         \centering
+%         \includegraphics[width=\linewidth]{fig/RGT.png}
+%         \vspace{-1mm}
+%         \centerline{\scriptsize (a)}
+%     \end{minipage}
+%     \hfill
+%     \begin{minipage}{0.48\columnwidth}
+%         \centering
+%         \includegraphics[width=\linewidth]{fig/RIntrinect.png}
+%         \vspace{-1mm}
+%         \centerline{\scriptsize (b)}
+%     \end{minipage}
+    
+%     \vspace{2mm}
+    
+%     \begin{minipage}{0.48\columnwidth}
+%         \centering
+%         \includegraphics[width=\linewidth]{fig/RNIdaR.png}
+%         \vspace{-1mm}
+%         \centerline{\scriptsize (c)}
+%     \end{minipage}
+    
+%     \caption{IUDI and IIW-CRF on MIT Intrinsic dataset. (a) GT. (b) IIW-CRF. (c) IUDI.}
+%     \label{Compare_ablation}
+%     \vspace{-4mm}
+% \end{figure}
+
+
+\begin{figure}[!htbp]
+    \centering
+    \setlength{\tabcolsep}{1pt}
+
+    \includegraphics[width=0.7\linewidth]{fig/RGT.png}
+    \vspace{-1mm}
+    \centerline{\scriptsize (a)}
+
+    \vspace{2mm}
+
+    \includegraphics[width=0.7\linewidth]{fig/RIntrinect.png}
+    \vspace{-1mm}
+    \centerline{\scriptsize (b)}
+
+    \vspace{2mm}
+
+    \includegraphics[width=0.7\linewidth]{fig/RNIdaR.png}
+    \vspace{-1mm}
+    \centerline{\scriptsize (c)}
+
+    \caption{IUDI and IIW-CRF on MIT Intrinsic dataset. (a) GT. (b) IIW-CRF. (c) IUDI.}
+    \label{Compare_ablation}
+    \vspace{-4mm}
+\end{figure}
+
+
+\begin{figure*}[htbp]
+    \centering
+    \includegraphics[width=1.58\columnwidth]{fig/UE5.png}
+    \caption{Integration of NIdaR with Unreal Engine 5. Left shows point clouds without intensity; right with NIdaR-inferred intensity.} 
+    \label{fig:ue5}
+    \vspace{-4mm}
+\end{figure*}
+
+
+% \textbf{Effectiveness of Our System:}
+\subsection{Applications}
+
+% ...existing code...
+% \begin{figure}[t] % 改为单栏环境
+%     \centering
+%     % 将宽度调整为适应单栏
+%     \includegraphics[width=\columnwidth]{fig/UE5.png}
+%     \caption{Integration of NIdaR with Unreal Engine 5. Left shows point clouds without intensity; right with NIdaR-inferred intensity.} 
+%     \label{fig:ue5}
+%     \vspace{-4mm}
+% \end{figure}
+% ...existing code...
+
+\textbf{Adapt to Graphics Engine.}
+To further validate the practicality of our method, we integrate it into LiDAR simulation in UE5 and Isaac Sim, as shown in Figs.~\ref{fig:ue5} and~\ref{isaacsim}. In UE5, point clouds with NIdaR-inferred intensity exhibit stronger structural consistency and better resemblance to real object structures. In Isaac Sim, compared with the built-in simulated intensity, our method likewise achieves superior structural consistency.
+
+% \vspace{-4mm}
+% filepath: f:\iros2026\NIdaR_latex\root.tex
+% ...existing code...
+% \begin{figure}[t]
+%     \centering
+%     \setlength{\tabcolsep}{1pt}
+    
+%     % 第一行：(a) 场景图，居中显示
+%     \begin{minipage}{0.6\columnwidth} % 宽度稍大一点，或者 0.8
+%         \centering
+%         \begin{tikzpicture}[baseline=(ref.base)]
+%             \node[inner sep=0,anchor=south west] (ref) at (0,0) {\includegraphics[width=\linewidth]{fig/isaacsim.png}};
+%             \coordinate (blx) at ($(ref.south west)!0.24!(ref.south east)$);
+%             \coordinate (tlx) at ($(ref.north west)!0.24!(ref.north east)$);
+%             \coordinate (bl) at ($(blx)!0.32!(tlx)$);
+%             \coordinate (trx) at ($(ref.south west)!0.35!(ref.south east)$);
+%             \coordinate (trtx) at ($(ref.north west)!0.35!(ref.north east)$);
+%             \coordinate (tr) at ($(trx)!0.45!(trtx)$);
+%             \draw[red,line width=0.7pt] (bl) rectangle (tr);
+%         \end{tikzpicture}
+%         \vspace{-1mm}
+%         \centerline{\scriptsize (a)}
+%     \end{minipage}
+
+%     \vspace{2mm} % 行间距
+
+%     % 第二行：(b) 和 (c) 并排对比
+%     \begin{tabular}{cc}
+%         \begin{minipage}{0.48\columnwidth}
+%             \centering
+%             \begin{tikzpicture}[baseline=(ref.base)]
+%                 \node[inner sep=0,anchor=south west] (ref) at (0,0) {\includegraphics[width=\linewidth]{fig/isaacsim-in.png}};
+%                 \coordinate (blx) at ($(ref.south west)!0.23!(ref.south east)$);
+%                 \coordinate (tlx) at ($(ref.north west)!0.23!(ref.north east)$);
+%                 \coordinate (bl) at ($(blx)!0.11!(tlx)$);
+%                 \coordinate (trx) at ($(ref.south west)!0.35!(ref.south east)$);
+%                 \coordinate (trtx) at ($(ref.north west)!0.35!(ref.north east)$);
+%                 \coordinate (tr) at ($(trx)!0.25!(trtx)$);
+%                 \draw[red,line width=0.7pt] (bl) rectangle (tr);
+%             \end{tikzpicture}
+%         \end{minipage} &
+%         \begin{minipage}{0.48\columnwidth}
+%             \centering
+%             \begin{tikzpicture}[baseline=(ref.base)]
+%                 \node[inner sep=0,anchor=south west] (ref) at (0,0) {\includegraphics[width=\linewidth]{fig/isaacsim-nidar.png}};
+%                 \coordinate (blx) at ($(ref.south west)!0.23!(ref.south east)$);
+%                 \coordinate (tlx) at ($(ref.north west)!0.23!(ref.north east)$);
+%                 \coordinate (bl) at ($(blx)!0.11!(tlx)$);
+%                 \coordinate (trx) at ($(ref.south west)!0.35!(ref.south east)$);
+%                 \coordinate (trtx) at ($(ref.north west)!0.35!(ref.north east)$);
+%                 \coordinate (tr) at ($(trx)!0.25!(trtx)$);
+%                 \draw[red,line width=0.7pt] (bl) rectangle (tr);
+%             \end{tikzpicture}
+%         \end{minipage} \\
+%         % 文字说明
+%         \begin{minipage}{0.48\columnwidth}
+%             \centering \scriptsize (b)
+%         \end{minipage} &
+%         \begin{minipage}{0.48\columnwidth}
+%             \centering \scriptsize (c)
+%         \end{minipage}
+%     \end{tabular}
+    
+%     \caption{NIdaR integration in Isaac Sim. (a) Scenarios in Isaac Sim. (b) Isaac Sim (Built-in). (c) NIdaR (Ours).}
+%     \label{isaacsim}
+%     \vspace{-4mm}
+% \end{figure}
+% ...existing code...
+
+
+\begin{figure}[t]
+    \centering
+    \setlength{\tabcolsep}{1pt}
+
+    % (a)
+    \begin{minipage}{0.7\columnwidth}
+        \centering
+        \begin{tikzpicture}[baseline=(ref.base)]
+            \node[inner sep=0,anchor=south west] (ref) at (0,0) 
+            {\includegraphics[width=\linewidth]{fig/isaacsim.png}};
+            \coordinate (blx) at ($(ref.south west)!0.24!(ref.south east)$);
+            \coordinate (tlx) at ($(ref.north west)!0.24!(ref.north east)$);
+            \coordinate (bl) at ($(blx)!0.32!(tlx)$);
+            \coordinate (trx) at ($(ref.south west)!0.35!(ref.south east)$);
+            \coordinate (trtx) at ($(ref.north west)!0.35!(ref.north east)$);
+            \coordinate (tr) at ($(trx)!0.45!(trtx)$);
+            \draw[red,line width=0.7pt] (bl) rectangle (tr);
+        \end{tikzpicture}
+        \vspace{-1mm}
+        \centerline{\scriptsize (a)}
+    \end{minipage}
+
+    \vspace{2mm}
+
+    % (b)
+    \begin{minipage}{0.7\columnwidth}
+        \centering
+        \begin{tikzpicture}[baseline=(ref.base)]
+            \node[inner sep=0,anchor=south west] (ref) at (0,0) 
+            {\includegraphics[width=\linewidth]{fig/isaacsim-in.png}};
+            \coordinate (blx) at ($(ref.south west)!0.23!(ref.south east)$);
+            \coordinate (tlx) at ($(ref.north west)!0.23!(ref.north east)$);
+            \coordinate (bl) at ($(blx)!0.11!(tlx)$);
+            \coordinate (trx) at ($(ref.south west)!0.35!(ref.south east)$);
+            \coordinate (trtx) at ($(ref.north west)!0.35!(ref.north east)$);
+            \coordinate (tr) at ($(trx)!0.25!(trtx)$);
+            \draw[red,line width=0.7pt] (bl) rectangle (tr);
+        \end{tikzpicture}
+        \vspace{-1mm}
+        \centerline{\scriptsize (b)}
+    \end{minipage}
+
+    \vspace{2mm}
+
+    % (c)
+    \begin{minipage}{0.7\columnwidth}
+        \centering
+        \begin{tikzpicture}[baseline=(ref.base)]
+            \node[inner sep=0,anchor=south west] (ref) at (0,0) 
+            {\includegraphics[width=\linewidth]{fig/isaacsim-nidar.png}};
+            \coordinate (blx) at ($(ref.south west)!0.23!(ref.south east)$);
+            \coordinate (tlx) at ($(ref.north west)!0.23!(ref.north east)$);
+            \coordinate (bl) at ($(blx)!0.11!(tlx)$);
+            \coordinate (trx) at ($(ref.south west)!0.35!(ref.south east)$);
+            \coordinate (trtx) at ($(ref.north west)!0.35!(ref.north east)$);
+            \coordinate (tr) at ($(trx)!0.25!(trtx)$);
+            \draw[red,line width=0.7pt] (bl) rectangle (tr);
+        \end{tikzpicture}
+        \vspace{-1mm}
+        \centerline{\scriptsize (c)}
+    \end{minipage}
+
+    \caption{NIdaR integration in Isaac Sim. (a) Scenarios in Isaac Sim. (b) Isaac Sim (Built-in). (c) NIdaR (Ours).}
+    \label{isaacsim}
+    \vspace{-4mm}
+\end{figure}
+
+
+\textbf{Adapt to Generation-based.}
+For generative LiDAR simulation, we integrate NIdaR with LiDAR-Diffusion~\cite{ran2024towards}, adopting an image-conditioned generation approach. The results are shown in Fig.~\ref{fig:lidardiffusion}.
+
+\begin{figure}[t] % 改为 figure (单栏)
+    \centering
+    % ---------- (a) RGB Image ----------
+    \begin{minipage}{\columnwidth}
+        \centering
+        \includegraphics[width=0.98\columnwidth]{fig/lidardiffusion_rgb.png}
+        \vspace{-2mm} % 减少图片和 caption 间距
+        \centerline{\scriptsize (a)}
+    \end{minipage}
+    
+    \vspace{2mm} % (a) 和 (b)(c) 之间的间距
+    
+    % ---------- (b) & (c) Point Clouds ----------
+    \setlength{\tabcolsep}{1pt} % 减小列间距
+    \begin{tabular}{cc}
+        \begin{minipage}{0.48\columnwidth}
+            \centering
+            \includegraphics[width=\linewidth]{fig/lidardiffusion_orin.png}
+        \end{minipage} & 
+        \begin{minipage}{0.48\columnwidth}
+            \centering
+            \includegraphics[width=\linewidth]{fig/lidardiffusion_nidar.png}
+        \end{minipage} \\
+        % Caption for (b)
+        \begin{minipage}{0.48\columnwidth}
+            \vspace{1mm}
+            \centering \scriptsize (b)
+        \end{minipage} &
+        % Caption for (c)
+        \begin{minipage}{0.48\columnwidth}
+            \vspace{1mm}
+            \centering \scriptsize (c)
+        \end{minipage}
+    \end{tabular}
+    
+    \vspace{-2mm}
+    \caption{Integration of NIdaR with LiDAR-Diffusion~\cite{ran2024towards}. (a) Input RGB image. (b) Generated by \cite{ran2024towards}. (c) With NIdaR intensity.}
+    \label{fig:lidardiffusion}
+    \vspace{-4mm}
+\end{figure}
+
+% \begin{figure*}[htbp]
+%     \centering
+%     \begin{tabular}{@{}c@{\hspace{1mm}}c@{\hspace{1mm}}c@{}}
+%         \begin{minipage}{0.32\textwidth}
+%             \centering
+%             \begin{tikzpicture}[baseline=(ref.base)]
+%                 \node[inner sep=0,anchor=south west] (ref) at (0,0) {\includegraphics[width=\linewidth]{fig/isaacsim.png}};
+%                 \coordinate (blx) at ($(ref.south west)!0.24!(ref.south east)$);
+%                 \coordinate (tlx) at ($(ref.north west)!0.24!(ref.north east)$);
+%                 \coordinate (bl) at ($(blx)!0.32!(tlx)$);
+%                 \coordinate (trx) at ($(ref.south west)!0.35!(ref.south east)$);
+%                 \coordinate (trtx) at ($(ref.north west)!0.35!(ref.north east)$);
+%                 \coordinate (tr) at ($(trx)!0.45!(trtx)$);
+%                 \draw[red,line width=0.7pt] (bl) rectangle (tr);
+%             \end{tikzpicture}
+%             \\ (a) Scenarios in Isaac Sim.
+%         \end{minipage} &
+%         \begin{minipage}{0.32\textwidth}
+%             \centering
+%             \begin{tikzpicture}[baseline=(ref.base)]
+%                 \node[inner sep=0,anchor=south west] (ref) at (0,0) {\includegraphics[width=\linewidth]{fig/isaacsim-in.png}};
+%                 \coordinate (blx) at ($(ref.south west)!0.23!(ref.south east)$);
+%                 \coordinate (tlx) at ($(ref.north west)!0.23!(ref.north east)$);
+%                 \coordinate (bl) at ($(blx)!0.11!(tlx)$);
+%                 \coordinate (trx) at ($(ref.south west)!0.35!(ref.south east)$);
+%                 \coordinate (trtx) at ($(ref.north west)!0.35!(ref.north east)$);
+%                 \coordinate (tr) at ($(trx)!0.25!(trtx)$);
+%                 \draw[red,line width=0.7pt] (bl) rectangle (tr);
+%             \end{tikzpicture}
+%             \\ (b) Simulated Intensity in Isaac Sim.
+%         \end{minipage} &
+%         \begin{minipage}{0.32\textwidth}
+%             \centering
+%             \begin{tikzpicture}[baseline=(ref.base)]
+%                 \node[inner sep=0,anchor=south west] (ref) at (0,0) {\includegraphics[width=\linewidth]{fig/isaacsim-nidar.png}};
+%                 \coordinate (blx) at ($(ref.south west)!0.23!(ref.south east)$);
+%                 \coordinate (tlx) at ($(ref.north west)!0.23!(ref.north east)$);
+%                 \coordinate (bl) at ($(blx)!0.11!(tlx)$);
+%                 \coordinate (trx) at ($(ref.south west)!0.35!(ref.south east)$);
+%                 \coordinate (trtx) at ($(ref.north west)!0.35!(ref.north east)$);
+%                 \coordinate (tr) at ($(trx)!0.25!(trtx)$);
+%                 \draw[red,line width=0.7pt] (bl) rectangle (tr);
+%             \end{tikzpicture}
+%             \\ (c) Intensity Inferred by NIdaR.
+%         \end{minipage}
+%     \end{tabular}
+    
+%     \caption{NIdaR integration in Isaac Sim.}
+%     \label{isaacsim}
+%     \vspace{-3mm}
+% \end{figure*}
+
+\section{Conclusion}
+This work addresses the problem of simulating LiDAR intensity without per-scene training or ground-truth intensity supervision. We propose NIdaR, an NIR-guided pipeline that infers intensity from RGB images via pseudo-NIR synthesis, intrinsic decomposition (reflectance and shading), and reflectance-to-point-cloud mapping with optional quantile remapping. A hierarchical UNet+DeepLabV3 design enables fast, accurate intensity prediction and generalizes across scenes and simulators. We validate NIdaR on Waymo, KITTI-360, and nuScenes and integrate it into graphics engines (UE5, Isaac Sim) and generative LiDAR simulation, demonstrating that all major LiDAR simulation paradigms can be endowed with realistic intensity at low cost. Future work may explore stronger cross-spectral priors and end-to-end training across stages.
+
+% \begin{figure*}[htbp]
+%     \centering
+%     \includegraphics[width=1.58\columnwidth]{fig/UE5.png}
+%     \caption{Integration of NIdaR with Unreal Engine 5. Left shows point clouds without intensity; right with NIdaR-inferred intensity.} 
+%     \label{fig:ue5}
+%     \vspace{-4mm}
+% \end{figure*}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\small
+\bibliographystyle{IEEEtrans}
+\bibliography{root}
+
+\end{document}
