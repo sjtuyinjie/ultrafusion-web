@@ -727,58 +727,6 @@
       </div>
     </div>
 
-    <!-- Row 1: Video + Trajectory Evaluation side by side (same width as Intensity Comparisons) -->
-    <div class="container">
-      <div class="columns" style="margin-top: 1rem; align-items: flex-start;">
-        <!-- Left: SLAM Process Video (wider) -->
-        <div class="column is-three-fifths">
-          <div class="publication-video">
-            <video id="slam-demo" autoplay controls muted loop playsinline height="100%">
-              <source src="./static/images/3_10.mp4" type="video/mp4">
-              Your browser does not support the video tag.
-            </video>
-          </div>
-          <p class="has-text-centered" style="margin-top: 0.5rem;">
-            <strong>Robustness visualization.</strong> Representative qualitative examples of multi-sensor localization and mapping under challenging conditions.
-          </p>
-        </div>
-        <!-- Right: Trajectory Evaluation (narrower), matched height to video -->
-        <div class="column is-two-fifths" style="display: flex; flex-direction: column;">
-          <div id="evo-wrapper" style="flex: 1;">
-            <img src="./static/images/evo.png" alt="SLAM trajectory evaluation"
-              style="width: 100%; height: 0; display: block; border-radius: 6px;">
-          </div>
-          <p class="has-text-justified" style="margin-top: 0.5rem;">
-            <strong>Trajectory evaluation.</strong> Quantitative trajectory comparison and error analysis using the <a href="https://michaelgrupp.github.io/evo/" target="_blank" rel="noopener">evo toolbox</a>.
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <script>
-      (function() {
-        function syncEvoHeight() {
-          var video = document.getElementById('slam-demo');
-          var wrapper = document.getElementById('evo-wrapper');
-          var img = wrapper ? wrapper.querySelector('img') : null;
-          if (!video || !img) return;
-          // publication-video uses padding-bottom:56.25%, so height = width * 0.5625
-          var videoCol = video.closest('.column');
-          if (!videoCol) return;
-          var videoH = videoCol.querySelector('.publication-video').offsetHeight;
-          if (videoH > 0) {
-            img.style.height = videoH + 'px';
-            img.style.objectFit = 'contain';
-            img.style.objectPosition = 'top';
-          }
-        }
-        window.addEventListener('load', syncEvoHeight);
-        window.addEventListener('resize', syncEvoHeight);
-        // Also try after a short delay for late renders
-        setTimeout(syncEvoHeight, 300);
-      })();
-    </script>
-
     <!-- Row 2: Model demo video (same width as text description) -->
     <!-- <div class="container is-max-desktop">
       <div class="columns is-centered" style="margin-top: 1.5rem;">
