@@ -165,6 +165,50 @@
       color: #204a66;
       font-size: 0.96rem;
     }
+
+    /* Tab switcher styles */
+    .viewer-tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .viewer-tab {
+      flex: 1;
+      border: 1px solid #2a5f8f;
+      border-radius: 999px;
+      padding: 0.45rem 1rem;
+      font-size: 0.95rem;
+      color: #a8d4ff;
+      background: #0f2a44;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .viewer-tab:hover {
+      background: #1a3f5f;
+      border-color: #3d8fd1;
+    }
+
+    .viewer-tab.active {
+      background: #1f6ca8;
+      border-color: #1f6ca8;
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    /* Single viewer container (tabbed) */
+    .viewer-single {
+      position: relative;
+    }
+
+    .viewer-single .viewer-panel {
+      display: none;
+    }
+
+    .viewer-single .viewer-panel.active {
+      display: block;
+    }
   </style>
   <!-- <link rel="icon" href="./static/images/favicon.svg"> -->
 
@@ -763,20 +807,25 @@
             <p>
               This online visualization shows the color mapping result of <strong>Ultra-Fusion</strong> on the
               <strong>MaRS-LVIG HKisland03</strong> sequence, reconstructed with <strong>Gaussian Splatting</strong>.
-              Left: colored point cloud from <code>assets/hkisland03_2.laz</code>.
-              Right: <strong>3D Gaussian Splatting</strong> from <code>assets/hkisland03_2.splat</code>.
+              Use the tabs above to switch between the colored point cloud (<code>assets/hkisland03_2.laz</code>)
+              and the <strong>3D Gaussian Splatting</strong> (<code>assets/hkisland03_2.splat</code>).
             </p>
           </div>
-          <div class="viewer-dual-layout">
-            <div class="viewer-panel">
-              <p class="viewer-panel-title">Colored Point Cloud</p>
+          <!-- Tab switcher -->
+          <div class="viewer-tabs">
+            <button id="tab-laz" class="viewer-tab active" type="button">Colored Point Cloud</button>
+            <button id="tab-gs" class="viewer-tab" type="button">3D Gaussian Splatting</button>
+          </div>
+
+          <!-- Single viewer container (switched by tabs) -->
+          <div class="viewer-single">
+            <div id="panel-laz" class="viewer-panel active">
               <div class="viewer-canvas-wrapper">
                 <div id="laz-viewer" class="viewer-panel-viewport" aria-label="HKisland03 LAZ point cloud viewer"></div>
                 <div id="laz-loading" class="viewer-status">Loading LAZ point cloud...</div>
               </div>
             </div>
-            <div class="viewer-panel">
-              <p class="viewer-panel-title">3D Gaussian Splatting</p>
+            <div id="panel-gs" class="viewer-panel">
               <div class="viewer-canvas-wrapper">
                 <div id="gs-viewer" class="viewer-panel-viewport" aria-label="HKisland03 Gaussian splat viewer"></div>
                 <div id="gs-loading" class="viewer-status">Loading Gaussian splats...</div>
@@ -787,9 +836,9 @@
             <button id="viewer-retry" class="viewer-retry-button" type="button" hidden>Retry</button>
           </div>
           <p class="viewer-tips has-text-left">
-            Each panel has independent controls: left-drag to rotate, wheel to zoom, right-drag to pan.
-            Left uses a web cache (<code>.points.bin</code>) decoded from the LAZ file for fast loading.
-            The right panel may take longer on first load while splats are processed.
+            Controls: left-drag to rotate, wheel to zoom, right-drag to pan.
+            The point cloud uses a web cache (<code>.points.bin</code>) for fast loading.
+            The Gaussian splat may take longer on first load while the data is processed.
           </p>
         </div>
       </div>
@@ -1321,6 +1370,36 @@
       retryBtn.addEventListener('click', function() {
         loadAllViewers().catch(handleLoadError);
       });
+
+      // Tab switching logic
+      function switchViewerTab(which) {
+        var tabLaz = document.getElementById('tab-laz');
+        var tabGs = document.getElementById('tab-gs');
+        var panelLaz = document.getElementById('panel-laz');
+        var panelGs = document.getElementById('panel-gs');
+
+        if (!tabLaz || !tabGs || !panelLaz || !panelGs) return;
+
+        if (which === 'laz') {
+          tabLaz.classList.add('active');
+          tabGs.classList.remove('active');
+          panelLaz.classList.add('active');
+          panelGs.classList.remove('active');
+        } else {
+          tabGs.classList.add('active');
+          tabLaz.classList.remove('active');
+          panelGs.classList.add('active');
+          panelLaz.classList.remove('active');
+        }
+      }
+
+      // Bind tab buttons
+      (function bindTabs() {
+        var tabLaz = document.getElementById('tab-laz');
+        var tabGs = document.getElementById('tab-gs');
+        if (tabLaz) tabLaz.addEventListener('click', function() { switchViewerTab('laz'); });
+        if (tabGs) tabGs.addEventListener('click', function() { switchViewerTab('gs'); });
+      })();
 
       function startViewers() {
         try {
