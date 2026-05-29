@@ -643,8 +643,12 @@
             <p>
               This online visualization shows the color mapping result of <strong>Ultra-Fusion</strong> on the
               <strong>MaRS-LVIG HKisland03</strong> sequence, reconstructed with <strong>Gaussian Splatting</strong>.
-              Use the tabs above to switch between the colored point cloud (<code>assets/hkisland03_2.laz</code>)
-              and the <strong>3D Gaussian Splatting</strong> (<code>assets/hkisland03_2.splat</code>).
+            </p>
+            <p>
+              We demonstrate our results in two initialization scenes from the FAST-LIVO2 dataset: CBD_Building_01 and SYSU_01. For each scene, we visualize the reconstructed colored point cloud, the 3DGS RGB rendering, and the corresponding 3DGS depth rendering. These results illustrate the geometric consistency, visual fidelity, and depth structure captured by our method in complex outdoor environments.
+            </p>
+            <p>
+              Select a scene below to load its colored point cloud (left) and 3D Gaussian Splatting (right).
             </p>
           </div>
 
@@ -659,23 +663,26 @@
             <strong>Real-time 3D GS Rendering Demo.</strong> Ultra-Fusion performing real-time localization and mapping with 3D Gaussian Splatting rendering on the MaRS-LVIG dataset.
           </p>
 
-          <!-- Tab switcher -->
-          <div class="viewer-tabs">
-            <button id="tab-laz" class="viewer-tab active" type="button">Colored Point Cloud</button>
-            <button id="tab-gs" class="viewer-tab" type="button">3D Gaussian Splatting</button>
+          <!-- Scene selector -->
+          <div class="viewer-scene-selector" style="display:flex; gap:0.5rem; justify-content:center; flex-wrap:wrap; margin-bottom:1rem;">
+            <button id="scene-hkisland" class="viewer-tab active" type="button" data-scene="hkisland">HKIsland (MaRS-LVIG)</button>
+            <button id="scene-cbd" class="viewer-tab" type="button" data-scene="cbd_building">CBD_Building_01 (FAST-LIVO2)</button>
+            <button id="scene-sysu" class="viewer-tab" type="button" data-scene="sysu_building">SYSU_01 (FAST-LIVO2)</button>
           </div>
 
-          <!-- Single viewer container (switched by tabs) -->
-          <div class="viewer-single">
-            <div id="panel-laz" class="viewer-panel active">
+          <!-- Dual side-by-side viewers: left PC, right GS -->
+          <div class="viewer-dual-layout">
+            <div class="viewer-panel">
+              <div class="viewer-panel-title">Colored Point Cloud</div>
               <div class="viewer-canvas-wrapper">
-                <div id="laz-viewer" class="viewer-panel-viewport" aria-label="HKisland03 LAZ point cloud viewer"></div>
-                <div id="laz-loading" class="viewer-status">Loading LAZ point cloud...</div>
+                <div id="laz-viewer" class="viewer-panel-viewport" aria-label="Point cloud viewer"></div>
+                <div id="laz-loading" class="viewer-status">Loading point cloud...</div>
               </div>
             </div>
-            <div id="panel-gs" class="viewer-panel">
+            <div class="viewer-panel">
+              <div class="viewer-panel-title">3D Gaussian Splatting</div>
               <div class="viewer-canvas-wrapper">
-                <div id="gs-viewer" class="viewer-panel-viewport" aria-label="HKisland03 Gaussian splat viewer"></div>
+                <div id="gs-viewer" class="viewer-panel-viewport" aria-label="Gaussian splat viewer"></div>
                 <div id="gs-loading" class="viewer-status">Loading Gaussian splats...</div>
               </div>
             </div>
@@ -775,9 +782,48 @@
       var retryBtn = document.getElementById('viewer-retry');
       if (!lazRoot || !gsRoot || !lazLoadingEl || !gsLoadingEl || !retryBtn) return;
 
-      var LAZ_LABEL = 'assets/hkisland03_2.laz';
-      var LAZ_POINTS_BIN_URL = './assets/hkisland03_2.points.bin';
-      var SPLAT_URL = './assets/hkisland03_2.splat';
+      // Scene configurations (PC left, GS right). All use .points.bin + .splat for fast web loading.
+      var SCENES = {
+        hkisland: {
+          key: 'hkisland',
+          title: 'MaRS-LVIG HKisland03',
+          lazLabel: 'assets/hkisland03_2.laz',
+          pointsBinUrl: './assets/hkisland03_2.points.bin',
+          splatUrl: './assets/hkisland03_2.splat',
+          splatLabel: 'assets/hkisland03_2.splat'
+        },
+        cbd_building: {
+          key: 'cbd_building',
+          title: 'FAST-LIVO2 CBD_Building_01',
+          lazLabel: 'assets/cbd.laz',
+          pointsBinUrl: './assets/cbd.points.bin',
+          splatUrl: './assets/cbd.splat',
+          splatLabel: 'assets/cbd.splat'
+        },
+        sysu_building: {
+          key: 'sysu_building',
+          title: 'FAST-LIVO2 SYSU_01',
+          lazLabel: 'assets/sysu.laz',
+          pointsBinUrl: './assets/sysu.points.bin',
+          splatUrl: './assets/sysu.splat',
+          splatLabel: 'assets/sysu.splat'
+        }
+      };
+      var currentSceneKey = 'hkisland';
+
+      function getCurrentScene() {
+        return SCENES[currentSceneKey];
+      }
+
+      function setCurrentScene(key) {
+        if (SCENES[key]) {
+          currentSceneKey = key;
+          // update active button styles
+          document.querySelectorAll('.viewer-scene-selector .viewer-tab').forEach(function(btn) {
+            btn.classList.toggle('active', btn.getAttribute('data-scene') === key);
+          });
+        }
+      }
 
       var lazScene = null;
       var lazCamera = null;
@@ -1020,18 +1066,19 @@
       }
 
       function loadLazPointCloud() {
+        var scene = getCurrentScene();
         return whenLayoutReady(lazRoot).then(function(panelSize) {
           return new Promise(function(resolve, reject) {
             clearLazViewer();
             initLazViewer(panelSize);
-            setLazStatus('Loading LAZ point cloud...');
+            setLazStatus('Loading ' + scene.title + ' point cloud...');
 
             pointsBinLoader.load(
-              LAZ_POINTS_BIN_URL,
+              scene.pointsBinUrl,
               function(geometry) {
                 setTimeout(function() {
                   try {
-                    showPointCloudGeometry(geometry, LAZ_LABEL);
+                    showPointCloudGeometry(geometry, scene.lazLabel);
                     resolve();
                   } catch (error) {
                     reject(error);
@@ -1045,13 +1092,13 @@
                 }
                 if (event.total) {
                   var progress = Math.min((event.loaded / event.total) * 100, 100);
-                  setLazStatus('Loading LAZ... ' + progress.toFixed(1) + '%');
+                  setLazStatus('Loading point cloud... ' + progress.toFixed(1) + '%');
                 } else {
-                  setLazStatus('Loading LAZ... ' + Math.round(event.loaded / 1024 / 1024) + ' MB');
+                  setLazStatus('Loading point cloud... ' + Math.round(event.loaded / 1024 / 1024) + ' MB');
                 }
               },
               function(error) {
-                reject(error || new Error('Failed to load LAZ point cloud'));
+                reject(error || new Error('Failed to load point cloud'));
               }
             );
           });
@@ -1066,9 +1113,10 @@
       }
 
       function resolveGsScene() {
+        var scene = getCurrentScene();
         return Promise.resolve({
-          url: SPLAT_URL,
-          label: 'assets/hkisland03_2.splat',
+          url: scene.splatUrl,
+          label: scene.splatLabel,
           sphericalHarmonicsDegree: 0
         });
       }
@@ -1189,7 +1237,8 @@
         showRetry(false);
         gsModulePromise = null;
         sharedSceneBounds = null;
-        setLazStatus('Loading LAZ point cloud...');
+        var scene = getCurrentScene();
+        setLazStatus('Loading ' + scene.title + ' point cloud...');
         setGsStatus('Waiting for point cloud...');
 
         return loadLazPointCloud()
@@ -1201,7 +1250,7 @@
             console.error('Viewer load failed:', error);
             var message = (error && error.message) ? error.message : String(error);
             if (!lazRenderer) {
-              setLazStatus('Failed to load LAZ point cloud.' + (message ? ' (' + message + ')' : ''));
+              setLazStatus('Failed to load point cloud.' + (message ? ' (' + message + ')' : ''));
             }
             if (!gsViewer) {
               setGsStatus('Failed to load Gaussian splats.' + (message ? ' (' + message + ')' : ''));
@@ -1219,38 +1268,40 @@
         loadAllViewers().catch(handleLoadError);
       });
 
-      // Tab switching logic
-      function switchViewerTab(which) {
-        var tabLaz = document.getElementById('tab-laz');
-        var tabGs = document.getElementById('tab-gs');
-        var panelLaz = document.getElementById('panel-laz');
-        var panelGs = document.getElementById('panel-gs');
-
-        if (!tabLaz || !tabGs || !panelLaz || !panelGs) return;
-
-        if (which === 'laz') {
-          tabLaz.classList.add('active');
-          tabGs.classList.remove('active');
-          panelLaz.classList.add('active');
-          panelGs.classList.remove('active');
-        } else {
-          tabGs.classList.add('active');
-          tabLaz.classList.remove('active');
-          panelGs.classList.add('active');
-          panelLaz.classList.remove('active');
+      // Scene switching: update current, reload both viewers side-by-side
+      function switchToScene(key) {
+        var scene = SCENES[key];
+        if (!scene) return;
+        setCurrentScene(key);
+        // clear any previous and reload
+        sharedSceneBounds = null;
+        gsModulePromise = null;
+        if (gsViewer) {
+          try { gsViewer.dispose(); } catch (e) {}
+          gsViewer = null;
         }
+        clearLazViewer();
+        // reset status
+        setLazStatus('Loading point cloud...');
+        setGsStatus('Waiting for point cloud...');
+        showRetry(false);
+        loadAllViewers().catch(handleLoadError);
       }
 
-      // Bind tab buttons
-      (function bindTabs() {
-        var tabLaz = document.getElementById('tab-laz');
-        var tabGs = document.getElementById('tab-gs');
-        if (tabLaz) tabLaz.addEventListener('click', function() { switchViewerTab('laz'); });
-        if (tabGs) tabGs.addEventListener('click', function() { switchViewerTab('gs'); });
+      // Bind scene selector buttons
+      (function bindSceneButtons() {
+        document.querySelectorAll('.viewer-scene-selector [data-scene]').forEach(function(btn) {
+          btn.addEventListener('click', function() {
+            var key = btn.getAttribute('data-scene');
+            switchToScene(key);
+          });
+        });
       })();
 
       function startViewers() {
         try {
+          // ensure initial button active
+          setCurrentScene(currentSceneKey);
           loadAllViewers().catch(handleLoadError);
         } catch (error) {
           console.error('Viewer initialization failed:', error);
