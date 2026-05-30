@@ -1,16 +1,26 @@
 class BeforeAfter {
     constructor(enteryObject) {
-
         const beforeAfterContainer = document.querySelector(enteryObject.id);
+        if (!beforeAfterContainer) {
+            return;
+        }
+
         const before = beforeAfterContainer.querySelector('.bal-before');
+        if (!before) {
+            return;
+        }
         const beforeText = beforeAfterContainer.querySelector('.bal-beforePosition');
         const afterText = beforeAfterContainer.querySelector('.bal-afterPosition');
         const handle = beforeAfterContainer.querySelector('.bal-handle');
+        const beforeInset = beforeAfterContainer.querySelector('.bal-before-inset');
+        if (!beforeInset || !handle) {
+            return;
+        }
         var widthChange = 0;
 
-        beforeAfterContainer.querySelector('.bal-before-inset').setAttribute("style", "width: " + beforeAfterContainer.offsetWidth + "px;")
+        beforeInset.setAttribute("style", "width: " + beforeAfterContainer.offsetWidth + "px;")
         window.onresize = function () {
-            beforeAfterContainer.querySelector('.bal-before-inset').setAttribute("style", "width: " + beforeAfterContainer.offsetWidth + "px;")
+            beforeInset.setAttribute("style", "width: " + beforeAfterContainer.offsetWidth + "px;")
         }
         before.setAttribute('style', "width: 50%;");
         handle.setAttribute('style', "left: 50%;");

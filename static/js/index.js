@@ -66,14 +66,18 @@ $(document).ready(function() {
         player.currentTime = player.duration / 100 * this.value;
       })
     }, false);*/
-    preloadInterpolationImages();
+    var interpolationSlider = $('#interpolation-slider');
+    var interpolationWrapper = $('#interpolation-image-wrapper');
 
-    $('#interpolation-slider').on('input', function(event) {
-      setInterpolationImage(this.value);
-    });
-    setInterpolationImage(0);
-    $('#interpolation-slider').prop('max', NUM_INTERP_FRAMES - 1);
-
-    bulmaSlider.attach();
+    // Interpolation assets were removed in this site version.
+    // Only enable that feature when both DOM nodes exist.
+    if (interpolationSlider.length && interpolationWrapper.length) {
+      preloadInterpolationImages();
+      interpolationSlider.on('input', function(event) {
+        setInterpolationImage(this.value);
+      });
+      setInterpolationImage(0);
+      interpolationSlider.prop('max', NUM_INTERP_FRAMES - 1);
+    }
 
 })

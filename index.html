@@ -7,13 +7,13 @@
     content="Ultra-Fusion: An Ultra-Resilient Tightly-Coupled Multi-Sensor Fusion SLAM Framework under Sensor Degradation and Spatiotemporal Uncertainty for Intelligent Transportation Systems.">
   <meta name="keywords" content="SLAM, multi-sensor fusion, localization, intelligent transportation systems, LiDAR, visual-inertial odometry, GNSS, wheel odometry">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
   <title>Ultra-Fusion: Ultra-Resilient Multi-Sensor Fusion SLAM for ITS</title>
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
 
   <link rel="stylesheet" href="./static/css/bulma.min.css">
   <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
   <style>
@@ -215,7 +215,6 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="./static/js/fontawesome.all.min.js"></script>
   <script src="./static/js/bulma-carousel.min.js"></script>
-  <script src="./static/js/bulma-slider.min.js"></script>
   <script src="./static/js/index.js"></script>
   <script src="./static/js/script.js"></script>
 
@@ -395,12 +394,23 @@
 
   <section class="section">
     <div class="container is-max-desktop">
-      <!-- Teaser image -->
+      <!-- Teaser videos: FAST-LIVO2 CBD & SYSU -->
       <div class="columns is-centered has-text-centered">
-        <div class="column is-full-width">
-          <figure class="image">
-            <img src="./static/images/teaser4.png" alt="Ultra-Fusion teaser">
-          </figure>
+        <div class="column is-half">
+          <div class="publication-video">
+            <video autoplay muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 10px 26px rgba(0,0,0,0.22);">
+              <source src="./assets/cbd.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </div>
+        <div class="column is-half">
+          <div class="publication-video">
+            <video autoplay muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 10px 26px rgba(0,0,0,0.22);">
+              <source src="./assets/sysu.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
         </div>
       </div>
 
@@ -591,9 +601,9 @@
     // new BeforeAfter({
     //   id: '#example8'
     // });
-    for (let i = 1; i <= 12; ++i) {
-      new BeforeAfter({ id: '#example' + i });
-    }
+    document.querySelectorAll('.bal-container-small[id^="example"]').forEach(function(el) {
+      new BeforeAfter({ id: '#' + el.id });
+    });
 
   </script>
 
@@ -691,9 +701,13 @@
             <button id="viewer-retry" class="viewer-retry-button" type="button" hidden>Retry</button>
           </div>
           <p class="viewer-tips has-text-left">
-            Controls: left-drag to rotate, wheel to zoom, right-drag to pan.
+            Controls: left-drag to rotate, wheel to zoom, right-drag to pan. Arrow keys pan; hold Shift/Ctrl/Meta with arrow keys to rotate.
+            Click a viewer panel first so keyboard input applies to that panel.
             The point cloud uses a web cache (<code>.points.bin</code>) for fast loading.
             The Gaussian splat may take longer on first load while the data is processed.
+            <strong>Do not open <code>index.html</code> directly from disk.</strong> Run
+            <code>python3 serve.py</code> in the project folder, then visit
+            <a href="http://127.0.0.1:8000/">http://127.0.0.1:8000/</a>.
           </p>
         </div>
       </div>
@@ -767,20 +781,41 @@
   </script>
 
   <script type="module">
-    import * as THREE from './static/js/vendor/three.module.js';
-    import { OrbitControls } from './static/js/vendor/OrbitControls.js';
-    import { PointsBinLoader } from './static/js/vendor/PointsBinLoader.js';
-    import { FileLoader } from './static/js/vendor/three.module.js';
-
-    var GS_MODULE_URL = './static/js/vendor/gaussian-splats-3d.module.js';
-
-    (function() {
+    (async function() {
       var lazRoot = document.getElementById('laz-viewer');
       var gsRoot = document.getElementById('gs-viewer');
       var lazLoadingEl = document.getElementById('laz-loading');
       var gsLoadingEl = document.getElementById('gs-loading');
       var retryBtn = document.getElementById('viewer-retry');
       if (!lazRoot || !gsRoot || !lazLoadingEl || !gsLoadingEl || !retryBtn) return;
+
+      function showFileProtocolHelp() {
+        var msg = '3D viewer needs a local server. Run: python3 serve.py — then open http://127.0.0.1:8000/';
+        lazLoadingEl.textContent = msg;
+        gsLoadingEl.textContent = msg;
+        lazLoadingEl.hidden = false;
+        gsLoadingEl.hidden = false;
+      }
+
+      if (location.protocol === 'file:') {
+        showFileProtocolHelp();
+        return;
+      }
+
+      var THREE, OrbitControls, PointsBinLoader, FileLoader;
+      try {
+        THREE = await import('./static/js/vendor/three.module.js');
+        ({ OrbitControls } = await import('./static/js/vendor/OrbitControls.js'));
+        ({ PointsBinLoader } = await import('./static/js/vendor/PointsBinLoader.js'));
+        ({ FileLoader } = await import('./static/js/vendor/three.module.js'));
+      } catch (importError) {
+        console.error('Failed to load viewer modules:', importError);
+        lazLoadingEl.textContent = 'Failed to load 3D libraries. Use: python3 serve.py';
+        gsLoadingEl.textContent = 'Failed to load 3D libraries. Use: python3 serve.py';
+        return;
+      }
+
+    var GS_MODULE_URL = './static/js/vendor/gaussian-splats-3d.module.js';
 
       // Scene configurations (PC left, GS right). All use .points.bin + .splat for fast web loading.
       var SCENES = {
@@ -790,7 +825,9 @@
           lazLabel: 'assets/hkisland03_2.laz',
           pointsBinUrl: './assets/hkisland03_2.points.bin',
           splatUrl: './assets/hkisland03_2.splat',
-          splatLabel: 'assets/hkisland03_2.splat'
+          splatLabel: 'assets/hkisland03_2.splat',
+          gsDefaultView: null,
+          viewRollDeg: 0
         },
         cbd_building: {
           key: 'cbd_building',
@@ -798,7 +835,12 @@
           lazLabel: 'assets/cbd.laz',
           pointsBinUrl: './assets/cbd.points.bin',
           splatUrl: './assets/cbd.splat',
-          splatLabel: 'assets/cbd.splat'
+          splatLabel: 'assets/cbd.splat',
+          gsDefaultView: {
+            position: { x: -0.649925, y: 0.172235, z: -0.524594 },
+            target: { x: 18.13892, y: -1.88306, z: 2.518211 }
+          },
+          viewRollDeg: 90
         },
         sysu_building: {
           key: 'sysu_building',
@@ -806,18 +848,77 @@
           lazLabel: 'assets/sysu.laz',
           pointsBinUrl: './assets/sysu.points.bin',
           splatUrl: './assets/sysu.splat',
-          splatLabel: 'assets/sysu.splat'
+          splatLabel: 'assets/sysu.splat',
+          gsDefaultView: {
+            position: { x: -1.762977, y: -0.502621, z: 0.117734 },
+            target: { x: 29.400995, y: 3.864263, z: 4.49313 }
+          },
+          viewRollDeg: 90
         }
       };
       var currentSceneKey = 'hkisland';
+      var GS_VIEW_DEBUG = false;
+      var GS_TERMINAL_LOG_ENDPOINT = '/__gs_view_log';
+      var pcTerminalLogState = {
+        inFlight: false,
+        pending: null,
+        timer: null
+      };
 
       function getCurrentScene() {
         return SCENES[currentSceneKey];
       }
 
+      var lazWrapper = lazRoot.parentElement;
+      var gsWrapper = gsRoot.parentElement;
+      var isViewerPanelSwapped = false;
+
+      function shouldSwapViewerPanels(key) {
+        return key === 'cbd_building' || key === 'sysu_building';
+      }
+
+      function placeViewerPair(wrapper, rootEl, loadingEl) {
+        if (!wrapper || !rootEl || !loadingEl) return;
+        wrapper.appendChild(rootEl);
+        wrapper.appendChild(loadingEl);
+      }
+
+      function applySceneViewerPanelSwap(key) {
+        var shouldSwap = shouldSwapViewerPanels(key);
+        if (shouldSwap === isViewerPanelSwapped) return;
+
+        if (shouldSwap) {
+          placeViewerPair(lazWrapper, gsRoot, gsLoadingEl);
+          placeViewerPair(gsWrapper, lazRoot, lazLoadingEl);
+        } else {
+          placeViewerPair(lazWrapper, lazRoot, lazLoadingEl);
+          placeViewerPair(gsWrapper, gsRoot, gsLoadingEl);
+        }
+        isViewerPanelSwapped = shouldSwap;
+      }
+
+      function applyCameraViewRoll(camera, targetVec, rollDeg) {
+        if (!camera || !targetVec) return;
+        var rollRad = ((rollDeg || 0) * Math.PI) / 180;
+        var forward = new THREE.Vector3().subVectors(targetVec, camera.position);
+        if (forward.lengthSq() < 1e-12) {
+          camera.up.set(0, 1, 0);
+          camera.lookAt(targetVec);
+          return;
+        }
+        forward.normalize();
+        var baseUp = new THREE.Vector3(0, 1, 0);
+        var rolledUp = baseUp.clone().applyQuaternion(
+          new THREE.Quaternion().setFromAxisAngle(forward, rollRad)
+        );
+        camera.up.copy(rolledUp);
+        camera.lookAt(targetVec);
+      }
+
       function setCurrentScene(key) {
         if (SCENES[key]) {
           currentSceneKey = key;
+          applySceneViewerPanelSwap(key);
           // update active button styles
           document.querySelectorAll('.viewer-scene-selector .viewer-tab').forEach(function(btn) {
             btn.classList.toggle('active', btn.getAttribute('data-scene') === key);
@@ -831,9 +932,11 @@
       var lazControls = null;
       var lazAnimationId = null;
       var lazResizeBound = false;
+      var lazViewDebugCleanup = null;
 
       var gsViewer = null;
       var gsModulePromise = null;
+      var gsLoadTicket = 0;
       var pointsBinLoader = new PointsBinLoader();
       var sharedSceneBounds = null;
 
@@ -841,6 +944,216 @@
         center: new THREE.Vector3(-267.61072, 253.33105, -59.162037),
         radius: 95
       };
+
+      var VIEWER_CONTROL_SETTINGS = {
+        enableDamping: true,
+        dampingFactor: 0.06,
+        rotateSpeed: 1.15,
+        zoomSpeed: 1.2,
+        panSpeed: 0.9,
+        keyPanSpeed: 7.0
+      };
+
+      function applyViewerControlSettings(controls) {
+        if (!controls) return;
+        controls.enableDamping = VIEWER_CONTROL_SETTINGS.enableDamping;
+        controls.dampingFactor = VIEWER_CONTROL_SETTINGS.dampingFactor;
+        controls.rotateSpeed = VIEWER_CONTROL_SETTINGS.rotateSpeed;
+        controls.zoomSpeed = VIEWER_CONTROL_SETTINGS.zoomSpeed;
+        controls.panSpeed = VIEWER_CONTROL_SETTINGS.panSpeed;
+        controls.keyPanSpeed = VIEWER_CONTROL_SETTINGS.keyPanSpeed;
+        controls.screenSpacePanning = true;
+        controls.update();
+      }
+
+      function bindViewerKeyboardControls(controls, domElement) {
+        if (!controls || !domElement) return;
+        if (controls._domElementKeyEvents) {
+          controls.stopListenToKeyEvents();
+        }
+        controls.listenToKeyEvents(domElement);
+      }
+
+      function syncGsViewerControls(viewer) {
+        if (!viewer || !viewer.renderer) return;
+        var domElement = viewer.renderer.domElement;
+        domElement.setAttribute('tabindex', '0');
+        [viewer.controls, viewer.perspectiveControls, viewer.orthographicControls].forEach(function(controls) {
+          applyViewerControlSettings(controls);
+          bindViewerKeyboardControls(controls, domElement);
+        });
+      }
+
+      function getGsViewSnapshot(viewer) {
+        if (!viewer) return null;
+        var controls = viewer.controls || viewer.perspectiveControls || viewer.orthographicControls;
+        var camera = (controls && controls.object) ? controls.object : viewer.camera;
+        if (!camera) return null;
+        var target = controls && controls.target ? controls.target : null;
+        return {
+          position: {
+            x: Number(camera.position.x.toFixed(6)),
+            y: Number(camera.position.y.toFixed(6)),
+            z: Number(camera.position.z.toFixed(6))
+          },
+          target: target ? {
+            x: Number(target.x.toFixed(6)),
+            y: Number(target.y.toFixed(6)),
+            z: Number(target.z.toFixed(6))
+          } : null
+        };
+      }
+
+      function getPcViewSnapshot() {
+        if (!lazCamera) return null;
+        var target = lazControls && lazControls.target ? lazControls.target : null;
+        return {
+          position: {
+            x: Number(lazCamera.position.x.toFixed(6)),
+            y: Number(lazCamera.position.y.toFixed(6)),
+            z: Number(lazCamera.position.z.toFixed(6))
+          },
+          target: target ? {
+            x: Number(target.x.toFixed(6)),
+            y: Number(target.y.toFixed(6)),
+            z: Number(target.z.toFixed(6))
+          } : null
+        };
+      }
+
+      function queuePcTerminalLog(sceneKey, snapshot, source) {
+        if (!GS_VIEW_DEBUG || !snapshot) return;
+        pcTerminalLogState.pending = {
+          scene: sceneKey,
+          viewer: 'pc',
+          snapshot: snapshot,
+          source: source || 'auto'
+        };
+        if (pcTerminalLogState.timer) return;
+        pcTerminalLogState.timer = setTimeout(function() {
+          pcTerminalLogState.timer = null;
+          flushPcTerminalLog();
+        }, 220);
+      }
+
+      function flushPcTerminalLog() {
+        if (pcTerminalLogState.inFlight || !pcTerminalLogState.pending) return;
+        var payload = pcTerminalLogState.pending;
+        pcTerminalLogState.pending = null;
+        pcTerminalLogState.inFlight = true;
+
+        fetch(GS_TERMINAL_LOG_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+          keepalive: true
+        }).catch(function(error) {
+          console.debug('[PC_VIEW] terminal log failed', error);
+        }).finally(function() {
+          pcTerminalLogState.inFlight = false;
+          if (pcTerminalLogState.pending) {
+            flushPcTerminalLog();
+          }
+        });
+      }
+
+      function attachGsViewDebugLogger(viewer) {
+        var scene = getCurrentScene();
+        if (!GS_VIEW_DEBUG || !scene || !viewer) return;
+        if (scene.key !== 'cbd_building' && scene.key !== 'sysu_building') return;
+        if (viewer._gsViewDebugCleanup) return;
+
+        var controlsList = [viewer.controls, viewer.perspectiveControls, viewer.orthographicControls]
+          .filter(function(c) { return !!c; });
+        if (!controlsList.length) return;
+
+        var lastLogAt = 0;
+        var minIntervalMs = 200;
+        var onChange = function() {
+          var now = Date.now();
+          if (now - lastLogAt < minIntervalMs) return;
+          lastLogAt = now;
+          var snapshot = getGsViewSnapshot(viewer);
+          if (!snapshot) return;
+          console.log('[GS_VIEW]', scene.key, JSON.stringify(snapshot));
+        };
+
+        controlsList.forEach(function(c) { c.addEventListener('change', onChange); });
+        var pollTimer = setInterval(function() {
+          if (!viewer || viewer !== gsViewer) return;
+          onChange();
+        }, 300);
+        console.log('[GS_VIEW] Debug enabled for', scene.key, '- move view and copy JSON');
+        var initial = getGsViewSnapshot(viewer);
+        if (initial) {
+          console.log('[GS_VIEW]', scene.key, JSON.stringify(initial));
+        }
+        viewer._gsViewDebugCleanup = function() {
+          controlsList.forEach(function(c) { c.removeEventListener('change', onChange); });
+          clearInterval(pollTimer);
+        };
+      }
+
+      function scheduleGsViewDebugLogger(viewer) {
+        if (!GS_VIEW_DEBUG || !viewer) return;
+        var attempts = 0;
+        function tryAttach() {
+          attempts += 1;
+          attachGsViewDebugLogger(viewer);
+          if (viewer._gsViewDebugCleanup || attempts >= 20) return;
+          setTimeout(tryAttach, 150);
+        }
+        tryAttach();
+      }
+
+      function attachPcViewDebugLogger() {
+        var scene = getCurrentScene();
+        if (!GS_VIEW_DEBUG || !scene || !lazControls || !lazCamera) return;
+        if (scene.key !== 'cbd_building' && scene.key !== 'sysu_building') return;
+        if (lazViewDebugCleanup) return;
+
+        var lastLogAt = 0;
+        var minIntervalMs = 200;
+        var onChange = function() {
+          var now = Date.now();
+          if (now - lastLogAt < minIntervalMs) return;
+          lastLogAt = now;
+          var snapshot = getPcViewSnapshot();
+          if (!snapshot) return;
+          console.log('[PC_VIEW]', scene.key, JSON.stringify(snapshot));
+          queuePcTerminalLog(scene.key, snapshot, 'change');
+        };
+
+        lazControls.addEventListener('change', onChange);
+        var pollTimer = setInterval(function() {
+          if (!lazControls || !lazCamera) return;
+          onChange();
+        }, 300);
+        console.log('[PC_VIEW] Debug enabled for', scene.key, '- move view and copy JSON');
+        var initial = getPcViewSnapshot();
+        if (initial) {
+          console.log('[PC_VIEW]', scene.key, JSON.stringify(initial));
+          queuePcTerminalLog(scene.key, initial, 'initial');
+        }
+        lazViewDebugCleanup = function() {
+          if (lazControls) {
+            lazControls.removeEventListener('change', onChange);
+          }
+          clearInterval(pollTimer);
+        };
+      }
+
+      function schedulePcViewDebugLogger() {
+        if (!GS_VIEW_DEBUG) return;
+        var attempts = 0;
+        function tryAttach() {
+          attempts += 1;
+          attachPcViewDebugLogger();
+          if (lazViewDebugCleanup || attempts >= 20) return;
+          setTimeout(tryAttach, 150);
+        }
+        tryAttach();
+      }
 
       function setLazStatus(text, hideOverlay) {
         if (text) lazLoadingEl.textContent = text;
@@ -861,6 +1174,10 @@
           cancelAnimationFrame(lazAnimationId);
           lazAnimationId = null;
         }
+        if (typeof lazViewDebugCleanup === 'function') {
+          lazViewDebugCleanup();
+          lazViewDebugCleanup = null;
+        }
         if (lazControls) {
           lazControls.dispose();
           lazControls = null;
@@ -878,12 +1195,22 @@
 
       function clearGsViewer() {
         if (gsViewer) {
+          var disposingViewer = gsViewer;
+          gsViewer = null;
           try {
-            gsViewer.dispose();
+            if (typeof disposingViewer._gsViewDebugCleanup === 'function') {
+              disposingViewer._gsViewDebugCleanup();
+              disposingViewer._gsViewDebugCleanup = null;
+            }
+            var disposeResult = disposingViewer.dispose();
+            if (disposeResult && typeof disposeResult.catch === 'function') {
+              disposeResult.catch(function(error) {
+                console.warn('GS viewer async dispose failed:', error);
+              });
+            }
           } catch (error) {
             console.warn('GS viewer dispose failed:', error);
           }
-          gsViewer = null;
           return;
         }
         while (gsRoot.firstChild) {
@@ -912,17 +1239,42 @@
         if (!geometry.boundingSphere) {
           geometry.computeBoundingSphere();
         }
+        var scene = getCurrentScene();
+        var defaultView = scene && scene.gsDefaultView;
+        var viewRollDeg = scene && typeof scene.viewRollDeg === 'number' ? scene.viewRollDeg : 0;
         var center = geometry.boundingSphere.center;
         var radius = geometry.boundingSphere.radius || 1;
-        lazControls.target.copy(center);
-        lazCamera.position.set(
-          center.x + radius * 1.6,
-          center.y + radius * 1.0,
-          center.z + radius * 1.5
-        );
+        var targetVec;
+
+        if (defaultView && defaultView.position && defaultView.target) {
+          lazCamera.position.set(
+            defaultView.position.x,
+            defaultView.position.y,
+            defaultView.position.z
+          );
+          lazControls.target.set(
+            defaultView.target.x,
+            defaultView.target.y,
+            defaultView.target.z
+          );
+          targetVec = new THREE.Vector3(
+            defaultView.target.x,
+            defaultView.target.y,
+            defaultView.target.z
+          );
+        } else {
+          lazControls.target.copy(center);
+          lazCamera.position.set(
+            center.x + radius * 1.6,
+            center.y + radius * 1.0,
+            center.z + radius * 1.5
+          );
+          targetVec = center.clone();
+        }
         lazCamera.near = Math.max(radius / 200, 0.01);
         lazCamera.far = Math.max(radius * 80, 1000);
         lazCamera.updateProjectionMatrix();
+        applyCameraViewRoll(lazCamera, targetVec, viewRollDeg);
         lazControls.update();
       }
 
@@ -983,14 +1335,12 @@
         lazRenderer.setSize(width, height);
         lazRenderer.domElement.style.width = '100%';
         lazRenderer.domElement.style.height = '100%';
+        lazRenderer.domElement.setAttribute('tabindex', '0');
         lazRoot.appendChild(lazRenderer.domElement);
 
         lazControls = new OrbitControls(lazCamera, lazRenderer.domElement);
-        lazControls.enableDamping = true;
-        lazControls.dampingFactor = 0.08;
-        lazControls.rotateSpeed = 0.65;
-        lazControls.zoomSpeed = 1.0;
-        lazControls.panSpeed = 0.75;
+        applyViewerControlSettings(lazControls);
+        bindViewerKeyboardControls(lazControls, lazRenderer.domElement);
         lazControls.target.set(0, 0, 0);
         lazControls.update();
 
@@ -1058,6 +1408,17 @@
         var points = new THREE.Points(geometry, pointMaterial);
         lazScene.add(points);
         fitLazCamera(geometry);
+        schedulePcViewDebugLogger();
+        window.dumpCurrentPcView = function() {
+          var scene = getCurrentScene();
+          var snapshot = getPcViewSnapshot();
+          if (!snapshot) {
+            console.log('[PC_VIEW] no active snapshot');
+            return;
+          }
+          console.log('[PC_VIEW_MANUAL]', scene.key, JSON.stringify(snapshot));
+          queuePcTerminalLog(scene.key, snapshot, 'manual');
+        };
         setLazStatus(
           'Loaded: ' + sourceLabel + ' (' + count.toLocaleString() + ' points)',
           true
@@ -1124,26 +1485,48 @@
       function fitGsCamera(viewer) {
         if (!viewer || !viewer.camera) return;
 
+        var scene = getCurrentScene();
+        var defaultView = scene && scene.gsDefaultView;
+        var viewRollDeg = scene && typeof scene.viewRollDeg === 'number' ? scene.viewRollDeg : 0;
         var bounds = sharedSceneBounds || GS_SCENE_FALLBACK;
         var center = bounds.center;
         var radius = bounds.radius || GS_SCENE_FALLBACK.radius;
         var distance = Math.max(radius * 2.2, 30);
+        var targetVec;
 
         viewer.camera.far = Math.max(radius * 40, 8000);
         viewer.camera.near = Math.max(radius / 800, 0.02);
         viewer.camera.updateProjectionMatrix();
 
-        viewer.camera.position.set(
-          center.x + distance * 0.55,
-          center.y + distance * 0.35,
-          center.z + distance * 0.75
-        );
-
-        if (viewer.controls) {
-          viewer.controls.target.copy(center);
-          viewer.controls.update();
+        if (defaultView && defaultView.position && defaultView.target) {
+          viewer.camera.position.set(
+            defaultView.position.x,
+            defaultView.position.y,
+            defaultView.position.z
+          );
+          targetVec = new THREE.Vector3(
+            defaultView.target.x,
+            defaultView.target.y,
+            defaultView.target.z
+          );
+          if (viewer.controls && viewer.controls.target) {
+            viewer.controls.target.copy(targetVec);
+          }
         } else {
-          viewer.camera.lookAt(center);
+          viewer.camera.position.set(
+            center.x + distance * 0.55,
+            center.y + distance * 0.35,
+            center.z + distance * 0.75
+          );
+          targetVec = center.clone();
+
+          if (viewer.controls) {
+            viewer.controls.target.copy(targetVec);
+          }
+        }
+        applyCameraViewRoll(viewer.camera, targetVec, viewRollDeg);
+        if (viewer.controls) {
+          viewer.controls.update();
         }
 
         if (viewer.forceRenderNextFrame) {
@@ -1210,7 +1593,18 @@
                     .then(function() {
                       fitGsCamera(gsViewer);
                       resizeGsViewer();
+                      syncGsViewerControls(gsViewer);
                       gsViewer.start();
+                      scheduleGsViewDebugLogger(gsViewer);
+                      window.dumpCurrentGsView = function() {
+                        var scene = getCurrentScene();
+                        var snapshot = getGsViewSnapshot(gsViewer);
+                        if (!snapshot) {
+                          console.log('[GS_VIEW] no active snapshot');
+                          return;
+                        }
+                        console.log('[GS_VIEW_MANUAL]', scene.key, JSON.stringify(snapshot));
+                      };
                       setGsStatus('Loaded: ' + scene.label, true);
                       resolve();
                     })
@@ -1276,10 +1670,7 @@
         // clear any previous and reload
         sharedSceneBounds = null;
         gsModulePromise = null;
-        if (gsViewer) {
-          try { gsViewer.dispose(); } catch (e) {}
-          gsViewer = null;
-        }
+        clearGsViewer();
         clearLazViewer();
         // reset status
         setLazStatus('Loading point cloud...');
@@ -1302,7 +1693,10 @@
         try {
           // ensure initial button active
           setCurrentScene(currentSceneKey);
-          loadAllViewers().catch(handleLoadError);
+          // Defer to next frame so layout (aspect-ratio, grid) has settled
+          setTimeout(function() {
+            loadAllViewers().catch(handleLoadError);
+          }, 0);
         } catch (error) {
           console.error('Viewer initialization failed:', error);
           setLazStatus('Viewer initialization failed.');

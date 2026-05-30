@@ -12615,12 +12615,15 @@ class Viewer {
             }
             for (let controls of [this.orthographicControls, this.perspectiveControls,]) {
                 if (controls) {
-                    controls.listenToKeyEvents(window);
-                    controls.rotateSpeed = 0.5;
+                    controls.listenToKeyEvents(this.renderer.domElement);
+                    controls.rotateSpeed = 0.65;
+                    controls.zoomSpeed = 1.0;
+                    controls.panSpeed = 0.75;
+                    controls.keyPanSpeed = 7.0;
                     controls.maxPolarAngle = Math.PI * .75;
                     controls.minPolarAngle = 0.1;
                     controls.enableDamping = true;
-                    controls.dampingFactor = 0.05;
+                    controls.dampingFactor = 0.08;
                     controls.target.copy(this.initialCameraLookAt);
                     controls.update();
                 }
@@ -12688,12 +12691,6 @@ class Viewer {
                 case 'KeyF':
                     this.focalAdjustment -= 0.02;
                     this.forceRenderNextFrame();
-                break;
-                case 'ArrowLeft':
-                    this.camera.up.transformDirection(tempMatrixLeft);
-                break;
-                case 'ArrowRight':
-                    this.camera.up.transformDirection(tempMatrixRight);
                 break;
                 case 'KeyC':
                     this.showMeshCursor = !this.showMeshCursor;
