@@ -68,6 +68,12 @@
       margin: 0 auto;
     }
 
+    .benchmark-wide-container {
+      width: 100%;
+      max-width: min(1180px, 96vw) !important;
+      margin: 0 auto;
+    }
+
     .viewer-dual-layout {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -394,6 +400,24 @@
 
   <section class="section">
     <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths content-card">
+          <h2 class="title is-3 section-title">Teaser</h2>
+          <div class="content has-text-centered">
+            <figure class="image">
+              <img src="./static/images/teaser4.png" alt="Ultra-Fusion teaser overview">
+            </figure>
+            <p class="has-text-justified">
+              <strong>Overview of Ultra-Fusion.</strong> The framework unifies heterogeneous sensors in a timestamp-ordered estimator,
+              supports deployment on ground, aerial, legged, and vehicle platforms, and improves localization robustness under sensor degradation,
+              spatiotemporal uncertainty, and long-term or high-speed operation.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container is-max-desktop">
       <!-- Teaser videos: FAST-LIVO2 CBD & SYSU -->
       <div class="columns is-centered has-text-centered">
         <div class="column is-half">
@@ -651,14 +675,13 @@
           <h2 class="title is-3 section-title">Online Point Cloud Demo</h2>
           <div class="content has-text-justified">
             <p>
-              This online visualization shows the color mapping result of <strong>Ultra-Fusion</strong> on the
-              <strong>MaRS-LVIG HKisland03</strong> sequence, reconstructed with <strong>Gaussian Splatting</strong>.
+              This online demo visualizes the mapping interface of <strong>Ultra-Fusion</strong>, including a colorized LiDAR point cloud and a LiDAR-guided <strong>3D Gaussian Splatting</strong> reconstruction.
             </p>
             <p>
-              We demonstrate our results in two initialization scenes from the FAST-LIVO2 dataset: CBD_Building_01 and SYSU_01. For each scene, we visualize the reconstructed colored point cloud, the 3DGS RGB rendering, and the corresponding 3DGS depth rendering. These results illustrate the geometric consistency, visual fidelity, and depth structure captured by our method in complex outdoor environments.
+              Besides the <strong>MaRS-LVIG HKisland03</strong> sequence, we provide two FAST-LIVO2 initialization scenes, <strong>CBD_Building_01</strong> and <strong>SYSU_01</strong>, to show cross-scene consistency under outdoor conditions.
             </p>
             <p>
-              Select a scene below to load its colored point cloud (left) and 3D Gaussian Splatting (right).
+              The left panel shows the reconstructed colored point cloud, and the right panel shows the corresponding 3D Gaussian Splatting rendering generated from aligned poses, RGB observations, and geometric anchors.
             </p>
           </div>
 
@@ -703,11 +726,6 @@
           <p class="viewer-tips has-text-left">
             Controls: left-drag to rotate, wheel to zoom, right-drag to pan. Arrow keys pan; hold Shift/Ctrl/Meta with arrow keys to rotate.
             Click a viewer panel first so keyboard input applies to that panel.
-            The point cloud uses a web cache (<code>.points.bin</code>) for fast loading.
-            The Gaussian splat may take longer on first load while the data is processed.
-            <strong>Do not open <code>index.html</code> directly from disk.</strong> Run
-            <code>python3 serve.py</code> in the project folder, then visit
-            <a href="http://127.0.0.1:8000/">http://127.0.0.1:8000/</a>.
           </p>
         </div>
       </div>
@@ -827,7 +845,8 @@
           splatUrl: './assets/hkisland03_2.splat',
           splatLabel: 'assets/hkisland03_2.splat',
           gsDefaultView: null,
-          viewRollDeg: 0
+          pcViewRollDeg: 0,
+          gsViewRollDeg: 0
         },
         cbd_building: {
           key: 'cbd_building',
@@ -840,7 +859,8 @@
             position: { x: -0.649925, y: 0.172235, z: -0.524594 },
             target: { x: 18.13892, y: -1.88306, z: 2.518211 }
           },
-          viewRollDeg: 90
+          pcViewRollDeg: 90,
+          gsViewRollDeg: 90
         },
         sysu_building: {
           key: 'sysu_building',
@@ -853,7 +873,8 @@
             position: { x: -1.762977, y: -0.502621, z: 0.117734 },
             target: { x: 29.400995, y: 3.864263, z: 4.49313 }
           },
-          viewRollDeg: 90
+          pcViewRollDeg: 90,
+          gsViewRollDeg: 90
         }
       };
       var currentSceneKey = 'hkisland';
@@ -867,34 +888,6 @@
 
       function getCurrentScene() {
         return SCENES[currentSceneKey];
-      }
-
-      var lazWrapper = lazRoot.parentElement;
-      var gsWrapper = gsRoot.parentElement;
-      var isViewerPanelSwapped = false;
-
-      function shouldSwapViewerPanels(key) {
-        return key === 'cbd_building' || key === 'sysu_building';
-      }
-
-      function placeViewerPair(wrapper, rootEl, loadingEl) {
-        if (!wrapper || !rootEl || !loadingEl) return;
-        wrapper.appendChild(rootEl);
-        wrapper.appendChild(loadingEl);
-      }
-
-      function applySceneViewerPanelSwap(key) {
-        var shouldSwap = shouldSwapViewerPanels(key);
-        if (shouldSwap === isViewerPanelSwapped) return;
-
-        if (shouldSwap) {
-          placeViewerPair(lazWrapper, gsRoot, gsLoadingEl);
-          placeViewerPair(gsWrapper, lazRoot, lazLoadingEl);
-        } else {
-          placeViewerPair(lazWrapper, lazRoot, lazLoadingEl);
-          placeViewerPair(gsWrapper, gsRoot, gsLoadingEl);
-        }
-        isViewerPanelSwapped = shouldSwap;
       }
 
       function applyCameraViewRoll(camera, targetVec, rollDeg) {
@@ -915,10 +908,24 @@
         camera.lookAt(targetVec);
       }
 
+      function getSceneViewRoll(scene, viewerType) {
+        if (!scene) return 0;
+        if (viewerType === 'pc' && typeof scene.pcViewRollDeg === 'number') {
+          return scene.pcViewRollDeg;
+        }
+        if (viewerType === 'gs' && typeof scene.gsViewRollDeg === 'number') {
+          return scene.gsViewRollDeg;
+        }
+        if (typeof scene.viewRollDeg === 'number') {
+          return scene.viewRollDeg;
+        }
+        return 0;
+      }
+
       function setCurrentScene(key) {
         if (SCENES[key]) {
           currentSceneKey = key;
-          applySceneViewerPanelSwap(key);
+          syncPcViewerControls();
           // update active button styles
           document.querySelectorAll('.viewer-scene-selector .viewer-tab').forEach(function(btn) {
             btn.classList.toggle('active', btn.getAttribute('data-scene') === key);
@@ -954,16 +961,45 @@
         keyPanSpeed: 7.0
       };
 
-      function applyViewerControlSettings(controls) {
+      function applyViewerControlSettings(controls, overrides) {
         if (!controls) return;
+        overrides = overrides || {};
         controls.enableDamping = VIEWER_CONTROL_SETTINGS.enableDamping;
         controls.dampingFactor = VIEWER_CONTROL_SETTINGS.dampingFactor;
-        controls.rotateSpeed = VIEWER_CONTROL_SETTINGS.rotateSpeed;
-        controls.zoomSpeed = VIEWER_CONTROL_SETTINGS.zoomSpeed;
-        controls.panSpeed = VIEWER_CONTROL_SETTINGS.panSpeed;
-        controls.keyPanSpeed = VIEWER_CONTROL_SETTINGS.keyPanSpeed;
+        controls.rotateSpeed = (typeof overrides.rotateSpeed === 'number')
+          ? overrides.rotateSpeed
+          : VIEWER_CONTROL_SETTINGS.rotateSpeed;
+        controls.zoomSpeed = (typeof overrides.zoomSpeed === 'number')
+          ? overrides.zoomSpeed
+          : VIEWER_CONTROL_SETTINGS.zoomSpeed;
+        controls.panSpeed = (typeof overrides.panSpeed === 'number')
+          ? overrides.panSpeed
+          : VIEWER_CONTROL_SETTINGS.panSpeed;
+        controls.keyPanSpeed = (typeof overrides.keyPanSpeed === 'number')
+          ? overrides.keyPanSpeed
+          : VIEWER_CONTROL_SETTINGS.keyPanSpeed;
         controls.screenSpacePanning = true;
         controls.update();
+      }
+
+      function getPcControlOverrides(sceneKey) {
+        if (sceneKey === 'cbd_building' || sceneKey === 'sysu_building') {
+          // Match GS interaction direction/sensitivity in rotated-view scenes.
+          return {
+            rotateSpeed: -VIEWER_CONTROL_SETTINGS.rotateSpeed,
+            panSpeed: -VIEWER_CONTROL_SETTINGS.panSpeed,
+            keyPanSpeed: -VIEWER_CONTROL_SETTINGS.keyPanSpeed
+          };
+        }
+        return null;
+      }
+
+      function syncPcViewerControls() {
+        if (!lazControls || !lazRenderer || !lazRenderer.domElement) return;
+        var scene = getCurrentScene();
+        var sceneKey = scene ? scene.key : '';
+        applyViewerControlSettings(lazControls, getPcControlOverrides(sceneKey));
+        bindViewerKeyboardControls(lazControls, lazRenderer.domElement);
       }
 
       function bindViewerKeyboardControls(controls, domElement) {
@@ -1241,7 +1277,7 @@
         }
         var scene = getCurrentScene();
         var defaultView = scene && scene.gsDefaultView;
-        var viewRollDeg = scene && typeof scene.viewRollDeg === 'number' ? scene.viewRollDeg : 0;
+        var viewRollDeg = getSceneViewRoll(scene, 'pc');
         var center = geometry.boundingSphere.center;
         var radius = geometry.boundingSphere.radius || 1;
         var targetVec;
@@ -1339,8 +1375,7 @@
         lazRoot.appendChild(lazRenderer.domElement);
 
         lazControls = new OrbitControls(lazCamera, lazRenderer.domElement);
-        applyViewerControlSettings(lazControls);
-        bindViewerKeyboardControls(lazControls, lazRenderer.domElement);
+        syncPcViewerControls();
         lazControls.target.set(0, 0, 0);
         lazControls.update();
 
@@ -1487,7 +1522,7 @@
 
         var scene = getCurrentScene();
         var defaultView = scene && scene.gsDefaultView;
-        var viewRollDeg = scene && typeof scene.viewRollDeg === 'number' ? scene.viewRollDeg : 0;
+        var viewRollDeg = getSceneViewRoll(scene, 'gs');
         var bounds = sharedSceneBounds || GS_SCENE_FALLBACK;
         var center = bounds.center;
         var radius = bounds.radius || GS_SCENE_FALLBACK.radius;
