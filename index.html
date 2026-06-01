@@ -4,11 +4,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="description"
-    content="Ultra-Fusion: An Ultra-Resilient Tightly-Coupled Multi-Sensor Fusion SLAM Framework under Sensor Degradation and Spatiotemporal Uncertainty for Intelligent Transportation Systems.">
-  <meta name="keywords" content="SLAM, multi-sensor fusion, localization, intelligent transportation systems, LiDAR, visual-inertial odometry, GNSS, wheel odometry">
+    content="Ultra-Fusion: A Resilient Tightly-Coupled Multi-Sensor Fusion SLAM Framework under Sensor Degradation and Spatiotemporal Perturbation for Intelligent Transportation Systems.">
+  <meta name="keywords" content="SLAM, multi-sensor fusion, localization, intelligent transportation systems, LiDAR, visual-inertial odometry, GNSS, wheel odometry, M3DGR">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="data:,">
-  <title>Ultra-Fusion: Ultra-Resilient Multi-Sensor Fusion SLAM for ITS</title>
+  <title>Ultra-Fusion | Resilient Multi-Sensor Fusion SLAM for ITS</title>
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
 
@@ -72,6 +72,23 @@
       width: 100%;
       max-width: min(1180px, 96vw) !important;
       margin: 0 auto;
+    }
+
+    .teaser-videos-row {
+      margin-bottom: 1.25rem;
+    }
+
+    .teaser-videos-row .column {
+      display: flex;
+    }
+
+    .teaser-video,
+    .teaser-figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.12);
     }
 
     .viewer-dual-layout {
@@ -275,34 +292,45 @@
             <h1 class="title is-1 publication-title">
               <span class="ultrafusion-title" style="font-weight: bolder;">
                 <span class="ultra-word">Ultra</span><span class="hyphen-word">-</span><span class="fusion-word">Fusion</span>
-              </span>: An Ultra-Resilient Tightly-Coupled Multi-Sensor Fusion SLAM Framework Under Sensor Degradation and Spatiotemporal Uncertainty for Intelligent Transportation Systems
+              </span>
             </h1>
-            <h3 class="title is-4 conference-authors">IEEE Transactions on Intelligent Transportation Systems (Under Review)</h3>
-            <div class="is-size-5 publication-authors">
-              <span class="author-block">Anonymous Authors</span>
-            </div>
+            <p class="publication-subtitle is-size-4">
+              A Resilient Tightly-Coupled Multi-Sensor Fusion SLAM Framework under Sensor Degradation and Spatiotemporal Perturbation for Intelligent Transportation Systems
+            </p>
+            <h3 class="title is-5 conference-authors">IEEE Transactions on Intelligent Transportation Systems</h3>
 
             <div class="is-size-5 publication-authors">
-              <span class="author-block">Anonymous Institution(s)</span>
+              <span class="author-block">Yihong Tian<sup>1,2</sup></span>,
+              <span class="author-block">Junjie Zhang<sup>2</sup></span>,
+              <span class="author-block">Liuyang Li<sup>2</sup></span>,
+              <span class="author-block">Deteng Zhang<sup>2</sup></span>,
+              <span class="author-block">Yunfei Zuo<sup>1,2</sup></span>, and
+              <span class="author-block">Jie Yin<sup>2,3</sup>*</span>
             </div>
-            <div class="column has-text-centered">
+            <p class="publication-affiliations is-size-6">
+              <sup>1</sup> Beijing Institute of Technology &nbsp;·&nbsp;
+              <sup>2</sup> InnoBot Lab &nbsp;·&nbsp;
+              <sup>3</sup> Shanghai Jiao Tong University
+            </p>
+            <p class="corresponding-note is-size-6">
+              * Corresponding author:
+              <a href="mailto:robot_yinjie@outlook.com">Jie Yin</a>
+            </p>
+
+            <div class="hero-link-row">
               <span class="link-block">
-                <button class="external-link button is-normal is-rounded is-dark" disabled>
-                  <span class="icon">
-                    <i class="fas fa-file-pdf"></i>
-                  </span>
-                  <span>Paper (TBD)</span>
-                </button>
+                <a href="https://github.com/sjtuyinjie/Ultra-Fusion" class="external-link button is-normal is-rounded is-dark" target="_blank" rel="noopener">
+                  <span class="icon"><i class="fab fa-github"></i></span>
+                  <span>Code</span>
+                </a>
               </span>
               <span class="link-block">
-                <button class="external-link button is-normal is-rounded is-dark" disabled>
-                  <span class="icon">
-                    <i class="fab fa-github"></i>
-                  </span>
-                  <span>Code (TBD)</span>
-                </button>
+                <a href="https://github.com/sjtuyinjie/M3DGR" class="external-link button is-normal is-rounded is-dark" target="_blank" rel="noopener">
+                  <span class="icon"><i class="fas fa-database"></i></span>
+                  <span>M3DGR Dataset</span>
+                </a>
               </span>
-              </div>
+            </div>
 
             </div>
           </div>
@@ -394,7 +422,7 @@
       <p class="nidar-slogan">
         <span class="s1">Robust</span>&nbsp;<span class="s3">Fusion</span>&nbsp;<span class="s4">for</span>&nbsp;<span class="s5">Degraded Multi-Sensor Localization</span><span class="s-dot"></span>
       </p>
-      <p class="nidar-slogan-sub">A unified timestamp-ordered estimator for resilient localization across sensors, platforms, and challenging transportation scenarios.</p>
+      <p class="nidar-slogan-sub">Unified sliding-window estimation with observability-aware initialization, factor-wise reliability scheduling, and online spatiotemporal calibration.</p>
     </div>
   </section>
 
@@ -402,10 +430,23 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths content-card">
-          <h2 class="title is-3 section-title">Teaser</h2>
           <div class="content has-text-centered">
-            <figure class="image">
-              <img src="./static/images/teaser4.png" alt="Ultra-Fusion teaser overview">
+            <div class="columns is-centered teaser-videos-row">
+              <div class="column is-half">
+                <video class="teaser-video" autoplay muted loop playsinline onloadedmetadata="this.playbackRate=1.5" onplay="this.playbackRate=2">
+                  <source src="./assets/cbd.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+              <div class="column is-half">
+                <video class="teaser-video" autoplay muted loop playsinline onloadedmetadata="this.playbackRate=1.5" onplay="this.playbackRate=2">
+                  <source src="./assets/sysu.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            </div>
+            <figure class="image teaser-figure">
+              <img src="./static/images/teaser.png" alt="Ultra-Fusion teaser overview" loading="lazy">
             </figure>
             <p class="has-text-justified">
               <strong>Overview of Ultra-Fusion.</strong> The framework unifies heterogeneous sensors in a timestamp-ordered estimator,
@@ -418,83 +459,75 @@
     </div>
 
     <div class="container is-max-desktop">
-      <!-- Teaser videos: FAST-LIVO2 CBD & SYSU -->
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-half">
-          <div class="publication-video">
-            <video autoplay muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 10px 26px rgba(0,0,0,0.22);">
-              <source src="./assets/cbd.mp4" type="video/mp4">
-              Your browser does not support the video tag.
-            </video>
-          </div>
-        </div>
-        <div class="column is-half">
-          <div class="publication-video">
-            <video autoplay muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 10px 26px rgba(0,0,0,0.22);">
-              <source src="./assets/sysu.mp4" type="video/mp4">
-              Your browser does not support the video tag.
-            </video>
-          </div>
-        </div>
-      </div>
-
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths content-card">
           <h2 class="title is-3 section-title">TL;DR</h2>
           <div class="content has-text-justified">
             <p>
-              <strong>Ultra-Fusion</strong> is an ultra-resilient tightly-coupled multi-sensor fusion SLAM framework for intelligent transportation systems.
-              It unifies RGB, IMU, depth, wheel, GNSS, and LiDAR measurements within a timestamp-ordered sliding-window estimator,
-              enabling robust localization under sensor degradation and spatiotemporal uncertainty.
+              <strong><a href="https://github.com/sjtuyinjie/Ultra-Fusion">Ultra-Fusion</a></strong> is a resilient tightly-coupled multi-sensor fusion SLAM framework for intelligent transportation systems.
+              A <em>Unified Sliding-Window Estimator</em> orders asynchronous measurements by timestamp and supports WIO, VIO, LIO, and LVIO with optional wheel and/or GNSS augmentation.
+              <em>Observability-Aware Initialization</em>, <em>Factor-Wise Reliability Scheduling</em>, and <em>Online Spatiotemporal Calibration</em> improve robustness under sensor degradation and calibration perturbation.
             </p>
           </div>
         </div>
       </div>
 
-      <div class="columns is-centered has-text-centered">
+      <!-- <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths content-card">
           <h2 class="title is-3 section-title">Abstract</h2>
-          <div class="content has-text-justified">
+          <div class="content has-text-justified abstract-content">
             <p>
               Reliable localization is a fundamental capability for intelligent transportation systems, including autonomous driving, legged robots,
               and aerial vehicles. Although multi-sensor fusion has become a promising paradigm for robust localization, practical systems remain
               fragile when sensors degrade, such as under poor illumination, LiDAR degeneracy, wheel slippage, or GNSS denial, and when
-              spatiotemporal calibration is imperfect.
+              spatiotemporal calibration is imperfect. These challenges are especially pronounced in real-world transportation scenarios, such as
+              urban canyons, tunnels, and high-speed driving, where they can severely compromise localization reliability and system safety.
             </p>
             <p>
-              To address these challenges, we propose <strong>Ultra-Fusion</strong>, an ultra-resilient tightly-coupled multi-sensor fusion SLAM
-              framework built upon a unified timestamp-ordered estimator. Ultra-Fusion combines condition-aware initialization,
-              continuous-time LiDAR--inertial geometric modeling, degradation-aware factor scheduling, and online refinement of sensor time offsets
-              and extrinsic parameters. We further introduce the <strong>M3DGR</strong> benchmark and conduct a large-scale evaluation of
-              <strong>60 representative SLAM systems</strong>. Extensive experiments on M3DGR, M2DGR-Plus, KAIST, GrandTour, and MARS-LVIG
-              demonstrate consistent state-of-the-art performance across wheeled robots, legged platforms, and autonomous vehicles.
+              This paper presents <strong><a href="https://github.com/sjtuyinjie/Ultra-Fusion">Ultra-Fusion</a></strong>, a resilient tightly-coupled
+              multi-sensor fusion SLAM framework built upon a <em>Unified Sliding-Window Estimator</em>. The estimator is sequentially organized:
+              asynchronous measurements are ordered by timestamp and instantiated as modality-specific factors under the same optimization interface.
+              It supports WIO, VIO, LIO, and LVIO modes with optional wheel and/or GNSS augmentation when applicable, enabling deployment-specific
+              sensor configurations without redesigning the estimator structure. It is initialized by <em>Observability-Aware Initialization</em> and
+              further strengthened by two online modules: <em>Factor-Wise Reliability Scheduling</em> for sensor degradation and
+              <em>Online Spatiotemporal Calibration</em> for calibration errors during operation.
+            </p>
+            <p>
+              We further introduce the <strong><a href="https://github.com/sjtuyinjie/M3DGR">M3DGR</a></strong> benchmark, which includes both
+              real-world and simulation trajectories with synchronized timestamps and accurate extrinsics, and we conduct a large-scale evaluation of
+              <strong>over 60</strong> representative SLAM systems. Extensive experiments on M3DGR, M2DGR-Plus, KAIST, GrandTour, and MARS-LVIG
+              demonstrate consistent competitive performance. Across wheeled robots, legged platforms, and autonomous vehicles, Ultra-Fusion delivers
+              resilient and accurate localization over long-term and high-speed trajectories, even under severe degradation and calibration perturbations.
             </p>
           </div>
         </div>
-      </div>
+      </div> -->
 
-      <div class="columns is-centered has-text-centered">
+      <!-- <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths content-card">
           <h2 class="title is-3 section-title">Contributions</h2>
           <div class="content has-text-justified">
             <ul>
               <li>
-                We propose <strong>Ultra-Fusion</strong>, a tightly-coupled multi-sensor fusion SLAM framework that unifies asynchronous sensing streams
-                within a timestamp-ordered sliding-window estimator, enabling tighter cross-modal interaction than modular coordination schemes.
+                We propose <strong><a href="https://github.com/sjtuyinjie/Ultra-Fusion">Ultra-Fusion</a></strong>, a tightly-coupled multi-sensor fusion SLAM framework built on a
+                <strong>Unified Sliding-Window Estimator</strong> with <strong>Observability-Aware Initialization</strong>, supporting WIO, VIO, LIO, and LVIO in one configurable estimator.
               </li>
               <li>
-                We introduce a <strong>condition-aware and spatiotemporally consistent estimation strategy</strong> that combines dynamic and
-                low-excitation initialization, continuous-time LiDAR modeling, and online refinement of selected time-offset and extrinsic parameters.
+                We develop <strong>Factor-Wise Reliability Scheduling</strong> for sensor degradation, applying degeneracy-aware gating and down-weighting directly within the unified optimization problem.
               </li>
               <li>
-                We develop a <strong>degradation-aware tightly-coupled fusion mechanism</strong> that performs factor-level scheduling, gating,
-                and down-weighting directly within the unified optimization problem, and we validate it through large-scale benchmarking across
-                M3DGR, M2DGR-Plus, KAIST, GrandTour, and MARS-LVIG.
+                We design <strong>Online Spatiotemporal Calibration</strong> to refine calibration variables only under sufficient excitation and sensor reliability.
+              </li>
+              <li>
+                We extend the <strong><a href="https://github.com/sjtuyinjie/M3DGR">M3DGR</a></strong> benchmark and evaluate <strong>more than 60</strong> representative SLAM systems, including controlled simulation-based perturbation studies.
+              </li>
+              <li>
+                We validate resilience and robustness on heterogeneous platforms and operating conditions, including wheeled, legged, and aerial robots, autonomous driving, and long-term or high-speed trajectories.
               </li>
             </ul>
           </div>
         </div>
-      </div>
+      </div> -->
 
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths content-card">
@@ -504,9 +537,8 @@
               <img src="./static/images/pipeline_test.png" alt="Ultra-Fusion pipeline overview">
             </figure>
             <p class="has-text-justified">
-              <strong>Ultra-Fusion pipeline.</strong> Heterogeneous sensor measurements are organized in timestamp order and fused in a common
-              sliding-window estimator with condition-aware initialization, continuous-time LiDAR modeling, degradation-aware factor scheduling,
-              and online spatiotemporal refinement.
+              <strong>Ultra-Fusion pipeline.</strong> Timestamp-ordered multi-modal measurements are fused in a unified sliding-window estimator with
+              observability-aware initialization, factor-wise reliability scheduling, and online spatiotemporal calibration.
             </p>
           </div>
         </div>
@@ -685,15 +717,33 @@
             </p>
           </div>
 
-          <!-- Real-time demo video -->
-          <div class="publication-video" style="margin: 1.25rem 0 0.75rem;">
-            <video autoplay controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 10px 26px rgba(0,0,0,0.22);">
-              <source src="./static/images/gs_4x.mp4" type="video/mp4">
-              Your browser does not support the video tag.
-            </video>
+          <!-- Real-time demo videos -->
+          <div class="columns is-centered" style="margin: 1.25rem 0 0.75rem;">
+            <div class="column is-half">
+              <div class="publication-video">
+                <video autoplay controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 10px 26px rgba(0,0,0,0.22);">
+                  <source src="./static/images/gs_4x.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+              <p class="has-text-centered" style="margin-top: 0.55rem; margin-bottom: 0; color: #204a66; font-size: 0.94rem;">
+                <strong>HKIsland03.</strong> Real-time 3DGS rendering with Ultra-Fusion on MaRS-LVIG.
+              </p>
+            </div>
+            <div class="column is-half">
+              <div class="publication-video">
+                <video autoplay controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 10px 26px rgba(0,0,0,0.22);">
+                  <source src="./assets/hkairport02.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+              <p class="has-text-centered" style="margin-top: 0.55rem; margin-bottom: 0; color: #204a66; font-size: 0.94rem;">
+                <strong>HKAirport02.</strong> Additional sequence showing stable localization and dense 3DGS mapping in a large outdoor environment.
+              </p>
+            </div>
           </div>
           <p class="has-text-centered" style="margin-bottom: 1rem; color: #204a66; font-size: 0.96rem;">
-            <strong>Real-time 3D GS Rendering Demo.</strong> Ultra-Fusion performing real-time localization and mapping with 3D Gaussian Splatting rendering on the MaRS-LVIG dataset.
+            <strong>Real-time 3D GS Rendering Demos.</strong> Side-by-side examples from HKIsland03 and HKAirport02 illustrate consistent online reconstruction quality across different MaRS-LVIG scenes.
           </p>
 
           <!-- Scene selector -->
@@ -751,38 +801,41 @@
   </div>
 </section> -->
   
-<section class="section" id="BibTeX">
-  <div class="container is-max-desktop content">
-    <h2 class="title">BibTeX</h2>
-    <pre><code>@article{anonymous2026ultrafusion,
-  author    = {Anonymous Authors},
-  title     = {Ultra-Fusion: An Ultra-Resilient Tightly-Coupled Multi-Sensor Fusion SLAM Framework Under Sensor Degradation and Spatiotemporal Uncertainty for Intelligent Transportation Systems},
-  journal   = {IEEE Transactions on Intelligent Transportation Systems},
-  year      = {2026},
+<section class="section uf-bibtex-section" id="BibTeX">
+  <div class="container is-max-desktop">
+    <div class="column is-four-fifths content-card" style="margin: 0 auto;">
+      <h2 class="title is-3 section-title">BibTeX</h2>
+      <pre class="bibtex-block"><code>@article{tian2026ultrafusion,
+  author  = {Yihong Tian and Junjie Zhang and Liuyang Li and Deteng Zhang and Yunfei Zuo and Jie Yin},
+  title   = {{Ultra-Fusion}: A Resilient Tightly-Coupled Multi-Sensor Fusion {SLAM} Framework under Sensor Degradation and Spatiotemporal Perturbation for Intelligent Transportation Systems},
+  journal = {In Submission},
+  year    = {2026},
 }</code></pre>
+    </div>
   </div>
 </section>
 
-  <footer class="footer">
+  <footer class="footer uf-footer">
     <div class="container">
       <div class="content has-text-centered">
-        <span class="icon-link" title="Paper (TBD)">
-          <i class="fas fa-file-pdf"></i>
-        </span>
-        <span class="icon-link" title="Code (TBD)">
+        <a class="icon-link" href="https://github.com/sjtuyinjie/Ultra-Fusion" target="_blank" rel="noopener" title="Ultra-Fusion Code">
           <i class="fab fa-github"></i>
-        </span>
+        </a>
+        <a class="icon-link" href="https://github.com/sjtuyinjie/M3DGR" target="_blank" rel="noopener" title="M3DGR Dataset">
+          <i class="fas fa-database"></i>
+        </a>
+        <a class="icon-link" href="mailto:robot_yinjie@outlook.com" title="Contact">
+          <i class="fas fa-envelope"></i>
+        </a>
       </div>
       <div class="columns is-centered">
         <div class="column is-8">
-          <div class="content">
-            <p>
-              This website is licensed under a <a rel="license"
-                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
-                Commons Attribution-ShareAlike 4.0 International License</a>.
+          <div class="content has-text-centered">
+            <p class="footer-note">
+              Project page for <strong>Ultra-Fusion</strong> · InnoBot Lab
             </p>
-            <p>
-              This website is a lightweight static template for an academic project page.
+            <p class="footer-note is-size-7">
+              Licensed under <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.
             </p>
           </div>
         </div>

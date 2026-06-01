@@ -49,10 +49,46 @@ body {
     color: #0f2f43;
 }
 
+.publication-subtitle {
+  max-width: 980px;
+  margin: 0.35rem auto 1rem;
+  line-height: 1.35;
+  font-weight: 500;
+  color: var(--uf-text-muted);
+  text-wrap: balance;
+}
+
+.publication-affiliations {
+  margin-top: 0.35rem;
+  margin-bottom: 0.25rem;
+  color: var(--uf-text-muted);
+  line-height: 1.5;
+}
+
+.corresponding-note {
+  margin-bottom: 1.15rem;
+  color: var(--uf-text-muted);
+}
+
+.corresponding-note a {
+  color: var(--uf-primary);
+  font-weight: 600;
+}
+
+.hero-link-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.65rem;
+  margin-top: 0.25rem;
+}
+
 .conference-authors {
   letter-spacing: 0.04em;
   color: var(--uf-primary-deep) !important;
   opacity: 0.9;
+  margin-bottom: 1rem !important;
 }
 
 .hero .link-block .button.is-dark {
@@ -85,11 +121,11 @@ body {
 }
 
 .content-card {
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(244, 251, 255, 0.9));
-  border: 1px solid var(--uf-border-soft);
-  border-radius: 16px;
-  box-shadow: var(--uf-shadow-soft);
-  padding: 1.35rem 1.45rem 1.4rem;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0.2rem 0;
 }
 
 .content-card .content p,
@@ -101,10 +137,64 @@ body {
   color: var(--uf-primary-deep);
 }
 
+.abstract-content a,
+.content-card .content a {
+  color: var(--uf-primary);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(0, 100, 150, 0.25);
+}
+
+.abstract-content a:hover,
+.content-card .content a:hover {
+  color: var(--uf-primary-deep);
+  border-bottom-color: var(--uf-primary-deep);
+}
+
+.uf-bibtex-section .bibtex-block {
+  margin: 0;
+  padding: 1rem 1.1rem;
+  border-radius: 0;
+  background: #f4fafd;
+  border: 1px solid var(--uf-border-soft);
+  overflow-x: auto;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: var(--uf-text-strong);
+}
+
+.uf-footer {
+  background: linear-gradient(180deg, #f8fcff 0%, #eef6fb 100%);
+  border-top: 1px solid var(--uf-border-soft);
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.uf-footer .icon-link {
+  color: var(--uf-primary-deep);
+  margin: 0 0.5rem;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.uf-footer .icon-link:hover {
+  color: var(--uf-primary);
+  transform: translateY(-1px);
+}
+
+.uf-footer .footer-note {
+  color: var(--uf-text-muted);
+  margin-bottom: 0.35rem;
+}
+
 .publication-video,
 .bal-container-small {
   border: 1px solid rgba(0, 100, 150, 0.16);
-  box-shadow: 0 12px 28px rgba(0, 40, 70, 0.16);
+  box-shadow: none;
+}
+
+.publication-video video,
+.publication-video iframe,
+.teaser-figure img {
+  box-shadow: none !important;
 }
 
 .section {
@@ -117,10 +207,13 @@ body {
   color: var(--uf-text-muted);
 }
 
+.uf-footer .icon-link {
+  font-size: 1.45rem;
+}
 
-.footer .icon-link {
-    font-size: 25px;
-    color: #000;
+.uf-footer .footer-note a {
+  color: var(--uf-primary);
+  font-weight: 600;
 }
 
 .link-block a {
@@ -543,7 +636,8 @@ body {
 .nidar-slogan-section {
   padding-top: 2.5rem;
   padding-bottom: 1.5rem;
-  background: linear-gradient(135deg, #f0f8ff 0%, #fafffe 60%, #fff8f0 100%);
+  background: linear-gradient(135deg, rgba(236, 246, 251, 0.95) 0%, rgba(252, 254, 255, 1) 55%, rgba(244, 250, 255, 1) 100%);
+  border-bottom: 1px solid var(--uf-border-soft);
 }
 
 .nidar-slogan {
@@ -564,16 +658,12 @@ body {
 /* Each word gets an explicit color; use !important to beat Bulma/title overrides */
 .nidar-slogan .s1 { color: #006496 !important; }
 .nidar-slogan .s2 { color: #3b82f6 !important; }
-.nidar-slogan .s3 { color: #8b5cf6 !important; }
-.nidar-slogan .s4 { color: #ef4444 !important; }
+.nidar-slogan .s3 { color: #2b88b5 !important; }
+.nidar-slogan .s4 { color: #4f6b79 !important; }
 .nidar-slogan .s5 {
-  background: linear-gradient(90deg, #f59e0b 0%, #10b981 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  color: transparent !important;
+  color: var(--uf-primary-deep) !important;
 }
-.nidar-slogan .s-dot { color: #10b981 !important; }
+.nidar-slogan .s-dot { color: var(--uf-primary) !important; }
 
 .nidar-slogan-sub {
   font-family: 'Noto Sans', sans-serif;
