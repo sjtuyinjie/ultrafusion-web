@@ -232,6 +232,151 @@
     .viewer-single .viewer-panel.active {
       display: block;
     }
+
+    .compact-toc-wrap {
+      margin: 0 auto 1.25rem;
+      max-width: 960px;
+      text-align: left;
+      border: 1px solid rgba(0, 100, 150, 0.2);
+      border-radius: 10px;
+      background: rgba(236, 246, 251, 0.75);
+      padding: 0.8rem 1rem;
+    }
+
+    .compact-toc-label {
+      font-weight: 700;
+      color: #0e4566;
+      margin-bottom: 0.45rem;
+    }
+
+    .compact-toc {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem 0.6rem;
+    }
+
+    .compact-toc a {
+      border: 1px solid rgba(0, 100, 150, 0.26);
+      border-radius: 999px;
+      padding: 0.22rem 0.72rem;
+      font-size: 0.9rem;
+      color: #0f4d70;
+      text-decoration: none;
+      background: #ffffff;
+    }
+
+    .compact-toc a:hover {
+      background: #e6f4fb;
+    }
+
+    .exp-subsection {
+      margin-top: 1.2rem;
+      border: 1px solid rgba(0, 100, 150, 0.16);
+      border-radius: 10px;
+      background: #fff;
+      padding: 0.9rem 1rem;
+    }
+
+    .exp-subsection h3 {
+      margin-bottom: 0.4rem;
+      color: #0f4d70;
+      font-weight: 700;
+    }
+
+    .ablation-summary-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.6rem;
+      margin-top: 0.85rem;
+    }
+
+    .ablation-summary-card {
+      border: 1px solid rgba(0, 100, 150, 0.18);
+      border-radius: 10px;
+      background: #f7fcff;
+      padding: 0.7rem 0.75rem;
+      text-align: left;
+    }
+
+    .ablation-card-label {
+      display: block;
+      color: #2a607f;
+      font-size: 0.82rem;
+      margin-bottom: 0.2rem;
+      font-weight: 600;
+    }
+
+    .ablation-summary-card strong {
+      display: block;
+      color: #0c4667;
+      margin-bottom: 0.25rem;
+    }
+
+    .ablation-detail {
+      margin-top: 0.6rem;
+      border: 1px solid rgba(0, 100, 150, 0.18);
+      border-radius: 10px;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .ablation-detail summary {
+      cursor: pointer;
+      padding: 0.7rem 0.85rem;
+      font-weight: 600;
+      color: #1d5575;
+      background: #f2f9fe;
+    }
+
+    .ablation-detail-body {
+      padding: 0.75rem 0.85rem 0.9rem;
+    }
+
+    .ablation-table-wrap {
+      overflow-x: auto;
+    }
+
+    .ablation-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      min-width: 560px;
+    }
+
+    .ablation-table th,
+    .ablation-table td {
+      border: 1px solid rgba(0, 100, 150, 0.16);
+      padding: 0.35rem 0.5rem;
+      text-align: center;
+    }
+
+    .ablation-table th:first-child,
+    .ablation-table td:first-child {
+      text-align: left;
+      min-width: 180px;
+    }
+
+    .ablation-table thead th {
+      background: #f3faff;
+      color: #1f5777;
+    }
+
+    .ablation-best-row {
+      background: #eef8ff;
+      font-weight: 700;
+    }
+
+    .ablation-conclusion {
+      margin-top: 0.55rem;
+      margin-bottom: 0;
+      color: #204a66;
+    }
+
+    @media (max-width: 900px) {
+      .ablation-summary-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
   </style>
   <!-- <link rel="icon" href="./static/images/favicon.svg"> -->
 
@@ -297,7 +442,7 @@
             <p class="publication-subtitle is-size-4">
               A Resilient Tightly-Coupled Multi-Sensor Fusion SLAM Framework under Sensor Degradation and Spatiotemporal Perturbation for Intelligent Transportation Systems
             </p>
-            <h3 class="title is-5 conference-authors">IEEE Transactions on Intelligent Transportation Systems</h3>
+            <h3 class="title is-5 conference-authors">In submission</h3>
 
             <div class="is-size-5 publication-authors">
               <span class="author-block">Yihong Tian<sup>1,2</sup></span>,
@@ -420,7 +565,7 @@
   <section class="section nidar-slogan-section">
     <div class="container is-max-desktop has-text-centered">
       <p class="nidar-slogan">
-        <span class="s1">Robust</span>&nbsp;<span class="s3">Fusion</span>&nbsp;<span class="s4">for</span>&nbsp;<span class="s5">Degraded Multi-Sensor Localization</span><span class="s-dot"></span>
+        <span class="gradient-slogan">Robust Fusion for Degraded Multi-Sensor Localization</span><span class="s-dot"></span>
       </p>
       <p class="nidar-slogan-sub">Unified sliding-window estimation with observability-aware initialization, factor-wise reliability scheduling, and online spatiotemporal calibration.</p>
     </div>
@@ -433,13 +578,13 @@
           <div class="content has-text-centered">
             <div class="columns is-centered teaser-videos-row">
               <div class="column is-half">
-                <video class="teaser-video" autoplay muted loop playsinline onloadedmetadata="this.playbackRate=1.5" onplay="this.playbackRate=2">
+                <video class="teaser-video" autoplay muted loop playsinline onloadedmetadata="this.playbackRate=2" onplay="this.playbackRate=2">
                   <source src="./assets/cbd.mp4" type="video/mp4">
                   Your browser does not support the video tag.
                 </video>
               </div>
               <div class="column is-half">
-                <video class="teaser-video" autoplay muted loop playsinline onloadedmetadata="this.playbackRate=1.5" onplay="this.playbackRate=2">
+                <video class="teaser-video" autoplay muted loop playsinline onloadedmetadata="this.playbackRate=2" onplay="this.playbackRate=2">
                   <source src="./assets/sysu.mp4" type="video/mp4">
                   Your browser does not support the video tag.
                 </video>
@@ -459,6 +604,20 @@
     </div>
 
     <div class="container is-max-desktop">
+      <div class="compact-toc-wrap">
+        <div class="compact-toc-label">Quick Navigation</div>
+        <nav class="compact-toc" aria-label="Ultra-Fusion experiments">
+          <a href="#ablation-evidence">Module Ablations</a>
+          <a href="#degradation-robustness">Sensor Degradation</a>
+          <a href="#miscalibration-robustness">Spatiotemporal Miscalibration</a>
+          <a href="#longterm-highspeed">Long-Term & High-Speed</a>
+          <a href="#cross-platform-validation">Cross-Platform</a>
+          <a href="#mapping-runtime">Mapping & Runtime</a>
+          <a href="#benchmark-highlights">Benchmark Highlights</a>
+          <a href="#online-demo">Online Point Cloud Demo</a>
+        </nav>
+      </div>
+
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths content-card">
           <h2 class="title is-3 section-title">TL;DR</h2>
@@ -469,6 +628,28 @@
               <em>Observability-Aware Initialization</em>, <em>Factor-Wise Reliability Scheduling</em>, and <em>Online Spatiotemporal Calibration</em> improve robustness under sensor degradation and calibration perturbation.
             </p>
           </div>
+          <!-- <div class="proof-strip" aria-label="Ultra-Fusion evidence chain">
+            <div class="proof-step">
+              <span>01</span>
+              <strong>Unify</strong>
+              <p>Put LiDAR, visual, inertial, wheel, and GNSS factors into one estimator.</p>
+            </div>
+            <div class="proof-step">
+              <span>02</span>
+              <strong>Trust Selectively</strong>
+              <p>Gate degraded factors before they dominate the sliding-window solution.</p>
+            </div>
+            <div class="proof-step">
+              <span>03</span>
+              <strong>Recalibrate Online</strong>
+              <p>Refine timing and extrinsics only when motion and sensor evidence are reliable.</p>
+            </div>
+            <div class="proof-step">
+              <span>04</span>
+              <strong>Transfer</strong>
+              <p>Validate the same estimator across wheeled, legged, aerial, and driving platforms.</p>
+            </div>
+          </div> -->
         </div>
       </div>
 
@@ -533,12 +714,11 @@
         <div class="column is-four-fifths content-card">
           <h2 class="title is-3 section-title">Pipeline</h2>
           <div class="content has-text-centered">
-            <figure class="image">
-              <img src="./static/images/pipeline_test.png" alt="Ultra-Fusion pipeline overview">
+            <figure class="image evidence-figure">
+              <img src="./static/images/paper/pipeline.png" alt="Ultra-Fusion unified estimator pipeline">
             </figure>
             <p class="has-text-justified">
-              <strong>Ultra-Fusion pipeline.</strong> Timestamp-ordered multi-modal measurements are fused in a unified sliding-window estimator with
-              observability-aware initialization, factor-wise reliability scheduling, and online spatiotemporal calibration.
+              <strong>Mechanism.</strong> Ultra-Fusion first converts asynchronous sensor streams into timestamp-ordered factors, then decides which factors are observable, reliable, and calibration-safe enough to enter the same sliding-window optimization. The page evidence below follows this logic: if the scheduler and calibration modules work, difficult trajectories should remain closed, stable, and transferable.
             </p>
           </div>
         </div>
@@ -546,7 +726,269 @@
     </div>
   </section>
 
-  <section class="section">
+  <section class="section" id="ablation-evidence">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths content-card">
+          <h2 class="title is-3 section-title">Evidence in the Current Submission</h2>
+          <div class="content has-text-justified">
+            <p>
+              The experimental story is organized as a proof rather than a table dump: first, ablations show that the robustness modules are causal; then stress scenes show that unreliable factors do not propagate drift; finally, long-horizon and cross-platform results show that the same estimator transfers beyond a single robot or sensor regime.
+            </p>
+          </div>
+
+          <div class="exp-subsection">
+            <h3>Module Ablations</h3>
+            <div class="content has-text-justified">
+              <p>
+                Two core modules are ablated: <strong>Factor-Wise Reliability Scheduling (FRS)</strong> and
+                <strong>Observability-Aware Initialization</strong>. The reported gains consistently show that robustness improvements come from
+                reliability-aware factor gating and adaptive bootstrap, rather than adding sensors alone.
+              </p>
+            </div>
+            <div class="ablation-summary-grid">
+              <div class="ablation-summary-card">
+                <span class="ablation-card-label">LiDAR FRS gain</span>
+                <strong>ATE -75.3%</strong>
+                <p>Mean ATE drops by <strong>0.45 m</strong> with LiDAR FRS enabled.</p>
+              </div>
+              <div class="ablation-summary-card">
+                <span class="ablation-card-label">Visual FRS gain</span>
+                <strong>ATE -36.2%</strong>
+                <p>Mean ATE drops by <strong>1.60 m</strong> under visual degradation.</p>
+              </div>
+              <div class="ablation-summary-card">
+                <span class="ablation-card-label">Wheel FRS gain</span>
+                <strong>ATE -41.3%</strong>
+                <p>Mean ATE drops by <strong>1.56 m</strong> with wheel consistency checks.</p>
+              </div>
+              <div class="ablation-summary-card">
+                <span class="ablation-card-label">Adaptive initialization</span>
+                <strong>0.153 s init</strong>
+                <p>Mean init latency improves from <strong>4.642 s</strong> (wo adaptive) to <strong>0.153 s</strong>.</p>
+              </div>
+            </div>
+
+            <details class="ablation-detail" open>
+              <summary>Initialization ablation (18 sequences with complete first-20s outputs)</summary>
+              <div class="ablation-detail-body">
+                <div class="ablation-table-wrap">
+                  <table class="ablation-table">
+                    <thead>
+                      <tr>
+                        <th>Method</th>
+                        <th>Mean init (s)</th>
+                        <th>Median init (s)</th>
+                        <th>Mean 20s ATE (m)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr><td>Ground-Fusion++</td><td>2.118</td><td>1.058</td><td>85.217</td></tr>
+                      <tr><td>FAST-LIVO2</td><td>0.913</td><td>0.671</td><td>28.687</td></tr>
+                      <tr><td>FAST-LIVO</td><td>1.436</td><td>1.192</td><td>73.754</td></tr>
+                      <tr><td>Ultra-Fusion (wo adaptive init)</td><td>4.642</td><td>2.097</td><td>16.808</td></tr>
+                      <tr class="ablation-best-row"><td>Ultra-Fusion (full)</td><td>0.153</td><td>0.150</td><td>0.483</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p class="ablation-conclusion"><strong>Conclusion.</strong> Adaptive bootstrap is necessary for both fast start-up and stable early-window localization.</p>
+              </div>
+            </details>
+          </div>
+
+          <div class="exp-subsection" id="degradation-robustness">
+            <h3>Robustness under Sensor Degradation</h3>
+            <div class="content has-text-justified">
+              <p>
+                Degradation experiments cover visual failure, LiDAR degeneracy, wheel slippage, and GNSS denial.
+                Reliability-aware gating keeps informative constraints while suppressing inconsistent factors.
+              </p>
+            </div>
+            <div class="evidence-story-card">
+              <figure class="evidence-figure">
+                <img src="./static/images/paper/degradation_grid.png" alt="Qualitative robustness across degraded localization scenarios" loading="lazy">
+              </figure>
+              <div class="evidence-copy">
+                <span class="evidence-kicker">Why this matters</span>
+                <h4>Drift does not accumulate when the scene becomes weakly observable.</h4>
+                <p>
+                  The four scenarios intentionally remove different kinds of information: long-corridor geometry, GNSS reference, stable legged motion, and clean visual correspondences. Ultra-Fusion keeps the start and end regions aligned because it does not force low-confidence measurements into the estimator.
+                </p>
+                <div class="mini-proof-grid">
+                  <span><strong>Corridor</strong> weak geometry</span>
+                  <span><strong>GNSS denial</strong> no absolute anchor</span>
+                  <span><strong>Stairs</strong> oscillating platform</span>
+                  <span><strong>Vegetation</strong> ambiguous vision</span>
+                </div>
+              </div>
+            </div>
+            <details class="ablation-detail" open>
+              <summary>LiDAR-degenerate Isaac Sim sequences (ATE RMSE, m)</summary>
+              <div class="ablation-detail-body">
+                <div class="ablation-table-wrap">
+                  <table class="ablation-table">
+                    <thead>
+                      <tr><th>Method</th><th>Wild01</th><th>Wild02</th><th>Tunnel01</th><th>Tunnel02</th></tr>
+                    </thead>
+                    <tbody>
+                      <tr><td>R3LIVE</td><td>308.03</td><td>210.97</td><td>Fail</td><td>1310.17</td></tr>
+                      <tr><td>FAST-LIVO</td><td>5.31</td><td>309.44</td><td>1.05</td><td>24.64</td></tr>
+                      <tr><td>FAST-LIVO2</td><td>5.94</td><td>12.96</td><td>0.13</td><td>14.42</td></tr>
+                      <tr><td>Ultra-Fusion (wo intensity)</td><td>0.10</td><td>0.95</td><td>0.08</td><td>2.07</td></tr>
+                      <tr class="ablation-best-row"><td>Ultra-Fusion (w intensity)</td><td>0.06</td><td>0.70</td><td>0.08</td><td>2.21</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p class="ablation-conclusion"><strong>Conclusion.</strong> In strongly degenerate geometry, reliability scheduling plus optional intensity constraints stabilize localization by suppressing ill-conditioned LiDAR factors.</p>
+              </div>
+            </details>
+            <div class="content has-text-justified" style="margin-top: 0.7rem;">
+              <p>
+                Additional paper observations: GNSS assistance on Longtime02 reduces ATE from <strong>17.40 m</strong> to <strong>8.45 m</strong>,
+                while GNSS-denial trajectories remain continuous through denied segments; wheel reliability checks reduce average ATE versus raw wheel and Ground-Fusion WIO baselines.
+              </p>
+            </div>
+            <div class="evidence-story-card compact-evidence">
+              <figure class="evidence-figure">
+                <img src="./static/images/paper/gnss_routes.png" alt="GNSS augmentation and GNSS-denial trajectory evidence" loading="lazy">
+              </figure>
+              <div class="evidence-copy">
+                <span class="evidence-kicker">External anchors become optional</span>
+                <h4>GNSS helps when reliable, but local fusion remains continuous when GNSS disappears.</h4>
+                <p>Integrity-checked GNSS factors limit long-term drift, while LiDAR, visual, inertial, and wheel factors maintain continuity through denied segments.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="exp-subsection" id="miscalibration-robustness">
+            <h3>Robustness under Spatiotemporal Miscalibration</h3>
+            <div class="evidence-story-card compact-evidence">
+              <figure class="evidence-figure">
+                <img src="./static/images/paper/temporal_offsets.png" alt="Predicted temporal offsets under injected LiDAR-IMU delays" loading="lazy">
+              </figure>
+              <div class="evidence-copy">
+                <span class="evidence-kicker">Calibration as online evidence</span>
+                <h4>Temporal offsets are estimated from motion consistency instead of assumed fixed.</h4>
+                <p>The predicted offset distributions concentrate near the injected delays, supporting the claim that Ultra-Fusion treats timing uncertainty as part of localization rather than as a preprocessing assumption.</p>
+              </div>
+            </div>
+            <details class="ablation-detail" open>
+              <summary>Injected IMU time offsets on Wild01 (RMSE, m)</summary>
+              <div class="ablation-detail-body">
+                <div class="ablation-table-wrap">
+                  <table class="ablation-table">
+                    <thead>
+                      <tr>
+                        <th>Offset</th><th>FAST-LIVO</th><th>FAST-LIVO2</th><th>Ground-Fusion</th><th>Ground-Fusion++</th><th>UF wo OSC</th><th>UF full</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr><td>0 ms</td><td>8.6999</td><td>8.0406</td><td>3.4194</td><td>8.8026</td><td>0.0484</td><td>0.0319</td></tr>
+                      <tr><td>+100 ms</td><td>38.1436</td><td>10.4990</td><td>4.1732</td><td>8.9272</td><td>0.0718</td><td>0.0348</td></tr>
+                      <tr><td>+200 ms</td><td>77.0621</td><td>9.7028</td><td>10.0682</td><td>9.0952</td><td>0.4684</td><td>0.0344</td></tr>
+                      <tr><td>-200 ms</td><td>157.5297</td><td>10.8993</td><td>30.4176</td><td>8.6085</td><td>0.1304</td><td>0.0375</td></tr>
+                      <tr><td>-300 ms</td><td>16.7918</td><td>15.4956</td><td>3.5999</td><td>8.4933</td><td>1.0094</td><td>0.0403</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p class="ablation-conclusion"><strong>Conclusion.</strong> Online temporal calibration keeps Ultra-Fusion stable under large injected delays, with full model errors remaining near centimeter scale in this benchmark.</p>
+              </div>
+            </details>
+
+            <details class="ablation-detail">
+              <summary>Extrinsic rotation perturbation on HILTI22 (RMSE, m)</summary>
+              <div class="ablation-detail-body">
+                <div class="ablation-table-wrap">
+                  <table class="ablation-table">
+                    <thead>
+                      <tr><th>Rotation error</th><th>FAST-LIVO2</th><th>Ground-Fusion++</th><th>UF wo extr calib</th><th>UF full</th></tr>
+                    </thead>
+                    <tbody>
+                      <tr><td>0 deg</td><td>0.15</td><td>2.93</td><td>0.12</td><td>0.10</td></tr>
+                      <tr><td>3 deg</td><td>0.13</td><td>2.44</td><td>0.34</td><td>0.10</td></tr>
+                      <tr><td>7 deg</td><td>8.81</td><td>1.50</td><td>0.43</td><td>0.14</td></tr>
+                      <tr><td>8 deg</td><td>145.11</td><td>2.75</td><td>0.44</td><td>0.10</td></tr>
+                      <tr><td>10 deg</td><td>940.37</td><td>3.81</td><td>0.75</td><td>0.25</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p class="ablation-conclusion"><strong>Conclusion.</strong> Online extrinsic calibration markedly improves tolerance to large rotational perturbations.</p>
+              </div>
+            </details>
+          </div>
+
+          <div class="exp-subsection" id="longterm-highspeed">
+            <h3>Long-Term and High-Speed Operation</h3>
+            <div class="evidence-story-card compact-evidence">
+              <figure class="evidence-figure">
+                <img src="./static/images/paper/kaist_overview.png" alt="Large-scale KAIST urban driving localization and mapping" loading="lazy">
+              </figure>
+              <div class="evidence-copy">
+                <span class="evidence-kicker">Scale test</span>
+                <h4>The same estimator remains coherent on city-scale driving routes.</h4>
+                <p>High-speed urban motion stresses wheel-inertial prediction, LiDAR geometry, visual correction, and calibration consistency at once. The KAIST result presents the deployment scale behind the drift-rate numbers.</p>
+              </div>
+            </div>
+            <details class="ablation-detail" open>
+              <summary>Long-duration M3DGR sequences (ATE RMSE, m)</summary>
+              <div class="ablation-detail-body">
+                <div class="ablation-table-wrap">
+                  <table class="ablation-table">
+                    <thead>
+                      <tr><th>Method</th><th>Longtime01</th><th>Longtime02</th></tr>
+                    </thead>
+                    <tbody>
+                      <tr><td>FAST-LIVO</td><td>20.5</td><td>27.5</td></tr>
+                      <tr><td>FAST-LIVO2</td><td>5.13</td><td>8.4</td></tr>
+                      <tr><td>Ground-Fusion++</td><td>7.5</td><td>15.9</td></tr>
+                      <tr class="ablation-best-row"><td>Ultra-Fusion (LVWIO)</td><td>4.3</td><td>2.8</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </details>
+            <div class="content has-text-justified" style="margin-top: 0.7rem;">
+              <p>
+                On KAIST (up to <strong>96.9 km/h</strong>), Ultra-Fusion (LVWIO) reaches average drift around <strong>0.38%</strong> with strong stability across urban sequences.
+              </p>
+            </div>
+          </div>
+
+          <div class="exp-subsection" id="cross-platform-validation">
+            <h3>Cross-Platform Validation (Legged + UAV)</h3>
+            <div class="content has-text-justified">
+              <p>
+                <strong>GrandTour (quadruped):</strong> Ultra-Fusion (LVIO) achieves the lowest RTE on 3/4 representative sequences
+                (e.g., <strong>0.41</strong> on SPX-2, <strong>0.34</strong> on SNOW-2, <strong>0.26</strong> on EIG-1).
+              </p>
+              <p>
+                <strong>MARS-LVIG (UAV):</strong> Ultra-Fusion attains best average rank / RMSE (<strong>1.5 / 1.47</strong>) with strong results across airport, island,
+                town, and valley sequences under large viewpoint and altitude variation.
+              </p>
+              <p class="ablation-conclusion"><strong>Conclusion.</strong> The same unified estimator transfers from wheeled ITS to legged and aerial platforms without redesigning the core fusion architecture.</p>
+            </div>
+          </div>
+
+          <div class="exp-subsection" id="mapping-runtime">
+            <h3>Mapping Results and Runtime</h3>
+            <div class="content has-text-justified">
+              <p>
+                Mapping evaluation in the paper shows coherent large-scale colored point-cloud reconstructions on HKisland03 and HKAirport02,
+                with clear road boundaries, building contours, and low ghosting in local zoom-ins.
+              </p>
+              <p>
+                Runtime profiling on multiple LiDAR types reports <strong>5.48-10.73 ms</strong> optimization time per scan in the real-time configuration,
+                supporting online operation.
+              </p>
+              <p class="ablation-conclusion"><strong>Condensed conclusion.</strong> Ultra-Fusion combines robustness and real-time feasibility: reliable localization under degradation and perturbation, plus consistent mapping quality across large outdoor scenes.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="benchmark-highlights">
     <div class="container benchmark-wide-container">
       <div class=" has-text-centered">
         <div class="title-with-logo">
@@ -663,7 +1105,7 @@
 
   </script>
 
-  <section class="section">
+  <section class="section" id="cross-platform-overview">
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths content-card">
@@ -700,7 +1142,7 @@
 
   </section>
 
-  <section class="section">
+  <section class="section" id="online-demo">
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column is-12 content-card viewer-section-wrap">

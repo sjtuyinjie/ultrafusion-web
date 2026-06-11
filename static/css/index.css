@@ -2,19 +2,24 @@ body {
   font-family: 'Noto Sans', sans-serif;
   color: #123245;
   background:
-    radial-gradient(circle at 8% -8%, rgba(0, 100, 150, 0.12), transparent 36%),
-    radial-gradient(circle at 92% 10%, rgba(84, 174, 210, 0.1), transparent 34%),
-    linear-gradient(180deg, #f6fbff 0%, #fcfeff 36%, #ffffff 100%);
+    radial-gradient(920px 420px at 8% -6%, rgba(0, 100, 150, 0.18), transparent 68%),
+    radial-gradient(760px 380px at 94% 6%, rgba(49, 184, 209, 0.18), transparent 68%),
+    radial-gradient(700px 420px at 12% 58%, rgba(255, 182, 98, 0.10), transparent 64%),
+    linear-gradient(180deg, #f4fbff 0%, #eef8fb 34%, #fbf7ef 72%, #ffffff 100%);
+  background-attachment: fixed;
 }
 
 :root {
   --uf-primary: #006496;
   --uf-primary-deep: #014e76;
   --uf-primary-soft: #ecf6fb;
+  --uf-accent: #e66f2f;
+  --uf-accent-soft: #fff0e6;
+  --uf-emerald: #0d8f7a;
   --uf-text-strong: #123245;
   --uf-text-muted: #4f6b79;
   --uf-border-soft: rgba(0, 100, 150, 0.14);
-  --uf-shadow-soft: 0 14px 36px rgba(0, 40, 70, 0.08);
+  --uf-shadow-soft: 0 18px 48px rgba(0, 40, 70, 0.12);
 }
 
 .uf-hero {
@@ -27,8 +32,22 @@ body {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 15% 0%, rgba(0, 100, 150, 0.18), transparent 42%),
-    radial-gradient(circle at 88% 16%, rgba(120, 201, 235, 0.17), transparent 36%);
+    radial-gradient(circle at 15% 0%, rgba(0, 100, 150, 0.24), transparent 42%),
+    radial-gradient(circle at 88% 16%, rgba(120, 201, 235, 0.22), transparent 36%),
+    linear-gradient(120deg, rgba(255,255,255,0.68), rgba(255,255,255,0.08));
+  pointer-events: none;
+}
+
+.uf-hero::after {
+  content: "";
+  position: absolute;
+  inset: auto 7% 1.1rem auto;
+  width: 260px;
+  height: 260px;
+  border: 1px solid rgba(0, 100, 150, 0.18);
+  border-radius: 38% 62% 48% 52%;
+  background: linear-gradient(135deg, rgba(255,255,255,0.32), rgba(0,100,150,0.06));
+  transform: rotate(-12deg);
   pointer-events: none;
 }
 
