@@ -607,14 +607,14 @@
       <div class="compact-toc-wrap">
         <div class="compact-toc-label">Quick Navigation</div>
         <nav class="compact-toc" aria-label="Ultra-Fusion experiments">
+          <a href="#online-demo">Online Point Cloud Demo</a>
           <a href="#ablation-evidence">Module Ablations</a>
           <a href="#degradation-robustness">Sensor Degradation</a>
           <a href="#miscalibration-robustness">Spatiotemporal Miscalibration</a>
           <a href="#longterm-highspeed">Long-Term & High-Speed</a>
-          <a href="#cross-platform-validation">Cross-Platform</a>
+          <a href="#benchmark-highlights">M3DGR / M2DGR-Plus</a>
+          <a href="#cross-platform-overview">KAIST / GrandTour / MARS-LVIG</a>
           <a href="#mapping-runtime">Mapping & Runtime</a>
-          <a href="#benchmark-highlights">Benchmark Highlights</a>
-          <a href="#online-demo">Online Point Cloud Demo</a>
         </nav>
       </div>
 
@@ -726,14 +726,84 @@
     </div>
   </section>
 
+  <section class="section" id="online-demo">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-12 content-card viewer-section-wrap">
+          <h2 class="title is-3 section-title">Online Point Cloud Demo</h2>
+          <div class="content has-text-justified">
+            <p>
+              The online demo connects the paper's mapping claim to an inspectable reconstruction: optimized poses support both colored point-cloud mapping and LiDAR-guided 3D Gaussian Splatting on MaRS-LVIG and FAST-LIVO2 outdoor scenes.
+            </p>
+          </div>
+
+          <div class="columns is-centered" style="margin: 1.25rem 0 0.75rem;">
+            <div class="column is-half">
+              <div class="publication-video">
+                <video autoplay controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 10px 26px rgba(0,0,0,0.22);">
+                  <source src="./static/images/gs_4x.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+              <p class="has-text-centered" style="margin-top: 0.55rem; margin-bottom: 0; color: #204a66; font-size: 0.94rem;">
+                <strong>HKIsland03.</strong> MaRS-LVIG reconstruction rendered with aligned 3D Gaussian splats.
+              </p>
+            </div>
+            <div class="column is-half">
+              <div class="publication-video">
+                <video autoplay controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 10px 26px rgba(0,0,0,0.22);">
+                  <source src="./assets/hkairport02.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+              <p class="has-text-centered" style="margin-top: 0.55rem; margin-bottom: 0; color: #204a66; font-size: 0.94rem;">
+                <strong>HKAirport02.</strong> Large outdoor UAV sequence with stable localization and dense rendering.
+              </p>
+            </div>
+          </div>
+
+          <div class="viewer-scene-selector" style="display:flex; gap:0.5rem; justify-content:center; flex-wrap:wrap; margin-bottom:1rem;">
+            <button id="scene-hkisland" class="viewer-tab active" type="button" data-scene="hkisland">HKIsland03 (MaRS-LVIG)</button>
+            <button id="scene-cbd" class="viewer-tab" type="button" data-scene="cbd_building">CBD_Building_01 (FAST-LIVO2)</button>
+            <button id="scene-sysu" class="viewer-tab" type="button" data-scene="sysu_building">SYSU_01 (FAST-LIVO2)</button>
+          </div>
+
+          <div class="viewer-dual-layout">
+            <div class="viewer-panel">
+              <div class="viewer-panel-title">Colored Point Cloud</div>
+              <div class="viewer-canvas-wrapper">
+                <div id="laz-viewer" class="viewer-panel-viewport" aria-label="Point cloud viewer"></div>
+                <div id="laz-loading" class="viewer-status">Loading point cloud...</div>
+              </div>
+            </div>
+            <div class="viewer-panel">
+              <div class="viewer-panel-title">3D Gaussian Splatting</div>
+              <div class="viewer-canvas-wrapper">
+                <div id="gs-viewer" class="viewer-panel-viewport" aria-label="Gaussian splat viewer"></div>
+                <div id="gs-loading" class="viewer-status">Loading Gaussian splats...</div>
+              </div>
+            </div>
+          </div>
+          <div class="viewer-actions">
+            <button id="viewer-retry" class="viewer-retry-button" type="button" hidden>Retry</button>
+          </div>
+          <p class="viewer-tips has-text-left">
+            Controls: left-drag to rotate, wheel to zoom, right-drag to pan. Arrow keys pan; hold Shift/Ctrl/Meta with arrow keys to rotate.
+            Click a viewer panel first so keyboard input applies to that panel.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="section" id="ablation-evidence">
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths content-card">
-          <h2 class="title is-3 section-title">Evidence in the Current Submission</h2>
+          <h2 class="title is-3 section-title">Evidence Chain: Why Ultra-Fusion Is Robust</h2>
           <div class="content has-text-justified">
             <p>
-              The experimental story is organized as a proof rather than a table dump: first, ablations show that the robustness modules are causal; then stress scenes show that unreliable factors do not propagate drift; finally, long-horizon and cross-platform results show that the same estimator transfers beyond a single robot or sensor regime.
+              The experimental story follows the estimator design: first verify that the robustness modules are causal, then stress the system with degraded or miscalibrated factors, and finally test whether the same estimator remains stable over long horizons and different platforms.
             </p>
           </div>
 
@@ -989,236 +1059,149 @@
   </section>
 
   <section class="section" id="benchmark-highlights">
-    <div class="container benchmark-wide-container">
-      <div class=" has-text-centered">
-        <div class="title-with-logo">
-          <h2 class="title is-3 section-title section-title-compact">Benchmark Highlights <span class="title-sub-line"><span class="logo-before"><img class="section-logo" src="./static/images/nuscenes_data.png" alt="M3DGR benchmark" loading="lazy"></span><span class="subtitle-with">M3DGR / M2DGR-Plus</span></span></h2>
-        </div>
-        <div class="columns is-centered">
-          <div class="column is-full">
-            <div class="content has-text-justified">
-              <p>
-                We evaluate Ultra-Fusion against representative vision-based, LiDAR-based, and fusion-based SLAM systems on challenging benchmark
-                sequences. <strong>The proposed framework consistently improves the balance between nominal accuracy and robustness under degradation,</strong>
-                especially in scenarios involving visual failure, LiDAR degeneracy, wheel slippage, GNSS denial, and calibration uncertainty.
-              </p>
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths content-card">
+          <h2 class="title is-3 section-title">Benchmark Results on M3DGR and M2DGR-Plus</h2>
+          <div class="content has-text-justified">
+            <p>
+              The primary benchmark asks whether one estimator can cover different sensor configurations without changing the optimization core.
+              On <strong>M3DGR</strong>, Ultra-Fusion variants lead their compatible sensor groups; on <strong>M2DGR-Plus</strong>, the LVWIO configuration obtains the lowest average drift rate and RMSE among the compared methods.
+            </p>
+          </div>
+
+          <div class="ablation-summary-grid">
+            <div class="ablation-summary-card">
+              <span class="ablation-card-label">M3DGR WIO</span>
+              <strong>1.3 / 26.99</strong>
+              <p>Avg. rank / ATE, improving over raw wheel odometry and Ground-Fusion WIO.</p>
             </div>
-          </div>
-        </div>
-
-        <div class="columns is-multiline is-centered">
-          <!-- Column group header -->
-          <div class="comparison-group-header">
-            <div class="comparison-group-cell">vision-based</div>
-            <div class="comparison-group-cell">LiDAR-based</div>
-            <div class="comparison-group-cell">fusion-based</div>
-            <div class="comparison-group-cell">ours</div>
-          </div>
-
-          <!-- 2x2 grid of comparisons (placeholder) -->
-
-          <!-- Example 1 -->
-          <div class="column is-half">
-            <div id="example1" class="bal-container-small">
-              <div class="bal-after">
-                <img src="./static/images/render/lidar4d/4d40.png">
-                <div class="bal-afterPosition afterLabel" style="z-index:1;">ORB-SLAM3</div>
-              </div>
-              <div class="bal-before" style="width:50%;">
-                <div class="bal-before-inset" style="width: 539px;"><img src="./static/images/render/gt/gt40.png"><div class="bal-beforePosition beforeLabel">GT</div></div>
-              </div>
-              <div class="bal-handle" style="left:50%;"><span class=" handle-left-arrow"></span><span class="handle-right-arrow"></span></div>
+            <div class="ablation-summary-card">
+              <span class="ablation-card-label">M3DGR VWIO</span>
+              <strong>2.1 / 2.23</strong>
+              <p>Best visual-compatible aggregate among evaluated visual fusion baselines.</p>
+            </div>
+            <div class="ablation-summary-card">
+              <span class="ablation-card-label">M3DGR LWIO</span>
+              <strong>3.5 / 0.17</strong>
+              <p>Best LiDAR-compatible aggregate in the paper's grouped comparison.</p>
+            </div>
+            <div class="ablation-summary-card">
+              <span class="ablation-card-label">M3DGR LVWIO</span>
+              <strong>1.4 / 0.15</strong>
+              <p>Best LiDAR-visual-wheel-inertial aggregate across ten M3DGR sequences.</p>
             </div>
           </div>
 
-          <!-- Example 2 -->
-          <div class="column is-half">
-            <div id="example2" class="bal-container-small">
-              <div class="bal-after">
-                <img src="./static/images/render/lidarnerf/nerf40.png">
-                <div class="bal-afterPosition afterLabel">CT-LIO</div>
+          <details class="ablation-detail" open>
+            <summary>M2DGR-Plus campus-scale wheeled routes (ATE RMSE / drift rate)</summary>
+            <div class="ablation-detail-body">
+              <div class="ablation-table-wrap">
+                <table class="ablation-table">
+                  <thead>
+                    <tr>
+                      <th>Method</th>
+                      <th>Anomaly</th>
+                      <th>Switch</th>
+                      <th>Tree</th>
+                      <th>Building1</th>
+                      <th>Parking1</th>
+                      <th>Street2</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>FAST-LIVO2</td><td>0.10 / 1.36%</td><td>1.60 / 1.86%</td><td>2.70 / 3.73%</td><td>1.62 / 3.51%</td><td>0.81 / 2.90%</td><td>0.57 / 1.56%</td></tr>
+                    <tr><td>Ground-Fusion</td><td>0.29 / 3.96%</td><td>1.80 / 2.09%</td><td>Fail</td><td>0.60 / 1.29%</td><td>0.48 / 1.73%</td><td>0.23 / 0.63%</td></tr>
+                    <tr><td>Ground-Fusion++</td><td>Fail</td><td>Fail</td><td>3.40 / 4.70%</td><td>Fail</td><td>Fail</td><td>Fail</td></tr>
+                    <tr class="ablation-best-row"><td>Ultra-Fusion (LVWIO)</td><td>0.09 / 1.23%</td><td>0.23 / 0.27%</td><td>0.16 / 0.21%</td><td>0.32 / 0.69%</td><td>0.10 / 0.36%</td><td>0.12 / 0.33%</td></tr>
+                  </tbody>
+                </table>
               </div>
-              <div class="bal-before" style="width:99%;">
-                <div class="bal-before-inset" style="width: 539px;"><img src="./static/images/render/gt/gt40.png"><div class="bal-beforePosition beforeLabel">GT</div></div>
-              </div>
-              <div class="bal-handle" style="left:99%;"><span class=" handle-left-arrow"></span><span class="handle-right-arrow"></span></div>
+              <p class="ablation-conclusion"><strong>Conclusion.</strong> Ultra-Fusion achieves the lowest average drift/RMSE on M2DGR-Plus: <strong>0.59% / 0.24 m</strong>, compared with <strong>2.32% / 1.48 m</strong> for FAST-LIVO2 and <strong>1.71% / 0.75 m</strong> for Ground-Fusion.</p>
             </div>
-          </div>
-
-          <!-- Example 3 -->
-          <div class="column is-half">
-            <div id="example3" class="bal-container-small">
-              <div class="bal-after">
-                <img src="./static/images/render/lidarrt/rt40.png">
-                <div class="bal-afterPosition afterLabel" style="z-index:1;">Fast-LIVO2</div>
-              </div>
-              <div class="bal-before" style="width:99%;">
-                <div class="bal-before-inset" style="width: 539px;"><img src="./static/images/render/gt/gt40.png"><div class="bal-beforePosition beforeLabel">GT</div></div>
-              </div>
-              <div class="bal-handle" style="left:99%;"><span class=" handle-left-arrow"></span><span class="handle-right-arrow"></span></div>
-            </div>
-          </div>
-
-          <!-- Example 4 (duplicate of original Example 1 to make 4 columns) -->
-          <div class="column is-half">
-            <div id="example4" class="bal-container-small">
-              <div class="bal-after">
-                <img src="./static/images/render/NIDAR/our40.png">
-                <div class="bal-afterPosition afterLabel" style="z-index:1;">Ultra-Fusion</div>
-              </div>
-              <div class="bal-before" style="width:50%;">
-                <div class="bal-before-inset" style="width: 539px;"><img src="./static/images/render/gt/gt40.png"><div class="bal-beforePosition beforeLabel">GT</div></div>
-              </div>
-              <div class="bal-handle" style="left:50%;"><span class=" handle-left-arrow"></span><span class="handle-right-arrow"></span></div>
-            </div>
-          </div>
-
+          </details>
         </div>
       </div>
     </div>
   </section>
-
-
-
-  <script>
-    // new BeforeAfter({
-    //   id: '#example1'
-    // });
-    // new BeforeAfter({
-    //   id: '#example2'
-    // });
-    // new BeforeAfter({
-    //   id: '#example4'
-    // });
-    // new BeforeAfter({
-    //   id: '#example5'
-    // });
-    // new BeforeAfter({
-    //   id: '#example7'
-    // });
-    // new BeforeAfter({
-    //   id: '#example8'
-    // });
-    document.querySelectorAll('.bal-container-small[id^="example"]').forEach(function(el) {
-      new BeforeAfter({ id: '#' + el.id });
-    });
-
-  </script>
 
   <section class="section" id="cross-platform-overview">
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths content-card">
-          <div class="title-with-logo">
-            <h2 class="title is-3 section-title section-title-compact">Robustness Across Platforms <span class="title-sub-line"><span class="logo-before"><img class="section-logo" src="./static/images/isaacsim.png" alt="Cross-platform evaluation" loading="lazy"></span><span class="subtitle-with">KAIST / GrandTour / MARS-LVIG</span></span></h2>
-          </div>
+          <h2 class="title is-3 section-title">Robustness Across Platforms</h2>
           <div class="content has-text-justified">
             <p>
-              To validate deployment-oriented performance, we further evaluate Ultra-Fusion on high-speed driving, legged locomotion, and aerial
-              localization benchmarks. <strong>The results show that the proposed framework remains accurate and stable across long-term, degraded,
-              and cross-platform operating conditions, rather than being tuned to a single robot or sensing regime.</strong>
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Row 2: Model demo video (same width as text description) -->
-    <!-- <div class="container is-max-desktop">
-      <div class="columns is-centered" style="margin-top: 1.5rem;">
-        <div class="column is-four-fifths">
-          <div class="publication-video">
-            <video id="model-demo" autoplay controls muted loop playsinline height="100%">
-              <source src="./static/images/3_11.mp4" type="video/mp4">
-              Your browser does not support the video tag.
-            </video>
-          </div>
-          <p class="has-text-centered" style="margin-top: 0.5rem;">
-            <strong>Framework demonstration.</strong> Illustration of the Ultra-Fusion pipeline and its resilience to sensing degradation and calibration error.
-          </p>
-        </div>
-      </div>
-    </div> -->
-
-  </section>
-
-  <section class="section" id="online-demo">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-12 content-card viewer-section-wrap">
-          <h2 class="title is-3 section-title">Online Point Cloud Demo</h2>
-          <div class="content has-text-justified">
-            <p>
-              This online demo visualizes the mapping interface of <strong>Ultra-Fusion</strong>, including a colorized LiDAR point cloud and a LiDAR-guided <strong>3D Gaussian Splatting</strong> reconstruction.
-            </p>
-            <p>
-              Besides the <strong>MaRS-LVIG HKisland03</strong> sequence, we provide two FAST-LIVO2 initialization scenes, <strong>CBD_Building_01</strong> and <strong>SYSU_01</strong>, to show cross-scene consistency under outdoor conditions.
-            </p>
-            <p>
-              The left panel shows the reconstructed colored point cloud, and the right panel shows the corresponding 3D Gaussian Splatting rendering generated from aligned poses, RGB observations, and geometric anchors.
+              Cross-platform evaluation tests whether the same estimation design transfers beyond the M3DGR ground robot: high-speed driving on <strong>KAIST</strong>, legged locomotion on <strong>GrandTour</strong>, and low-altitude UAV mapping on <strong>MARS-LVIG</strong>.
             </p>
           </div>
 
-          <!-- Real-time demo videos -->
-          <div class="columns is-centered" style="margin: 1.25rem 0 0.75rem;">
-            <div class="column is-half">
-              <div class="publication-video">
-                <video autoplay controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 10px 26px rgba(0,0,0,0.22);">
-                  <source src="./static/images/gs_4x.mp4" type="video/mp4">
-                  Your browser does not support the video tag.
-                </video>
+          <details class="ablation-detail" open>
+            <summary>KAIST high-speed urban driving (ATE RMSE / drift rate)</summary>
+            <div class="ablation-detail-body">
+              <div class="ablation-table-wrap">
+                <table class="ablation-table">
+                  <thead>
+                    <tr>
+                      <th>Method</th>
+                      <th>Urban23<br>3379.7 m / 96.9 km/h</th>
+                      <th>Urban25<br>2505.1 m / 91.4 km/h</th>
+                      <th>Urban26<br>3987.8 m / 25.2 km/h</th>
+                      <th>Urban29<br>3559.0 m / 29.1 km/h</th>
+                      <th>Urban35<br>3187.7 m / 67.0 km/h</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>FAST-LIVO2</td><td>979.40 / 28.98%</td><td>705.77 / 28.17%</td><td>497.03 / 12.46%</td><td>818.37 / 22.99%</td><td>918.62 / 28.82%</td></tr>
+                    <tr><td>Raw Wheel Odom</td><td>284.60 / 8.42%</td><td>14.63 / 0.58%</td><td>36.15 / 0.91%</td><td>19.42 / 0.55%</td><td>4.44 / 0.14%</td></tr>
+                    <tr><td>Ultra-Fusion (WIO)</td><td>279.90 / 8.28%</td><td>14.69 / 0.59%</td><td>36.56 / 0.92%</td><td>19.88 / 0.56%</td><td>4.43 / 0.14%</td></tr>
+                    <tr class="ablation-best-row"><td>Ultra-Fusion (LVWIO)</td><td>12.38 / 0.37%</td><td>14.56 / 0.37%</td><td>32.50 / 0.58%</td><td>16.43 / 0.46%</td><td>4.12 / 0.13%</td></tr>
+                  </tbody>
+                </table>
               </div>
-              <p class="has-text-centered" style="margin-top: 0.55rem; margin-bottom: 0; color: #204a66; font-size: 0.94rem;">
-                <strong>HKIsland03.</strong> Real-time 3DGS rendering with Ultra-Fusion on MaRS-LVIG.
-              </p>
+              <p class="ablation-conclusion"><strong>Conclusion.</strong> LVWIO reduces average KAIST drift to about <strong>0.38%</strong>, showing why LiDAR/visual correction and wheel-inertial motion support are complementary at city scale.</p>
             </div>
-            <div class="column is-half">
-              <div class="publication-video">
-                <video autoplay controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 10px 26px rgba(0,0,0,0.22);">
-                  <source src="./assets/hkairport02.mp4" type="video/mp4">
-                  Your browser does not support the video tag.
-                </video>
-              </div>
-              <p class="has-text-centered" style="margin-top: 0.55rem; margin-bottom: 0; color: #204a66; font-size: 0.94rem;">
-                <strong>HKAirport02.</strong> Additional sequence showing stable localization and dense 3DGS mapping in a large outdoor environment.
-              </p>
-            </div>
-          </div>
-          <p class="has-text-centered" style="margin-bottom: 1rem; color: #204a66; font-size: 0.96rem;">
-            <strong>Real-time 3D GS Rendering Demos.</strong> Side-by-side examples from HKIsland03 and HKAirport02 illustrate consistent online reconstruction quality across different MaRS-LVIG scenes.
-          </p>
+          </details>
 
-          <!-- Scene selector -->
-          <div class="viewer-scene-selector" style="display:flex; gap:0.5rem; justify-content:center; flex-wrap:wrap; margin-bottom:1rem;">
-            <button id="scene-hkisland" class="viewer-tab active" type="button" data-scene="hkisland">HKIsland (MaRS-LVIG)</button>
-            <button id="scene-cbd" class="viewer-tab" type="button" data-scene="cbd_building">CBD_Building_01 (FAST-LIVO2)</button>
-            <button id="scene-sysu" class="viewer-tab" type="button" data-scene="sysu_building">SYSU_01 (FAST-LIVO2)</button>
-          </div>
+          <details class="ablation-detail">
+            <summary>GrandTour legged robot sequences (RTE, cm)</summary>
+            <div class="ablation-detail-body">
+              <div class="ablation-table-wrap">
+                <table class="ablation-table">
+                  <thead>
+                    <tr><th>Method</th><th>SPX-2</th><th>SNOW-2</th><th>EIG-1</th><th>ARC-2</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>Coco-LIC</td><td>0.44</td><td>0.41</td><td>0.40</td><td>1.01</td></tr>
+                    <tr><td>FAST-LIVO2</td><td>1.05</td><td>1.25</td><td>1.11</td><td>0.70</td></tr>
+                    <tr><td>Fast-LIMO</td><td>1.15</td><td>1.16</td><td>1.10</td><td>2.49</td></tr>
+                    <tr class="ablation-best-row"><td>Ultra-Fusion (LVIO)</td><td>0.41</td><td>0.34</td><td>0.26</td><td>0.90</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="ablation-conclusion"><strong>Conclusion.</strong> Ultra-Fusion is best on three of four GrandTour sequences and remains competitive on ARC-2, where stair and debris traversal induce strong body oscillation.</p>
+            </div>
+          </details>
 
-          <!-- Dual side-by-side viewers: left PC, right GS -->
-          <div class="viewer-dual-layout">
-            <div class="viewer-panel">
-              <div class="viewer-panel-title">Colored Point Cloud</div>
-              <div class="viewer-canvas-wrapper">
-                <div id="laz-viewer" class="viewer-panel-viewport" aria-label="Point cloud viewer"></div>
-                <div id="laz-loading" class="viewer-status">Loading point cloud...</div>
+          <details class="ablation-detail">
+            <summary>MARS-LVIG aerial sequences (ATE, m)</summary>
+            <div class="ablation-detail-body">
+              <div class="ablation-table-wrap">
+                <table class="ablation-table">
+                  <thead>
+                    <tr><th>Method</th><th>Avg. rank / RMSE</th><th>HKairport01</th><th>HKairport02</th><th>HKisland03</th><th>AMtown03</th><th>AMvalley03</th><th>HKGNSS02</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>FAST-LIO2</td><td>4.3 / 2.98</td><td>0.44</td><td>0.96</td><td>2.13</td><td>3.65</td><td>7.77</td><td>2.92</td></tr>
+                    <tr><td>AKF-LIO</td><td>3.0 / 2.15</td><td>0.43</td><td>0.87</td><td>2.03</td><td>2.74</td><td>3.91</td><td>2.94</td></tr>
+                    <tr><td>FAST-LIVO2</td><td>2.7 / 1.42</td><td>0.75</td><td>0.88</td><td>0.89</td><td>3.25</td><td>1.43</td><td>1.32</td></tr>
+                    <tr class="ablation-best-row"><td>Ultra-Fusion (LVIO)</td><td>1.3 / 1.40</td><td>0.43</td><td>0.61</td><td>0.87</td><td>3.01</td><td>2.60</td><td>0.90</td></tr>
+                  </tbody>
+                </table>
               </div>
+              <p class="ablation-conclusion"><strong>Conclusion.</strong> The UAV results support the same narrative as the ground and legged tests: the estimator is not tied to a wheel-motion prior or a single sensing layout.</p>
             </div>
-            <div class="viewer-panel">
-              <div class="viewer-panel-title">3D Gaussian Splatting</div>
-              <div class="viewer-canvas-wrapper">
-                <div id="gs-viewer" class="viewer-panel-viewport" aria-label="Gaussian splat viewer"></div>
-                <div id="gs-loading" class="viewer-status">Loading Gaussian splats...</div>
-              </div>
-            </div>
-          </div>
-          <div class="viewer-actions">
-            <button id="viewer-retry" class="viewer-retry-button" type="button" hidden>Retry</button>
-          </div>
-          <p class="viewer-tips has-text-left">
-            Controls: left-drag to rotate, wheel to zoom, right-drag to pan. Arrow keys pan; hold Shift/Ctrl/Meta with arrow keys to rotate.
-            Click a viewer panel first so keyboard input applies to that panel.
-          </p>
+          </details>
         </div>
       </div>
     </div>
@@ -1249,7 +1232,7 @@
       <h2 class="title is-3 section-title">BibTeX</h2>
       <pre class="bibtex-block"><code>@article{tian2026ultrafusion,
   author  = {Yihong Tian and Junjie Zhang and Liuyang Li and Deteng Zhang and Yunfei Zuo and Jie Yin},
-  title   = {{Ultra-Fusion}: A Resilient Tightly-Coupled Multi-Sensor Fusion {SLAM} Framework under Sensor Degradation and Spatiotemporal Perturbation for Intelligent Transportation Systems},
+  title   = {{Ultra-Fusion}: A Resilient Tightly-Coupled Multi-Sensor Fusion SLAM Framework under Sensor Degradation and Spatiotemporal Perturbation for Intelligent Transportation Systems},
   journal = {In Submission},
   year    = {2026},
 }</code></pre>
