@@ -234,7 +234,7 @@
     }
 
     .compact-toc-wrap {
-      margin: 0 auto 1.25rem;
+      margin: 2rem auto 1.25rem;
       max-width: 960px;
       text-align: left;
       border: 1px solid rgba(0, 100, 150, 0.2);
@@ -366,6 +366,18 @@
       font-weight: 700;
     }
 
+    .ablation-best-row td:not(:first-child),
+    .best-cell {
+      color: #005f73;
+      font-weight: 800;
+      background: linear-gradient(180deg, #e7f7f2 0%, #f1fbf8 100%);
+      box-shadow: inset 0 0 0 1px rgba(0, 120, 110, 0.14);
+    }
+
+    .best-cell {
+      border-color: rgba(0, 120, 110, 0.28) !important;
+    }
+
     .ablation-conclusion {
       margin-top: 0.55rem;
       margin-bottom: 0;
@@ -445,28 +457,30 @@
             <h3 class="title is-5 conference-authors">In submission</h3>
 
             <div class="is-size-5 publication-authors">
-              <span class="author-block">Yihong Tian<sup>1,2</sup></span>,
+              <span class="author-block">Yihong Tian<sup>1</sup></span>,
               <span class="author-block">Junjie Zhang<sup>2</sup></span>,
-              <span class="author-block">Liuyang Li<sup>2</sup></span>,
-              <span class="author-block">Deteng Zhang<sup>2</sup></span>,
-              <span class="author-block">Yunfei Zuo<sup>1,2</sup></span>, and
-              <span class="author-block">Jie Yin<sup>2,3</sup>*</span>
+              <span class="author-block">Liuyang Li<sup>3</sup></span>,
+              <span class="author-block">Deteng Zhang<sup>4</sup></span>,
+              <span class="author-block">Yunfei Zuo<sup>1</sup></span>, and
+              <span class="author-block">Jie Yin<sup>5</sup>*</span>
             </div>
             <p class="publication-affiliations is-size-6">
               <sup>1</sup> Beijing Institute of Technology &nbsp;·&nbsp;
-              <sup>2</sup> InnoBot Lab &nbsp;·&nbsp;
-              <sup>3</sup> Shanghai Jiao Tong University
+              <sup>2</sup> Chongqing University &nbsp;·&nbsp;
+              <sup>3</sup> Sichuan University &nbsp;·&nbsp;
+              <sup>4</sup> Northwestern Polytechnical University &nbsp;·&nbsp;
+              <sup>5</sup> Shanghai Jiao Tong University
             </p>
             <p class="corresponding-note is-size-6">
               * Corresponding author:
-              <a href="mailto:robot_yinjie@outlook.com">Jie Yin</a>
+              <a href="https://sjtuyinjie.github.io/" target="_blank" rel="noopener">Jie Yin</a>
             </p>
 
             <div class="hero-link-row">
               <span class="link-block">
                 <a href="https://github.com/sjtuyinjie/Ultra-Fusion" class="external-link button is-normal is-rounded is-dark" target="_blank" rel="noopener">
                   <span class="icon"><i class="fab fa-github"></i></span>
-                  <span>Code</span>
+                  <span>Ultra-Fusion Code</span>
                 </a>
               </span>
               <span class="link-block">
