@@ -326,6 +326,22 @@
       font-weight: 600;
       color: #1d5575;
       background: #f2f9fe;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .ablation-detail summary::after {
+      content: "(click for evidence)";
+      font-weight: 400;
+      font-size: 0.82rem;
+      color: #5a7a8f;
+      flex-shrink: 0;
+    }
+
+    .ablation-detail[open] summary::after {
+      content: "(hide details)";
     }
 
     .ablation-detail-body {
@@ -454,7 +470,7 @@
             <p class="publication-subtitle is-size-4">
               A Resilient Tightly-Coupled Multi-Sensor Fusion SLAM Framework under Sensor Degradation and Spatiotemporal Perturbation for Intelligent Transportation Systems
             </p>
-            <h3 class="title is-5 conference-authors">In submission</h3>
+            <!-- <h3 class="title is-5 conference-authors">In submission</h3> -->
 
             <div class="is-size-5 publication-authors">
               <span class="author-block">Yihong Tian<sup>1</sup></span>,
@@ -979,7 +995,7 @@
               </div>
             </details>
 
-            <details class="ablation-detail">
+            <details class="ablation-detail" open>
               <summary>Extrinsic rotation perturbation on HILTI22 (RMSE, m)</summary>
               <div class="ablation-detail-body">
                 <div class="ablation-table-wrap">
@@ -1177,7 +1193,7 @@
             </div>
           </details>
 
-          <details class="ablation-detail">
+          <details class="ablation-detail" open>
             <summary>GrandTour legged robot sequences (RTE, cm)</summary>
             <div class="ablation-detail-body">
               <div class="ablation-table-wrap">
@@ -1197,7 +1213,7 @@
             </div>
           </details>
 
-          <details class="ablation-detail">
+          <details class="ablation-detail" open>
             <summary>MARS-LVIG aerial sequences (ATE, m)</summary>
             <div class="ablation-detail-body">
               <div class="ablation-table-wrap">
