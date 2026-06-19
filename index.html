@@ -14,6 +14,7 @@
 
   <link rel="stylesheet" href="./static/css/bulma.min.css">
   <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
   <style>
@@ -81,6 +82,8 @@
 
     .teaser-videos-row .column {
       display: flex;
+      flex-direction: column;
+      align-items: stretch;
     }
 
     .teaser-video,
@@ -237,7 +240,7 @@
     .compact-toc-wrap {
       margin: 2rem auto 1.25rem;
       width: 100%;
-      text-align: left;
+      text-align: center;
       border: 1px solid rgba(0, 100, 150, 0.2);
       border-radius: 10px;
       background: #ffffff;
@@ -248,11 +251,13 @@
       font-weight: 700;
       color: #0e4566;
       margin-bottom: 0.45rem;
+      text-align: center;
     }
 
     .compact-toc {
       display: flex;
       flex-wrap: wrap;
+      justify-content: center;
       gap: 0.4rem 0.6rem;
     }
 
@@ -419,43 +424,53 @@
 
 <body>
 
-  <!-- <nav class="navbar" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
-  </div>
-  <div class="navbar-menu">
-    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
-      <a class="navbar-item" href="">
-      <span class="icon">
-          <i class="fas fa-home"></i>
-      </span>
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
       </a>
-      <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link">
-          More Research
+    </div>
+    <div class="navbar-menu">
+      <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+        <a class="navbar-item" href="https://sjtuyinjie.github.io/">
+          <span class="icon">
+            <i class="fas fa-home"></i>
+          </span>
         </a>
-        <div class="navbar-dropdown">
-          <a class="navbar-item" href="https://hypernerf.github.io">
-            HyperNeRF
+
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            More Research
           </a>
-          <a class="navbar-item" href="https://nerfies.github.io">
-            Nerfies
-          </a>
-          <a class="navbar-item" href="https://latentfusion.github.io">
-            LatentFusion
-          </a>
-          <a class="navbar-item" href="https://photoshape.github.io">
-            PhotoShape
-          </a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://sjtuyinjie.github.io/M3DGR-website/" target="_blank" rel="noopener">
+              M3DGR(IROS2025)
+            </a>
+            <a class="navbar-item" href="https://github.com/SJTU-ViSYS/M2DGR" target="_blank" rel="noopener">
+              M2DGR(ICRA2022&RAL2021)
+            </a>
+            <a class="navbar-item" href="https://github.com/SJTU-ViSYS/Ground-Fusion" target="_blank" rel="noopener">
+              Ground-Fusion(ICRA2024)
+            </a>
+            <a class="navbar-item" href="https://github.com/sjtuyinjie/DAF" target="_blank" rel="noopener">
+              DAF(IROS2024)
+            </a>
+            <a class="navbar-item" href="https://github.com/Joanna-HE/LIGO." target="_blank" rel="noopener">
+              LIGO(TRO2025&IROS2025)
+            </a>
+            <a class="navbar-item" href="https://delinqu.github.io/EN-SLAM/" target="_blank" rel="noopener">
+              EN-SLAM(CVPR2024)
+            </a>
+            <a class="navbar-item" href="https://link.springer.com/article/10.1007/s10291-024-01623-9" target="_blank" rel="noopener">
+              Innovation-KF(GPS Solutions2024)
+            </a>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</nav> -->
+  </nav>
 
 
   <section class="hero uf-hero">
@@ -479,7 +494,7 @@
               <span class="author-block">Liuyang Li<sup>3</sup></span>,
               <span class="author-block">Deteng Zhang<sup>4</sup></span>,
               <span class="author-block">Yunfei Zuo<sup>1</sup></span>, and
-              <span class="author-block">Jie Yin<sup>5</sup>*</span>
+              <span class="author-block"><a href="https://sjtuyinjie.github.io/" target="_blank" rel="noopener">Jie Yin</a><sup>5</sup></span>
             </div>
             <p class="publication-affiliations is-size-6">
               <sup>1</sup> Beijing Institute of Technology &nbsp;·&nbsp;
@@ -487,10 +502,6 @@
               <sup>3</sup> Sichuan University &nbsp;·&nbsp;
               <sup>4</sup> Northwestern Polytechnical University &nbsp;·&nbsp;
               <sup>5</sup> Shanghai Jiao Tong University
-            </p>
-            <p class="corresponding-note is-size-6">
-              * Corresponding author:
-              <a href="https://sjtuyinjie.github.io/" target="_blank" rel="noopener">Jie Yin</a>
             </p>
 
             <div class="hero-link-row">
@@ -599,6 +610,31 @@
         <span class="s1">Robust Fusion</span>&nbsp;<span class="s3">for</span>&nbsp;<span class="s4">Degraded</span>&nbsp;<span class="s5">Multi-Sensor Localization</span><span class="s-dot">.</span>
       </p>
       <p class="nidar-slogan-sub"><span class="term-accent">Unified sliding-window estimation</span> with <span class="term-emphasis">observability-aware initialization</span>, <span class="term-accent">factor-wise reliability scheduling</span>, and <span class="term-emphasis">online spatiotemporal calibration</span>.</p>
+
+      <div class="columns is-centered" style="margin-top: 1.25rem;">
+        <div class="column is-four-fifths">
+          <div class="columns is-centered teaser-videos-row">
+            <div class="column is-half">
+              <video class="teaser-video" autoplay controls muted loop playsinline>
+                <source src="./static/images/gs_4x.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              <p class="has-text-centered" style="margin-top: 0.55rem; margin-bottom: 0; color: #204a66; font-size: 0.94rem;">
+                <strong>HKIsland03.</strong> MaRS-LVIG reconstruction rendered with aligned 3D Gaussian splats.
+              </p>
+            </div>
+            <div class="column is-half">
+              <video class="teaser-video" autoplay controls muted loop playsinline>
+                <source src="./assets/hkairport02.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              <p class="has-text-centered" style="margin-top: 0.55rem; margin-bottom: 0; color: #204a66; font-size: 0.94rem;">
+                <strong>HKAirport02.</strong> Large outdoor UAV sequence with stable localization and dense rendering.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -607,20 +643,6 @@
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths content-card">
           <div class="content has-text-centered">
-            <div class="columns is-centered teaser-videos-row">
-              <div class="column is-half">
-                <video class="teaser-video" autoplay muted loop playsinline onloadedmetadata="this.playbackRate=2" onplay="this.playbackRate=2">
-                  <source src="./assets/cbd.mp4" type="video/mp4">
-                  Your browser does not support the video tag.
-                </video>
-              </div>
-              <div class="column is-half">
-                <video class="teaser-video" autoplay muted loop playsinline onloadedmetadata="this.playbackRate=2" onplay="this.playbackRate=2">
-                  <source src="./assets/sysu.mp4" type="video/mp4">
-                  Your browser does not support the video tag.
-                </video>
-              </div>
-            </div>
             <figure class="image teaser-figure">
               <img src="./static/images/teaser.png" alt="Ultra-Fusion teaser overview" loading="lazy">
             </figure>
@@ -774,25 +796,21 @@
 
           <div class="columns is-centered" style="margin: 1.25rem 0 0.75rem;">
             <div class="column is-half">
-              <div class="publication-video">
-                <video autoplay controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 10px 26px rgba(0,0,0,0.22);">
-                  <source src="./static/images/gs_4x.mp4" type="video/mp4">
-                  Your browser does not support the video tag.
-                </video>
-              </div>
+              <video class="teaser-video" autoplay controls muted loop playsinline onloadedmetadata="this.playbackRate=2" onplay="this.playbackRate=2">
+                <source src="./assets/cbd.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
               <p class="has-text-centered" style="margin-top: 0.55rem; margin-bottom: 0; color: #204a66; font-size: 0.94rem;">
-                <strong>HKIsland03.</strong> MaRS-LVIG reconstruction rendered with aligned 3D Gaussian splats.
+                <strong>CBD_Building_01.</strong> FAST-LIVO2 outdoor sequence with stable localization.
               </p>
             </div>
             <div class="column is-half">
-              <div class="publication-video">
-                <video autoplay controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 10px 26px rgba(0,0,0,0.22);">
-                  <source src="./assets/hkairport02.mp4" type="video/mp4">
-                  Your browser does not support the video tag.
-                </video>
-              </div>
+              <video class="teaser-video" autoplay controls muted loop playsinline onloadedmetadata="this.playbackRate=2" onplay="this.playbackRate=2">
+                <source src="./assets/sysu.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
               <p class="has-text-centered" style="margin-top: 0.55rem; margin-bottom: 0; color: #204a66; font-size: 0.94rem;">
-                <strong>HKAirport02.</strong> Large outdoor UAV sequence with stable localization and dense rendering.
+                <strong>SYSU_01.</strong> FAST-LIVO2 campus-scale sequence with dense mapping.
               </p>
             </div>
           </div>
@@ -1292,7 +1310,7 @@
         <div class="column is-8">
           <div class="content has-text-centered">
             <p class="footer-note">
-              Project page for <strong>Ultra-Fusion</strong> · InnoBot Lab
+              Project page for <strong>Ultra-Fusion</strong> · Jie Yin
             </p>
             <p class="footer-note is-size-7">
               Licensed under <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.
