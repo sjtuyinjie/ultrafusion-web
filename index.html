@@ -86,6 +86,11 @@
       align-items: stretch;
     }
 
+    .teaser-figure {
+      width: 100%;
+      margin: 0 auto;
+    }
+
     .teaser-video,
     .teaser-figure img {
       display: block;
@@ -641,12 +646,16 @@
   <section class="section">
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <figure class="image teaser-figure">
+            <img src="./static/images/teaser.png" alt="Ultra-Fusion teaser overview" loading="lazy">
+          </figure>
+        </div>
+      </div>
+      <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths content-card">
-          <div class="content has-text-centered">
-            <figure class="image teaser-figure">
-              <img src="./static/images/teaser.png" alt="Ultra-Fusion teaser overview" loading="lazy">
-            </figure>
-            <p class="has-text-justified">
+          <div class="content has-text-justified">
+            <p>
               <strong>Overview of Ultra-Fusion.</strong> The framework unifies heterogeneous sensors in a timestamp-ordered estimator,
               supports deployment on ground, aerial, legged, and vehicle platforms, and improves localization robustness under sensor degradation,
               spatiotemporal uncertainty, and long-term or high-speed operation.
