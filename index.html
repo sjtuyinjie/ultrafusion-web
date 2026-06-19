@@ -620,7 +620,7 @@
         <div class="column is-four-fifths">
           <div class="columns is-centered teaser-videos-row">
             <div class="column is-half">
-              <video class="teaser-video" autoplay controls muted loop playsinline>
+              <video class="teaser-video" autoplay controls muted loop playsinline preload="none">
                 <source src="./static/images/gs_4x.mp4" type="video/mp4">
                 Your browser does not support the video tag.
               </video>
@@ -629,7 +629,7 @@
               </p>
             </div>
             <div class="column is-half">
-              <video class="teaser-video" autoplay controls muted loop playsinline>
+              <video class="teaser-video" autoplay controls muted loop playsinline preload="none">
                 <source src="./assets/hkairport02.mp4" type="video/mp4">
                 Your browser does not support the video tag.
               </video>
@@ -648,7 +648,7 @@
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
           <figure class="image teaser-figure">
-            <img src="./static/images/teaser.png" alt="Ultra-Fusion teaser overview" loading="lazy">
+            <img src="./static/images/teaser.png" alt="Ultra-Fusion teaser overview" class="teaser-sequential">
           </figure>
         </div>
       </div>
@@ -805,7 +805,7 @@
 
           <div class="columns is-centered" style="margin: 1.25rem 0 0.75rem;">
             <div class="column is-half">
-              <video class="teaser-video" autoplay controls muted loop playsinline onloadedmetadata="this.playbackRate=2" onplay="this.playbackRate=2">
+              <video class="teaser-video" autoplay controls muted loop playsinline preload="none" onloadedmetadata="this.playbackRate=2" onplay="this.playbackRate=2">
                 <source src="./assets/cbd.mp4" type="video/mp4">
                 Your browser does not support the video tag.
               </video>
@@ -814,7 +814,7 @@
               </p>
             </div>
             <div class="column is-half">
-              <video class="teaser-video" autoplay controls muted loop playsinline onloadedmetadata="this.playbackRate=2" onplay="this.playbackRate=2">
+              <video class="teaser-video" autoplay controls muted loop playsinline preload="none" onloadedmetadata="this.playbackRate=2" onplay="this.playbackRate=2">
                 <source src="./assets/sysu.mp4" type="video/mp4">
                 Your browser does not support the video tag.
               </video>
@@ -1338,6 +1338,67 @@
     }
   </script>
 
+  <script>
+    (function() {
+      function waitForVideo(video) {
+        return new Promise(function(resolve) {
+          if (video.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA) {
+            resolve();
+            return;
+          }
+          var done = function() { resolve(); };
+          video.addEventListener('canplaythrough', done, { once: true });
+          video.addEventListener('error', done, { once: true });
+          setTimeout(done, 20000);
+        });
+      }
+
+      function waitForImage(img) {
+        return new Promise(function(resolve) {
+          if (img.complete && img.naturalWidth > 0) {
+            resolve();
+            return;
+          }
+          img.loading = 'eager';
+          var done = function() { resolve(); };
+          img.addEventListener('load', done, { once: true });
+          img.addEventListener('error', done, { once: true });
+          setTimeout(done, 20000);
+        });
+      }
+
+      function runMediaQueue() {
+        var items = Array.from(document.querySelectorAll('video.teaser-video, img.teaser-sequential'));
+        var chain = Promise.resolve();
+        items.forEach(function(item) {
+          chain = chain.then(function() {
+            if (item.tagName === 'VIDEO') {
+              item.preload = 'auto';
+              item.load();
+              return waitForVideo(item).then(function() {
+                return item.play().catch(function() {});
+              });
+            }
+            if (item.tagName === 'IMG') {
+              return waitForImage(item);
+            }
+            return undefined;
+          });
+        });
+        chain.then(function() {
+          window.__ufMediaQueueDone = true;
+          window.dispatchEvent(new Event('uf-media-queue-done'));
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', runMediaQueue);
+      } else {
+        runMediaQueue();
+      }
+    })();
+  </script>
+
   <script type="module">
     (async function() {
       var lazRoot = document.getElementById('laz-viewer');
@@ -1359,6 +1420,18 @@
         showFileProtocolHelp();
         return;
       }
+
+      function waitForMediaQueue() {
+        return new Promise(function(resolve) {
+          if (window.__ufMediaQueueDone) {
+            resolve();
+            return;
+          }
+          window.addEventListener('uf-media-queue-done', resolve, { once: true });
+        });
+      }
+
+      await waitForMediaQueue();
 
       var THREE, OrbitControls, PointsBinLoader, FileLoader;
       try {
@@ -2280,11 +2353,7 @@
         }
       }
 
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', startViewers);
-      } else {
-        startViewers();
-      }
+      startViewers();
     })();
   </script>
 
