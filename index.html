@@ -62,6 +62,7 @@
       }
     }
 
+    .section-content-wrap,
     .viewer-section-wrap {
       width: 100%;
       max-width: min(1180px, 96vw);
@@ -235,11 +236,11 @@
 
     .compact-toc-wrap {
       margin: 2rem auto 1.25rem;
-      max-width: 960px;
+      width: 100%;
       text-align: left;
       border: 1px solid rgba(0, 100, 150, 0.2);
       border-radius: 10px;
-      background: rgba(236, 246, 251, 0.75);
+      background: #ffffff;
       padding: 0.8rem 1rem;
     }
 
@@ -293,7 +294,7 @@
     .ablation-summary-card {
       border: 1px solid rgba(0, 100, 150, 0.18);
       border-radius: 10px;
-      background: #f7fcff;
+      background: #ffffff;
       padding: 0.7rem 0.75rem;
       text-align: left;
     }
@@ -595,9 +596,9 @@
   <section class="section nidar-slogan-section">
     <div class="container is-max-desktop has-text-centered">
       <p class="nidar-slogan">
-        <span class="gradient-slogan">Robust Fusion for Degraded Multi-Sensor Localization</span><span class="s-dot"></span>
+        <span class="s1">Robust Fusion</span>&nbsp;<span class="s3">for</span>&nbsp;<span class="s4">Degraded</span>&nbsp;<span class="s5">Multi-Sensor Localization</span><span class="s-dot">.</span>
       </p>
-      <p class="nidar-slogan-sub">Unified sliding-window estimation with observability-aware initialization, factor-wise reliability scheduling, and online spatiotemporal calibration.</p>
+      <p class="nidar-slogan-sub"><span class="term-accent">Unified sliding-window estimation</span> with <span class="term-emphasis">observability-aware initialization</span>, <span class="term-accent">factor-wise reliability scheduling</span>, and <span class="term-emphasis">online spatiotemporal calibration</span>.</p>
     </div>
   </section>
 
@@ -634,28 +635,32 @@
     </div>
 
     <div class="container is-max-desktop">
-      <div class="compact-toc-wrap">
-        <div class="compact-toc-label">Quick Navigation</div>
-        <nav class="compact-toc" aria-label="Ultra-Fusion experiments">
-          <a href="#online-demo">Online Point Cloud Demo</a>
-          <a href="#ablation-evidence">Module Ablations</a>
-          <a href="#degradation-robustness">Sensor Degradation</a>
-          <a href="#miscalibration-robustness">Spatiotemporal Miscalibration</a>
-          <a href="#longterm-highspeed">Long-Term & High-Speed</a>
-          <a href="#benchmark-highlights">M3DGR / M2DGR-Plus</a>
-          <a href="#cross-platform-overview">KAIST / GrandTour / MARS-LVIG</a>
-          <a href="#mapping-runtime">Mapping & Runtime</a>
-        </nav>
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-12 content-card section-content-wrap">
+          <div class="compact-toc-wrap">
+            <div class="compact-toc-label">Quick Navigation</div>
+            <nav class="compact-toc" aria-label="Ultra-Fusion experiments">
+              <a href="#online-demo">Online Point Cloud Demo</a>
+              <a href="#ablation-evidence">Module Ablations</a>
+              <a href="#degradation-robustness">Sensor Degradation</a>
+              <a href="#miscalibration-robustness">Spatiotemporal Miscalibration</a>
+              <a href="#longterm-highspeed">Long-Term & High-Speed</a>
+              <a href="#benchmark-highlights">M3DGR / M2DGR-Plus</a>
+              <a href="#cross-platform-overview">KAIST / GrandTour / MARS-LVIG</a>
+              <a href="#mapping-runtime">Mapping & Runtime</a>
+            </nav>
+          </div>
+        </div>
       </div>
 
       <div class="columns is-centered has-text-centered">
-        <div class="column is-four-fifths content-card">
+        <div class="column is-12 content-card section-content-wrap">
           <h2 class="title is-3 section-title">TL;DR</h2>
           <div class="content has-text-justified">
             <p>
               <strong><a href="https://github.com/sjtuyinjie/Ultra-Fusion">Ultra-Fusion</a></strong> is a resilient tightly-coupled multi-sensor fusion SLAM framework for intelligent transportation systems.
-              A <em>Unified Sliding-Window Estimator</em> orders asynchronous measurements by timestamp and supports WIO, VIO, LIO, and LVIO with optional wheel and/or GNSS augmentation.
-              <em>Observability-Aware Initialization</em>, <em>Factor-Wise Reliability Scheduling</em>, and <em>Online Spatiotemporal Calibration</em> improve robustness under sensor degradation and calibration perturbation.
+              A <span class="term-accent">Unified Sliding-Window Estimator</span> orders asynchronous measurements by timestamp and supports WIO, VIO, LIO, and LVIO with optional wheel and/or GNSS augmentation.
+              <span class="term-emphasis">Observability-Aware Initialization</span>, <span class="term-accent">Factor-Wise Reliability Scheduling</span>, and <span class="term-emphasis">Online Spatiotemporal Calibration</span> improve robustness under sensor degradation and calibration perturbation.
             </p>
           </div>
           <!-- <div class="proof-strip" aria-label="Ultra-Fusion evidence chain">
@@ -741,7 +746,7 @@
       </div> -->
 
       <div class="columns is-centered has-text-centered">
-        <div class="column is-four-fifths content-card">
+        <div class="column is-12 content-card section-content-wrap">
           <h2 class="title is-3 section-title">Pipeline</h2>
           <div class="content has-text-centered">
             <figure class="image evidence-figure">
@@ -759,7 +764,7 @@
   <section class="section" id="online-demo">
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
-        <div class="column is-12 content-card viewer-section-wrap">
+        <div class="column is-12 content-card section-content-wrap">
           <h2 class="title is-3 section-title">Online Point Cloud Demo</h2>
           <div class="content has-text-justified">
             <p>

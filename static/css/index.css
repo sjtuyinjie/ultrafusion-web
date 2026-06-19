@@ -1,12 +1,7 @@
 body {
   font-family: 'Noto Sans', sans-serif;
   color: #123245;
-  background:
-    radial-gradient(920px 420px at 8% -6%, rgba(0, 100, 150, 0.18), transparent 68%),
-    radial-gradient(760px 380px at 94% 6%, rgba(49, 184, 209, 0.18), transparent 68%),
-    radial-gradient(700px 420px at 12% 58%, rgba(255, 182, 98, 0.10), transparent 64%),
-    linear-gradient(180deg, #f4fbff 0%, #eef8fb 34%, #fbf7ef 72%, #ffffff 100%);
-  background-attachment: fixed;
+  background: #ffffff;
 }
 
 :root {
@@ -25,30 +20,12 @@ body {
 .uf-hero {
   position: relative;
   overflow: hidden;
+  background: #ffffff;
 }
 
-.uf-hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(circle at 15% 0%, rgba(0, 100, 150, 0.24), transparent 42%),
-    radial-gradient(circle at 88% 16%, rgba(120, 201, 235, 0.22), transparent 36%),
-    linear-gradient(120deg, rgba(255,255,255,0.68), rgba(255,255,255,0.08));
-  pointer-events: none;
-}
-
+.uf-hero::before,
 .uf-hero::after {
-  content: "";
-  position: absolute;
-  inset: auto 7% 1.1rem auto;
-  width: 260px;
-  height: 260px;
-  border: 1px solid rgba(0, 100, 150, 0.18);
-  border-radius: 38% 62% 48% 52%;
-  background: linear-gradient(135deg, rgba(255,255,255,0.32), rgba(0,100,150,0.06));
-  transform: rotate(-12deg);
-  pointer-events: none;
+  display: none;
 }
 
 .uf-hero-body {
@@ -75,6 +52,26 @@ body {
   font-weight: 500;
   color: var(--uf-text-muted);
   text-wrap: balance;
+}
+
+.publication-subtitle .text-accent {
+  color: var(--uf-primary);
+  font-weight: 700;
+}
+
+.publication-subtitle .text-emphasis {
+  color: var(--uf-emerald);
+  font-weight: 700;
+}
+
+.content-card .content .term-accent {
+  color: var(--uf-primary);
+  font-weight: 700;
+}
+
+.content-card .content .term-emphasis {
+  color: var(--uf-emerald);
+  font-weight: 700;
 }
 
 .publication-affiliations {
@@ -182,7 +179,7 @@ body {
 }
 
 .uf-footer {
-  background: linear-gradient(180deg, #f8fcff 0%, #eef6fb 100%);
+  background: #ffffff;
   border-top: 1px solid var(--uf-border-soft);
   padding-top: 2rem;
   padding-bottom: 2rem;
@@ -655,7 +652,7 @@ body {
 .nidar-slogan-section {
   padding-top: 2.5rem;
   padding-bottom: 1.5rem;
-  background: linear-gradient(135deg, rgba(236, 246, 251, 0.95) 0%, rgba(252, 254, 255, 1) 55%, rgba(244, 250, 255, 1) 100%);
+  background: #ffffff;
   border-bottom: 1px solid var(--uf-border-soft);
 }
 
@@ -677,12 +674,16 @@ body {
 /* Each word gets an explicit color; use !important to beat Bulma/title overrides */
 .nidar-slogan .s1 { color: #006496 !important; }
 .nidar-slogan .s2 { color: #3b82f6 !important; }
-.nidar-slogan .s3 { color: #2b88b5 !important; }
-.nidar-slogan .s4 { color: #4f6b79 !important; }
+.nidar-slogan .s3 { color: #8b5cf6 !important; }
+.nidar-slogan .s4 { color: #ef4444 !important; }
 .nidar-slogan .s5 {
-  color: var(--uf-primary-deep) !important;
+  background: linear-gradient(90deg, #f59e0b 0%, #10b981 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent !important;
 }
-.nidar-slogan .s-dot { color: var(--uf-primary) !important; }
+.nidar-slogan .s-dot { color: #10b981 !important; }
 
 .nidar-slogan-sub {
   font-family: 'Noto Sans', sans-serif;
