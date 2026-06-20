@@ -21,18 +21,36 @@ function setInterpolationImage(i) {
 
 
 $(document).ready(function() {
+    function updateNavScrollOffset() {
+      var nav = document.querySelector(".uf-nav");
+      if (!nav) return;
+      var height = Math.ceil(nav.getBoundingClientRect().height);
+      document.documentElement.style.setProperty("--uf-nav-height", height + "px");
+    }
+
     function setMobileNavOpen(isOpen) {
       $(".navbar-burger").toggleClass("is-active", isOpen).attr("aria-expanded", isOpen);
       $("#uf-nav-menu").toggleClass("is-active", isOpen);
       $("body").toggleClass("uf-nav-open", isOpen);
+      window.requestAnimationFrame(updateNavScrollOffset);
     }
+
+    updateNavScrollOffset();
+    $(window).on("resize", updateNavScrollOffset);
 
     $(".navbar-burger").click(function() {
       setMobileNavOpen(!$(this).hasClass("is-active"));
     });
 
-    $("#uf-nav-menu .navbar-item[href^='#']").on("click", function() {
+    $("#uf-nav-menu .navbar-item[href^='#']").on("click", function(event) {
+      var targetId = this.getAttribute("href");
+      var target = targetId ? document.querySelector(targetId) : null;
+      if (!target) return;
+
+      event.preventDefault();
       setMobileNavOpen(false);
+      updateNavScrollOffset();
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
     });
 
     $(document).on("click", function(event) {

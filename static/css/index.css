@@ -1,17 +1,20 @@
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--uf-scroll-offset);
+}
+
 body {
   font-family: 'Noto Sans', sans-serif;
   color: #123245;
   background: #ffffff;
-  scroll-padding-top: 3.25rem;
-}
-
-html {
-  scroll-behavior: smooth;
+  scroll-padding-top: var(--uf-scroll-offset);
 }
 
 .uf-nav {
-  background: rgba(255, 255, 255, 0.96);
-  border-bottom: 1px solid #e4ebf0;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(228, 235, 240, 0.85);
   box-shadow: 0 1px 8px rgba(26, 82, 118, 0.06);
 }
 
@@ -53,10 +56,6 @@ html {
 }
 
 @media screen and (max-width: 1023px) {
-  body {
-    scroll-padding-top: 3rem;
-  }
-
   .uf-nav > .container {
     display: block;
     padding-left: 0.75rem;
@@ -71,7 +70,9 @@ html {
     flex: none;
     max-height: calc(100dvh - 3.25rem);
     overflow-y: auto;
-    background: rgba(255, 255, 255, 0.98);
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border-top: 1px solid #e4ebf0;
     box-shadow: 0 8px 24px rgba(26, 82, 118, 0.08);
   }
@@ -154,7 +155,16 @@ body.uf-nav-open {
   overflow: hidden;
 }
 
+.uf-section[id],
+.uf-bibtex-section[id],
+.uf-block[id],
+.exp-subsection[id] {
+  scroll-margin-top: var(--uf-scroll-offset);
+}
+
 :root {
+  --uf-nav-height: 3.5rem;
+  --uf-scroll-offset: calc(var(--uf-nav-height) + 0.5rem);
   --uf-primary: #006496;
   --uf-primary-deep: #014e76;
   --uf-primary-soft: #ecf6fb;
