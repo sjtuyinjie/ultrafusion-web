@@ -833,7 +833,7 @@
               <nav class="compact-toc" aria-label="Ultra-Fusion experiments">
                 <a href="#overview">Overview</a>
                 <a href="#online-demo">Online Demo</a>
-                <a href="#benchmark-highlights">M3DGR Benchmark</a>
+                <a href="#benchmark-highlights">Wheeled Benchmark</a>
                 <a href="#cross-platform-overview">Cross-Platform</a>
                 <a href="#ablation-evidence">Evidence Chain</a>
                 <a href="#degradation-robustness">Sensor Degradation</a>
@@ -963,7 +963,7 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column is-12 section-content-wrap content-card">
-          <h2 class="title is-3 section-title">Benchmark Results on M3DGR and M2DGR-Plus</h2>
+          <h2 class="title is-3 section-title">Benchmark on wheeled robots and autonomous driving</h2>
           <div class="content has-text-justified uf-section-lead">
             <p>
               The primary benchmark asks whether one estimator can cover different sensor configurations without changing the optimization core.
@@ -1045,6 +1045,108 @@
               <p class="ablation-conclusion"><strong>Conclusion.</strong> Ultra-Fusion achieves the lowest average drift/RMSE on M2DGR-Plus: <strong>0.59% / 0.24 m</strong>, compared with <strong>2.32% / 1.48 m</strong> for FAST-LIVO2 and <strong>1.71% / 0.75 m</strong> for Ground-Fusion.</p>
             </div>
           </details>
+
+          <div class="uf-block" id="degradation-robustness">
+            <h3 class="uf-subsection-title">Robustness under Sensor Degradation</h3>
+            <div class="content has-text-justified">
+              <p>
+                Degradation experiments cover visual failure, LiDAR degeneracy, wheel slippage, and GNSS denial.
+                Reliability-aware gating keeps informative constraints while suppressing inconsistent factors.
+              </p>
+            </div>
+
+            <div class="evidence-story-card">
+              <figure class="evidence-figure">
+                <img src="./static/images/paper/degradation_grid.png" alt="Qualitative robustness across degraded localization scenarios" loading="lazy">
+              </figure>
+              <div class="evidence-copy">
+                <span class="evidence-kicker">Why this matters</span>
+                <h4>Drift does not accumulate when the scene becomes weakly observable.</h4>
+                <p>
+                  The four scenarios intentionally remove different kinds of information: long-corridor geometry, GNSS reference, stable legged motion, and clean visual correspondences. Ultra-Fusion keeps the start and end regions aligned because it does not force low-confidence measurements into the estimator.
+                </p>
+                <div class="mini-proof-grid">
+                  <span><strong>Corridor</strong> weak geometry</span>
+                  <span><strong>GNSS denial</strong> no absolute anchor</span>
+                  <span><strong>Stairs</strong> oscillating platform</span>
+                  <span><strong>Vegetation</strong> ambiguous vision</span>
+                </div>
+              </div>
+            </div>
+            <details class="ablation-detail" open>
+              <summary>LiDAR-degenerate Isaac Sim sequences (ATE RMSE, m)</summary>
+              <div class="ablation-detail-body">
+                <div class="ablation-table-wrap">
+                  <table class="ablation-table">
+                    <thead>
+                      <tr><th>Method</th><th>Wild01</th><th>Wild02</th><th>Tunnel01</th><th>Tunnel02</th></tr>
+                    </thead>
+                    <tbody>
+                      <tr><td>R3LIVE</td><td>308.03</td><td>210.97</td><td>Fail</td><td>1310.17</td></tr>
+                      <tr><td>FAST-LIVO</td><td>5.31</td><td>309.44</td><td>1.05</td><td>24.64</td></tr>
+                      <tr><td>FAST-LIVO2</td><td>5.94</td><td>12.96</td><td>0.13</td><td>14.42</td></tr>
+                      <tr><td>Ultra-Fusion (wo intensity)</td><td>0.10</td><td>0.95</td><td>0.08</td><td>2.07</td></tr>
+                      <tr class="ablation-best-row"><td>Ultra-Fusion (w intensity)</td><td>0.06</td><td>0.70</td><td>0.08</td><td>2.21</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p class="ablation-conclusion"><strong>Conclusion.</strong> In strongly degenerate geometry, reliability scheduling plus optional intensity constraints stabilize localization by suppressing ill-conditioned LiDAR factors.</p>
+              </div>
+            </details>
+            <div class="content has-text-justified" style="margin-top: 0.7rem;">
+              <p>
+                Additional paper observations: GNSS assistance on Longtime02 reduces ATE from <strong>17.40 m</strong> to <strong>8.45 m</strong>,
+                while GNSS-denial trajectories remain continuous through denied segments; wheel reliability checks reduce average ATE versus raw wheel and Ground-Fusion WIO baselines.
+              </p>
+            </div>
+            <div class="evidence-story-card compact-evidence">
+              <figure class="evidence-figure">
+                <img src="./static/images/paper/gnss_routes.png" alt="GNSS augmentation and GNSS-denial trajectory evidence" loading="lazy">
+              </figure>
+              <div class="evidence-copy">
+                <span class="evidence-kicker">External anchors become optional</span>
+                <h4>GNSS helps when reliable, but local fusion remains continuous when GNSS disappears.</h4>
+                <p>Integrity-checked GNSS factors limit long-term drift, while LiDAR, visual, inertial, and wheel factors maintain continuity through denied segments.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="uf-block" id="longterm-highspeed">
+            <h3 class="uf-subsection-title">Long-Term and High-Speed Operation</h3>
+            <div class="evidence-story-card compact-evidence">
+              <figure class="evidence-figure">
+                <img src="./static/images/paper/kaist_overview.png" alt="Large-scale KAIST urban driving localization and mapping" loading="lazy">
+              </figure>
+              <div class="evidence-copy">
+                <span class="evidence-kicker">Scale test</span>
+                <h4>The same estimator remains coherent on city-scale driving routes.</h4>
+                <p>High-speed urban motion stresses wheel-inertial prediction, LiDAR geometry, visual correction, and calibration consistency at once. The KAIST result presents the deployment scale behind the drift-rate numbers.</p>
+              </div>
+            </div>
+            <details class="ablation-detail" open>
+              <summary>Long-duration M3DGR sequences (ATE RMSE, m)</summary>
+              <div class="ablation-detail-body">
+                <div class="ablation-table-wrap">
+                  <table class="ablation-table">
+                    <thead>
+                      <tr><th>Method</th><th>Longtime01</th><th>Longtime02</th></tr>
+                    </thead>
+                    <tbody>
+                      <tr><td>FAST-LIVO</td><td>20.5</td><td>27.5</td></tr>
+                      <tr><td>FAST-LIVO2</td><td>5.13</td><td>8.4</td></tr>
+                      <tr><td>Ground-Fusion++</td><td>7.5</td><td>15.9</td></tr>
+                      <tr class="ablation-best-row"><td>Ultra-Fusion (LVWIO)</td><td>4.3</td><td>2.8</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </details>
+            <div class="content has-text-justified" style="margin-top: 0.7rem;">
+              <p>
+                On KAIST (up to <strong>96.9 km/h</strong>), Ultra-Fusion (LVWIO) reaches average drift around <strong>0.38%</strong> with strong stability across urban sequences.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -1152,7 +1254,7 @@
           <h2 class="title is-3 section-title">Evidence Chain: Why Ultra-Fusion Is Robust</h2>
           <div class="content has-text-justified uf-section-lead">
             <p>
-              The experimental story follows the estimator design: first verify that the robustness modules are causal, then stress the system with degraded or miscalibrated factors, and finally test whether the same estimator remains stable over long horizons and different platforms.
+              The experimental story follows the estimator design: first verify that the robustness modules are causal, then stress the system with miscalibrated factors, and finally validate mapping quality and runtime.
             </p>
           </div>
 
@@ -1215,71 +1317,6 @@
             </details>
           </div>
 
-          <div class="exp-subsection" id="degradation-robustness">
-            <h3>Robustness under Sensor Degradation</h3>
-            <div class="content has-text-justified">
-              <p>
-                Degradation experiments cover visual failure, LiDAR degeneracy, wheel slippage, and GNSS denial.
-                Reliability-aware gating keeps informative constraints while suppressing inconsistent factors.
-              </p>
-            </div>
-
-            <div class="evidence-story-card">
-              <figure class="evidence-figure">
-                <img src="./static/images/paper/degradation_grid.png" alt="Qualitative robustness across degraded localization scenarios" loading="lazy">
-              </figure>
-              <div class="evidence-copy">
-                <span class="evidence-kicker">Why this matters</span>
-                <h4>Drift does not accumulate when the scene becomes weakly observable.</h4>
-                <p>
-                  The four scenarios intentionally remove different kinds of information: long-corridor geometry, GNSS reference, stable legged motion, and clean visual correspondences. Ultra-Fusion keeps the start and end regions aligned because it does not force low-confidence measurements into the estimator.
-                </p>
-                <div class="mini-proof-grid">
-                  <span><strong>Corridor</strong> weak geometry</span>
-                  <span><strong>GNSS denial</strong> no absolute anchor</span>
-                  <span><strong>Stairs</strong> oscillating platform</span>
-                  <span><strong>Vegetation</strong> ambiguous vision</span>
-                </div>
-              </div>
-            </div>
-            <details class="ablation-detail" open>
-              <summary>LiDAR-degenerate Isaac Sim sequences (ATE RMSE, m)</summary>
-              <div class="ablation-detail-body">
-                <div class="ablation-table-wrap">
-                  <table class="ablation-table">
-                    <thead>
-                      <tr><th>Method</th><th>Wild01</th><th>Wild02</th><th>Tunnel01</th><th>Tunnel02</th></tr>
-                    </thead>
-                    <tbody>
-                      <tr><td>R3LIVE</td><td>308.03</td><td>210.97</td><td>Fail</td><td>1310.17</td></tr>
-                      <tr><td>FAST-LIVO</td><td>5.31</td><td>309.44</td><td>1.05</td><td>24.64</td></tr>
-                      <tr><td>FAST-LIVO2</td><td>5.94</td><td>12.96</td><td>0.13</td><td>14.42</td></tr>
-                      <tr><td>Ultra-Fusion (wo intensity)</td><td>0.10</td><td>0.95</td><td>0.08</td><td>2.07</td></tr>
-                      <tr class="ablation-best-row"><td>Ultra-Fusion (w intensity)</td><td>0.06</td><td>0.70</td><td>0.08</td><td>2.21</td></tr>
-                    </tbody>
-                  </table>
-                </div>
-                <p class="ablation-conclusion"><strong>Conclusion.</strong> In strongly degenerate geometry, reliability scheduling plus optional intensity constraints stabilize localization by suppressing ill-conditioned LiDAR factors.</p>
-              </div>
-            </details>
-            <div class="content has-text-justified" style="margin-top: 0.7rem;">
-              <p>
-                Additional paper observations: GNSS assistance on Longtime02 reduces ATE from <strong>17.40 m</strong> to <strong>8.45 m</strong>,
-                while GNSS-denial trajectories remain continuous through denied segments; wheel reliability checks reduce average ATE versus raw wheel and Ground-Fusion WIO baselines.
-              </p>
-            </div>
-            <div class="evidence-story-card compact-evidence">
-              <figure class="evidence-figure">
-                <img src="./static/images/paper/gnss_routes.png" alt="GNSS augmentation and GNSS-denial trajectory evidence" loading="lazy">
-              </figure>
-              <div class="evidence-copy">
-                <span class="evidence-kicker">External anchors become optional</span>
-                <h4>GNSS helps when reliable, but local fusion remains continuous when GNSS disappears.</h4>
-                <p>Integrity-checked GNSS factors limit long-term drift, while LiDAR, visual, inertial, and wheel factors maintain continuity through denied segments.</p>
-              </div>
-            </div>
-          </div>
-
           <div class="exp-subsection" id="miscalibration-robustness">
             <h3>Robustness under Spatiotemporal Miscalibration</h3>
             <div class="evidence-story-card compact-evidence">
@@ -1335,43 +1372,6 @@
                 <p class="ablation-conclusion"><strong>Conclusion.</strong> Online extrinsic calibration markedly improves tolerance to large rotational perturbations.</p>
               </div>
             </details>
-          </div>
-
-          <div class="exp-subsection" id="longterm-highspeed">
-            <h3>Long-Term and High-Speed Operation</h3>
-            <div class="evidence-story-card compact-evidence">
-              <figure class="evidence-figure">
-                <img src="./static/images/paper/kaist_overview.png" alt="Large-scale KAIST urban driving localization and mapping" loading="lazy">
-              </figure>
-              <div class="evidence-copy">
-                <span class="evidence-kicker">Scale test</span>
-                <h4>The same estimator remains coherent on city-scale driving routes.</h4>
-                <p>High-speed urban motion stresses wheel-inertial prediction, LiDAR geometry, visual correction, and calibration consistency at once. The KAIST result presents the deployment scale behind the drift-rate numbers.</p>
-              </div>
-            </div>
-            <details class="ablation-detail" open>
-              <summary>Long-duration M3DGR sequences (ATE RMSE, m)</summary>
-              <div class="ablation-detail-body">
-                <div class="ablation-table-wrap">
-                  <table class="ablation-table">
-                    <thead>
-                      <tr><th>Method</th><th>Longtime01</th><th>Longtime02</th></tr>
-                    </thead>
-                    <tbody>
-                      <tr><td>FAST-LIVO</td><td>20.5</td><td>27.5</td></tr>
-                      <tr><td>FAST-LIVO2</td><td>5.13</td><td>8.4</td></tr>
-                      <tr><td>Ground-Fusion++</td><td>7.5</td><td>15.9</td></tr>
-                      <tr class="ablation-best-row"><td>Ultra-Fusion (LVWIO)</td><td>4.3</td><td>2.8</td></tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </details>
-            <div class="content has-text-justified" style="margin-top: 0.7rem;">
-              <p>
-                On KAIST (up to <strong>96.9 km/h</strong>), Ultra-Fusion (LVWIO) reaches average drift around <strong>0.38%</strong> with strong stability across urban sequences.
-              </p>
-            </div>
           </div>
 
           <div class="exp-subsection" id="mapping-runtime">
