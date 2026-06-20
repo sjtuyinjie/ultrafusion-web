@@ -846,7 +846,7 @@
                 <a href="#degradation-robustness">Sensor Degradation</a>
                 <a href="#miscalibration-robustness">Miscalibration</a>
                 <a href="#longterm-highspeed">Long-Term / High-Speed</a>
-                <a href="#mapping-runtime">Runtime</a>
+                <a href="#runtime">Runtime</a>
               </nav>
             </div>
           </div>
@@ -1381,15 +1381,21 @@
             </details>
           </div>
 
-          <div class="exp-subsection" id="mapping-runtime">
-            <h3>Runtime</h3>
+          <div class="exp-subsection" id="runtime">
+            <h3>Runtime Analysis</h3>
             <div class="content has-text-justified">
               <p>
-                Runtime profiling on multiple LiDAR types reports <strong>5.48-10.73 ms</strong> optimization time per scan in the real-time configuration,
-                supporting online operation.
+                Runtime is profiled on 60&nbsp;s segments with Robosense, Velodyne, Livox, and Hesai LiDARs using a real-time configuration:
+                per-frame LiDAR frontend, window size 4, at most 3 nonlinear iterations, 12&nbsp;ms solver budget, and capped factors on an Intel Core i9-14900K CPU.
+                Ultra-Fusion requires <strong>5.48&ndash;10.73&nbsp;ms</strong> per optimization step, satisfying real-time operation in this setting.
               </p>
-              <p class="ablation-conclusion"><strong>Conclusion.</strong> Ultra-Fusion combines robustness and real-time feasibility: reliable localization under degradation and perturbation with centimeter-scale optimization latency per scan.</p>
             </div>
+            <figure class="image evidence-figure">
+              <img src="./static/images/paper/computation_overhead.png" alt="Time consumption per LiDAR scan of Ultra-Fusion with baselines on different LiDAR types" loading="lazy">
+            </figure>
+            <p class="uf-media-caption uf-overview-caption">
+              <strong>Time consumption per LiDAR scan of Ultra-Fusion with baselines on different LiDAR types.</strong>
+            </p>
           </div>
         </div>
       </div>
