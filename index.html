@@ -492,13 +492,13 @@
     .ablation-detail summary {
       cursor: pointer;
       padding: 0.7rem 0.85rem;
+      padding-right: 9rem;
       font-weight: 600;
       color: #1d5575;
       background: #f2f9fe;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
+      display: block;
+      text-align: center;
+      position: relative;
     }
 
     .ablation-detail summary::after {
@@ -506,7 +506,10 @@
       font-weight: 400;
       font-size: 0.82rem;
       color: #5a7a8f;
-      flex-shrink: 0;
+      position: absolute;
+      right: 0.85rem;
+      top: 50%;
+      transform: translateY(-50%);
     }
 
     .ablation-detail[open] summary::after {
@@ -537,13 +540,17 @@
 
     .ablation-table th:first-child,
     .ablation-table td:first-child {
-      text-align: left;
       min-width: 180px;
+    }
+
+    .ablation-table td:first-child {
+      text-align: left;
     }
 
     .ablation-table thead th {
       background: #f3faff;
       color: #1f5777;
+      text-align: center;
     }
 
     .ablation-best-row {
