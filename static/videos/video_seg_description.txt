@@ -1,0 +1,77 @@
+GrandTour | EIG1
+场景特点：从山坡下降并经过火车站，包含长距离行走和平面/非平面混合结构。
+Scene: Hill-to-station descent with long walking and mixed planar/non-planar structures.
+
+右下角可以放：
+Ours: 0.26 cm RTE, Rank 1st
+Top-3: Ours 0.26 | Coco-LIC 0.40 | Fast-LIMO 1.10
+
+--------------------------------------------------------------------------------
+
+GrandTour | SPX2
+场景特点：Jungfraujoch 研究站场景，包含动态初始化、细长结构、移动物体和回环。
+Scene: Jungfraujoch research-station sequence with dynamic initialization, thin structures, moving objects, and loop closure.
+
+右下角可以放：
+Ours: 0.41 cm RTE, Rank 1st
+Top-3: Ours 0.41 | Coco-LIC 0.44 | Voxel-SLAM 1.03
+
+----------------------------------------
+
+GrandTour | ARC2
+场景特点：救援训练中心狭窄通道，视野受限，弱纹理墙面对视觉和LiDAR都具有挑战。
+Scene: Narrow passages in a rescue training center, with limited visibility and featureless walls challenging both vision and LiDAR.
+
+右下角可以放：
+Ours: 0.90 cm RTE, Rank 2nd
+Top-3: FAST-LIVO2 0.70 | Ours 0.90 | Coco-LIC 1.01
+
+----------------------------------------
+
+GrandTour | SNOW2
+场景特点：完全雪地覆盖下的快速行走，平面结构有限，并存在小范围回环。
+Scene: Fast walking on fully snow-covered terrain, with limited planar structures and small-scale loop closures.
+
+右下角可以放：
+Ours: 0.34 cm RTE, Rank 1st
+Top-3: Ours 0.34 | Coco-LIC 0.41 | Fast-LIMO 1.16
+
+----------------------------------------
+
+M3DGR | Dark01
+场景特点：夜间低光照场景，视觉特征明显退化。
+Scene: Nighttime low-light sequence with severe visual degradation.
+
+右下角可以放：
+Ours: 0.08 m ATE, Rank 2nd
+Top-3: PIN-SLAM 0.05 | Ours 0.08 | SR-LIVO 0.09
+
+----------------------------------------
+
+M3DGR | Corridor01
+场景特点：长走廊LiDAR退化场景，结构重复，横向几何约束较弱。
+Scene: Long-corridor LiDAR-degeneration sequence with repetitive structures and weak lateral constraints.
+
+右下角可以放：
+Ours: 0.02 m ATE, Rank 1st
+Top-3: Ours 0.02 | LTAOM 0.19 | Eq-LIO 0.20
+
+----------------------------------------
+
+MARS-LVIG | HKisland03
+场景特点：岛屿高空俯视建图，约90 m高度、9 m/s飞行速度，大范围且结构稀疏。
+Scene: Downward-looking island mapping at about 90 m altitude and 9 m/s flight speed, with large-scale sparse structures.
+
+右下角可以放：
+Ours: 0.87 m ATE, Rank 1st
+Top-3: Ours 0.87 | FAST-LIVO2 0.89 | Ground-Fusion++ 1.71
+
+----------------------------------------
+
+MARS-LVIG | HKairport02
+场景特点：航模机场开阔空中建图，约80 m高度、6 m/s飞行速度，几何约束较弱。
+Scene: Open airfield aerial mapping at about 80 m altitude and 6 m/s flight speed, with weak geometric constraints.
+
+右下角可以放：
+Ours: 0.61 m ATE, Rank 1st
+Top-3: Ours 0.61 | R3LIVE 0.82 | AKF-LIO 0.87

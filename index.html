@@ -70,6 +70,178 @@
       margin: 0 auto;
     }
 
+    .uf-section .section-title {
+      text-align: center;
+      margin-bottom: 0.85rem;
+    }
+
+    .uf-section-lead {
+      margin-bottom: 1.35rem;
+    }
+
+    .uf-block {
+      margin-top: 1.75rem;
+      padding-top: 1.75rem;
+      border-top: 1px solid rgba(0, 100, 150, 0.14);
+    }
+
+    .uf-block:first-of-type,
+    .uf-section-lead + .uf-block {
+      margin-top: 0;
+      padding-top: 0;
+      border-top: none;
+    }
+
+    .uf-subsection-title,
+    .seq-video-section-title {
+      font-size: 1.12rem;
+      font-weight: 700;
+      color: #0f4d70;
+      margin: 0 0 0.85rem;
+      text-align: left;
+    }
+
+    .uf-media-grid,
+    .seq-video-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.15rem;
+      margin: 0.5rem 0 0;
+    }
+
+    .uf-media-caption,
+    .seq-video-caption {
+      margin-top: 0.55rem;
+      margin-bottom: 0;
+      color: #204a66;
+      font-size: 0.94rem;
+      line-height: 1.45;
+      text-align: left;
+    }
+
+    .uf-media-caption strong:first-child {
+      color: #0c4667;
+    }
+
+    .uf-overview-caption {
+      text-align: center;
+    }
+
+    .exp-subsection {
+      margin-top: 1.75rem;
+      padding-top: 1.75rem;
+      border-top: 1px solid rgba(0, 100, 150, 0.14);
+      border-left: none;
+      border-right: none;
+      border-bottom: none;
+      border-radius: 0;
+      background: transparent;
+      padding-left: 0;
+      padding-right: 0;
+      padding-bottom: 0;
+    }
+
+    .exp-subsection:first-of-type {
+      margin-top: 0;
+      padding-top: 0;
+      border-top: none;
+    }
+
+    .exp-subsection h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.65rem;
+      color: #0f4d70;
+    }
+
+    .evidence-story-card {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+      gap: 1.1rem;
+      align-items: center;
+      margin: 1rem 0;
+      text-align: left;
+    }
+
+    .evidence-story-card.compact-evidence {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    }
+
+    .evidence-figure {
+      margin: 0;
+    }
+
+    .evidence-figure img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      border: 1px solid rgba(0, 100, 150, 0.14);
+    }
+
+    .evidence-kicker {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #006496;
+      margin-bottom: 0.35rem;
+    }
+
+    .evidence-copy h4 {
+      font-size: 1.02rem;
+      font-weight: 700;
+      color: #123245;
+      margin-bottom: 0.45rem;
+      line-height: 1.35;
+    }
+
+    .evidence-copy p {
+      color: #204a66;
+      margin-bottom: 0;
+    }
+
+    .mini-proof-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.45rem;
+      margin-top: 0.75rem;
+    }
+
+    .mini-proof-grid span {
+      font-size: 0.88rem;
+      color: #2a607f;
+      background: #f7fcff;
+      border: 1px solid rgba(0, 100, 150, 0.14);
+      border-radius: 999px;
+      padding: 0.28rem 0.65rem;
+    }
+
+    .viewer-scene-selector {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 1.25rem 0 1rem;
+    }
+
+    @media (max-width: 900px) {
+      .evidence-story-card,
+      .evidence-story-card.compact-evidence {
+        grid-template-columns: 1fr;
+      }
+
+      .mini-proof-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .uf-media-grid,
+      .seq-video-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
     .benchmark-wide-container {
       width: 100%;
       max-width: min(1180px, 96vw) !important;
@@ -280,20 +452,6 @@
       background: #e6f4fb;
     }
 
-    .exp-subsection {
-      margin-top: 1.2rem;
-      border: 1px solid rgba(0, 100, 150, 0.16);
-      border-radius: 10px;
-      background: #fff;
-      padding: 0.9rem 1rem;
-    }
-
-    .exp-subsection h3 {
-      margin-bottom: 0.4rem;
-      color: #0f4d70;
-      font-weight: 700;
-    }
-
     .ablation-summary-grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -411,6 +569,20 @@
       color: #204a66;
     }
 
+    .seq-video-wrap {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .seq-video-wrap .teaser-video {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.12);
+    }
+
     @media (max-width: 900px) {
       .ablation-summary-grid {
         grid-template-columns: 1fr 1fr;
@@ -524,7 +696,6 @@
               </span>
             </div>
 
-            </div>
           </div>
         </div>
       </div>
@@ -624,7 +795,7 @@
                 <source src="./static/images/gs_4x.mp4" type="video/mp4">
                 Your browser does not support the video tag.
               </video>
-              <p class="has-text-centered" style="margin-top: 0.55rem; margin-bottom: 0; color: #204a66; font-size: 0.94rem;">
+              <p class="uf-media-caption uf-overview-caption">
                 <strong>HKIsland03.</strong> MaRS-LVIG reconstruction rendered with aligned 3D Gaussian splats.
               </p>
             </div>
@@ -633,7 +804,7 @@
                 <source src="./assets/hkairport02.mp4" type="video/mp4">
                 Your browser does not support the video tag.
               </video>
-              <p class="has-text-centered" style="margin-top: 0.55rem; margin-bottom: 0; color: #204a66; font-size: 0.94rem;">
+              <p class="uf-media-caption uf-overview-caption">
                 <strong>HKAirport02.</strong> Large outdoor UAV sequence with stable localization and dense rendering.
               </p>
             </div>
@@ -643,56 +814,45 @@
     </div>
   </section>
 
-  <section class="section">
+  <section class="section uf-section" id="overview">
     <div class="container is-max-desktop">
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-four-fifths">
+      <div class="columns is-centered">
+        <div class="column is-12 section-content-wrap content-card">
           <figure class="image teaser-figure">
             <img src="./static/images/teaser.png" alt="Ultra-Fusion teaser overview" class="teaser-sequential">
           </figure>
-        </div>
-      </div>
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-four-fifths content-card">
-          <div class="content has-text-justified">
-            <p>
-              <strong>Overview of Ultra-Fusion.</strong> The framework unifies heterogeneous sensors in a timestamp-ordered estimator,
+          <p class="uf-media-caption uf-overview-caption">
+            <strong>Overview of Ultra-Fusion.</strong> The framework unifies heterogeneous sensors in a timestamp-ordered estimator,
               supports deployment on ground, aerial, legged, and vehicle platforms, and improves localization robustness under sensor degradation,
               spatiotemporal uncertainty, and long-term or high-speed operation.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
+          </p>
 
-    <div class="container is-max-desktop">
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-12 content-card section-content-wrap">
-          <div class="compact-toc-wrap">
-            <div class="compact-toc-label">Quick Navigation</div>
-            <nav class="compact-toc" aria-label="Ultra-Fusion experiments">
-              <a href="#online-demo">Online Point Cloud Demo</a>
-              <a href="#ablation-evidence">Module Ablations</a>
-              <a href="#degradation-robustness">Sensor Degradation</a>
-              <a href="#miscalibration-robustness">Spatiotemporal Miscalibration</a>
-              <a href="#longterm-highspeed">Long-Term & High-Speed</a>
-              <a href="#benchmark-highlights">M3DGR / M2DGR-Plus</a>
-              <a href="#cross-platform-overview">KAIST / GrandTour / MARS-LVIG</a>
-              <a href="#mapping-runtime">Mapping & Runtime</a>
-            </nav>
+          <div class="uf-block">
+            <div class="compact-toc-wrap">
+              <div class="compact-toc-label">Quick Navigation</div>
+              <nav class="compact-toc" aria-label="Ultra-Fusion experiments">
+                <a href="#overview">Overview</a>
+                <a href="#online-demo">Online Demo</a>
+                <a href="#benchmark-highlights">M3DGR Benchmark</a>
+                <a href="#cross-platform-overview">Cross-Platform</a>
+                <a href="#ablation-evidence">Evidence Chain</a>
+                <a href="#degradation-robustness">Sensor Degradation</a>
+                <a href="#miscalibration-robustness">Miscalibration</a>
+                <a href="#longterm-highspeed">Long-Term / High-Speed</a>
+                <a href="#mapping-runtime">Mapping & Runtime</a>
+              </nav>
+            </div>
           </div>
-        </div>
-      </div>
 
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-12 content-card section-content-wrap">
-          <h2 class="title is-3 section-title">TL;DR</h2>
-          <div class="content has-text-justified">
-            <p>
-              <strong><a href="https://github.com/sjtuyinjie/Ultra-Fusion">Ultra-Fusion</a></strong> is a resilient tightly-coupled multi-sensor fusion SLAM framework for intelligent transportation systems.
-              A <span class="term-accent">Unified Sliding-Window Estimator</span> orders asynchronous measurements by timestamp and supports WIO, VIO, LIO, and LVIO with optional wheel and/or GNSS augmentation.
-              <span class="term-emphasis">Observability-Aware Initialization</span>, <span class="term-emphasis">Factor-Wise Reliability Scheduling</span>, and <span class="term-emphasis">Online Spatiotemporal Calibration</span> improve robustness under sensor degradation and calibration perturbation.
-            </p>
+          <div class="uf-block">
+            <h2 class="title is-3 section-title">TL;DR</h2>
+            <div class="content has-text-justified">
+              <p>
+                <strong><a href="https://github.com/sjtuyinjie/Ultra-Fusion">Ultra-Fusion</a></strong> is a resilient tightly-coupled multi-sensor fusion SLAM framework for intelligent transportation systems.
+                A <span class="term-accent">Unified Sliding-Window Estimator</span> orders asynchronous measurements by timestamp and supports WIO, VIO, LIO, and LVIO with optional wheel and/or GNSS augmentation.
+                <span class="term-emphasis">Observability-Aware Initialization</span>, <span class="term-emphasis">Factor-Wise Reliability Scheduling</span>, and <span class="term-emphasis">Online Spatiotemporal Calibration</span> improve robustness under sensor degradation and calibration perturbation.
+              </p>
+            </div>
           </div>
           <!-- <div class="proof-strip" aria-label="Ultra-Fusion evidence chain">
             <div class="proof-step">
@@ -716,100 +876,41 @@
               <p>Validate the same estimator across wheeled, legged, aerial, and driving platforms.</p>
             </div>
           </div> -->
-        </div>
-      </div>
 
-      <!-- <div class="columns is-centered has-text-centered">
-        <div class="column is-four-fifths content-card">
-          <h2 class="title is-3 section-title">Abstract</h2>
-          <div class="content has-text-justified abstract-content">
-            <p>
-              Reliable localization is a fundamental capability for intelligent transportation systems, including autonomous driving, legged robots,
-              and aerial vehicles. Although multi-sensor fusion has become a promising paradigm for robust localization, practical systems remain
-              fragile when sensors degrade, such as under poor illumination, LiDAR degeneracy, wheel slippage, or GNSS denial, and when
-              spatiotemporal calibration is imperfect. These challenges are especially pronounced in real-world transportation scenarios, such as
-              urban canyons, tunnels, and high-speed driving, where they can severely compromise localization reliability and system safety.
-            </p>
-            <p>
-              This paper presents <strong><a href="https://github.com/sjtuyinjie/Ultra-Fusion">Ultra-Fusion</a></strong>, a resilient tightly-coupled
-              multi-sensor fusion SLAM framework built upon a <em>Unified Sliding-Window Estimator</em>. The estimator is sequentially organized:
-              asynchronous measurements are ordered by timestamp and instantiated as modality-specific factors under the same optimization interface.
-              It supports WIO, VIO, LIO, and LVIO modes with optional wheel and/or GNSS augmentation when applicable, enabling deployment-specific
-              sensor configurations without redesigning the estimator structure. It is initialized by <em>Observability-Aware Initialization</em> and
-              further strengthened by two online modules: <em>Factor-Wise Reliability Scheduling</em> for sensor degradation and
-              <em>Online Spatiotemporal Calibration</em> for calibration errors during operation.
-            </p>
-            <p>
-              We further introduce the <strong><a href="https://github.com/sjtuyinjie/M3DGR">M3DGR</a></strong> benchmark, which includes both
-              real-world and simulation trajectories with synchronized timestamps and accurate extrinsics, and we conduct a large-scale evaluation of
-              <strong>over 60</strong> representative SLAM systems. Extensive experiments on M3DGR, M2DGR-Plus, KAIST, GrandTour, and MARS-LVIG
-              demonstrate consistent competitive performance. Across wheeled robots, legged platforms, and autonomous vehicles, Ultra-Fusion delivers
-              resilient and accurate localization over long-term and high-speed trajectories, even under severe degradation and calibration perturbations.
-            </p>
-          </div>
-        </div>
-      </div> -->
-
-      <!-- <div class="columns is-centered has-text-centered">
-        <div class="column is-four-fifths content-card">
-          <h2 class="title is-3 section-title">Contributions</h2>
-          <div class="content has-text-justified">
-            <ul>
-              <li>
-                We propose <strong><a href="https://github.com/sjtuyinjie/Ultra-Fusion">Ultra-Fusion</a></strong>, a tightly-coupled multi-sensor fusion SLAM framework built on a
-                <strong>Unified Sliding-Window Estimator</strong> with <strong>Observability-Aware Initialization</strong>, supporting WIO, VIO, LIO, and LVIO in one configurable estimator.
-              </li>
-              <li>
-                We develop <strong>Factor-Wise Reliability Scheduling</strong> for sensor degradation, applying degeneracy-aware gating and down-weighting directly within the unified optimization problem.
-              </li>
-              <li>
-                We design <strong>Online Spatiotemporal Calibration</strong> to refine calibration variables only under sufficient excitation and sensor reliability.
-              </li>
-              <li>
-                We extend the <strong><a href="https://github.com/sjtuyinjie/M3DGR">M3DGR</a></strong> benchmark and evaluate <strong>more than 60</strong> representative SLAM systems, including controlled simulation-based perturbation studies.
-              </li>
-              <li>
-                We validate resilience and robustness on heterogeneous platforms and operating conditions, including wheeled, legged, and aerial robots, autonomous driving, and long-term or high-speed trajectories.
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div> -->
-
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-12 content-card section-content-wrap">
-          <h2 class="title is-3 section-title">Pipeline</h2>
-          <div class="content has-text-centered">
-            <figure class="image evidence-figure">
-              <img src="./static/images/paper/pipeline.png" alt="Ultra-Fusion unified estimator pipeline">
-            </figure>
-            <p class="has-text-justified">
-              <strong>Mechanism.</strong> Ultra-Fusion first converts asynchronous sensor streams into timestamp-ordered factors, then decides which factors are observable, reliable, and calibration-safe enough to enter the same sliding-window optimization. The page evidence below follows this logic: if the scheduler and calibration modules work, difficult trajectories should remain closed, stable, and transferable.
-            </p>
+          <div class="uf-block">
+            <h2 class="title is-3 section-title">Pipeline</h2>
+            <div class="content">
+              <figure class="image evidence-figure">
+                <img src="./static/images/paper/pipeline.png" alt="Ultra-Fusion unified estimator pipeline">
+              </figure>
+              <p class="has-text-justified">
+                <strong>Mechanism.</strong> Ultra-Fusion first converts asynchronous sensor streams into timestamp-ordered factors, then decides which factors are observable, reliable, and calibration-safe enough to enter the same sliding-window optimization. The page evidence below follows this logic: if the scheduler and calibration modules work, difficult trajectories should remain closed, stable, and transferable.
+              </p>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section" id="online-demo">
+  <section class="section uf-section" id="online-demo">
     <div class="container is-max-desktop">
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-12 content-card section-content-wrap">
+      <div class="columns is-centered">
+        <div class="column is-12 section-content-wrap content-card">
           <h2 class="title is-3 section-title">Online Point Cloud Demo</h2>
-          <div class="content has-text-justified">
+          <div class="content has-text-justified uf-section-lead">
             <p>
               The online demo connects the paper's mapping claim to an inspectable reconstruction: optimized poses support both colored point-cloud mapping and LiDAR-guided 3D Gaussian Splatting on MaRS-LVIG and FAST-LIVO2 outdoor scenes.
             </p>
           </div>
 
-          <div class="columns is-centered" style="margin: 1.25rem 0 0.75rem;">
+          <div class="columns is-centered uf-media-grid" style="margin: 1.25rem 0 0.75rem;">
             <div class="column is-half">
               <video class="teaser-video" autoplay controls muted loop playsinline preload="none" onloadedmetadata="this.playbackRate=2" onplay="this.playbackRate=2">
                 <source src="./assets/cbd.mp4" type="video/mp4">
                 Your browser does not support the video tag.
               </video>
-              <p class="has-text-centered" style="margin-top: 0.55rem; margin-bottom: 0; color: #204a66; font-size: 0.94rem;">
+              <p class="uf-media-caption uf-overview-caption">
                 <strong>CBD_Building_01.</strong> FAST-LIVO2 outdoor sequence with stable localization.
               </p>
             </div>
@@ -818,13 +919,13 @@
                 <source src="./assets/sysu.mp4" type="video/mp4">
                 Your browser does not support the video tag.
               </video>
-              <p class="has-text-centered" style="margin-top: 0.55rem; margin-bottom: 0; color: #204a66; font-size: 0.94rem;">
+              <p class="uf-media-caption uf-overview-caption">
                 <strong>SYSU_01.</strong> FAST-LIVO2 campus-scale sequence with dense mapping.
               </p>
             </div>
           </div>
 
-          <div class="viewer-scene-selector" style="display:flex; gap:0.5rem; justify-content:center; flex-wrap:wrap; margin-bottom:1rem;">
+          <div class="viewer-scene-selector">
             <button id="scene-hkisland" class="viewer-tab active" type="button" data-scene="hkisland">HKIsland03 (MaRS-LVIG)</button>
             <button id="scene-cbd" class="viewer-tab" type="button" data-scene="cbd_building">CBD_Building_01 (FAST-LIVO2)</button>
             <button id="scene-sysu" class="viewer-tab" type="button" data-scene="sysu_building">SYSU_01 (FAST-LIVO2)</button>
@@ -858,12 +959,198 @@
     </div>
   </section>
 
-  <section class="section" id="ablation-evidence">
+  <section class="section uf-section" id="benchmark-highlights">
     <div class="container is-max-desktop">
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-four-fifths content-card">
+      <div class="columns is-centered">
+        <div class="column is-12 section-content-wrap content-card">
+          <h2 class="title is-3 section-title">Benchmark Results on M3DGR and M2DGR-Plus</h2>
+          <div class="content has-text-justified uf-section-lead">
+            <p>
+              The primary benchmark asks whether one estimator can cover different sensor configurations without changing the optimization core.
+              On <strong>M3DGR</strong>, Ultra-Fusion variants lead their compatible sensor groups; on <strong>M2DGR-Plus</strong>, the LVWIO configuration obtains the lowest average drift rate and RMSE among the compared methods.
+            </p>
+          </div>
+
+          <div class="ablation-summary-grid">
+            <div class="ablation-summary-card">
+              <span class="ablation-card-label">M3DGR WIO</span>
+              <strong>1.3 / 26.99</strong>
+              <p>Avg. rank / ATE, improving over raw wheel odometry and Ground-Fusion WIO.</p>
+            </div>
+            <div class="ablation-summary-card">
+              <span class="ablation-card-label">M3DGR VWIO</span>
+              <strong>2.1 / 2.23</strong>
+              <p>Best visual-compatible aggregate among evaluated visual fusion baselines.</p>
+            </div>
+            <div class="ablation-summary-card">
+              <span class="ablation-card-label">M3DGR LWIO</span>
+              <strong>3.5 / 0.17</strong>
+              <p>Best LiDAR-compatible aggregate in the paper's grouped comparison.</p>
+            </div>
+            <div class="ablation-summary-card">
+              <span class="ablation-card-label">M3DGR LVWIO</span>
+              <strong>1.4 / 0.15</strong>
+              <p>Best LiDAR-visual-wheel-inertial aggregate across ten M3DGR sequences.</p>
+            </div>
+          </div>
+
+          <div class="uf-block">
+            <h3 class="uf-subsection-title">M3DGR sequence highlights</h3>
+            <div class="seq-video-grid">
+              <div class="seq-video-card">
+                <div class="seq-video-wrap">
+                  <video class="teaser-video" autoplay controls muted loop playsinline preload="none">
+                    <source src="./static/videos/speed/dark.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+                <p class="uf-media-caption"><strong>M3DGR · Dark01.</strong> Nighttime low-light sequence with severe visual degradation. Ultra-Fusion: <strong>0.08 m ATE</strong> (Rank 2nd). Top-3: PIN-SLAM 0.05 | Ours 0.08 | SR-LIVO 0.09.</p>
+              </div>
+              <div class="seq-video-card">
+                <div class="seq-video-wrap">
+                  <video class="teaser-video" autoplay controls muted loop playsinline preload="none">
+                    <source src="./static/videos/speed/corridor.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+                <p class="uf-media-caption"><strong>M3DGR · Corridor01.</strong> Long-corridor LiDAR-degeneration sequence with repetitive structures and weak lateral constraints. Ultra-Fusion: <strong>0.02 m ATE</strong> (Rank 1st). Top-3: Ours 0.02 | LTAOM 0.19 | Eq-LIO 0.20.</p>
+              </div>
+            </div>
+          </div>
+
+          <details class="ablation-detail" open>
+            <summary>M2DGR-Plus campus-scale wheeled routes (ATE RMSE / drift rate)</summary>
+            <div class="ablation-detail-body">
+              <div class="ablation-table-wrap">
+                <table class="ablation-table">
+                  <thead>
+                    <tr>
+                      <th>Method</th>
+                      <th>Anomaly</th>
+                      <th>Switch</th>
+                      <th>Tree</th>
+                      <th>Building1</th>
+                      <th>Parking1</th>
+                      <th>Street2</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>FAST-LIVO2</td><td>0.10 / 1.36%</td><td>1.60 / 1.86%</td><td>2.70 / 3.73%</td><td>1.62 / 3.51%</td><td>0.81 / 2.90%</td><td>0.57 / 1.56%</td></tr>
+                    <tr><td>Ground-Fusion</td><td>0.29 / 3.96%</td><td>1.80 / 2.09%</td><td>Fail</td><td>0.60 / 1.29%</td><td>0.48 / 1.73%</td><td>0.23 / 0.63%</td></tr>
+                    <tr><td>Ground-Fusion++</td><td>Fail</td><td>Fail</td><td>3.40 / 4.70%</td><td>Fail</td><td>Fail</td><td>Fail</td></tr>
+                    <tr class="ablation-best-row"><td>Ultra-Fusion (LVWIO)</td><td>0.09 / 1.23%</td><td>0.23 / 0.27%</td><td>0.16 / 0.21%</td><td>0.32 / 0.69%</td><td>0.10 / 0.36%</td><td>0.12 / 0.33%</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="ablation-conclusion"><strong>Conclusion.</strong> Ultra-Fusion achieves the lowest average drift/RMSE on M2DGR-Plus: <strong>0.59% / 0.24 m</strong>, compared with <strong>2.32% / 1.48 m</strong> for FAST-LIVO2 and <strong>1.71% / 0.75 m</strong> for Ground-Fusion.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section uf-section" id="cross-platform-overview">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column is-12 section-content-wrap content-card">
+          <h2 class="title is-3 section-title">Robustness Across Platforms</h2>
+          <div class="content has-text-justified uf-section-lead">
+            <p>
+              Cross-platform evaluation tests whether the same estimation design transfers beyond the M3DGR ground robot: high-speed driving on <strong>KAIST</strong>, legged locomotion on <strong>GrandTour</strong>, and low-altitude UAV mapping on <strong>MARS-LVIG</strong>.
+            </p>
+          </div>
+
+          <div class="uf-block" id="cross-platform-validation">
+            <h3 class="uf-subsection-title">GrandTour (Legged Robot)</h3>
+            <div class="content has-text-justified">
+              <p>
+                On the quadruped benchmark <strong>GrandTour</strong>, Ultra-Fusion (LVIO) achieves the lowest RTE on 3/4 representative sequences
+                (e.g., <strong>0.41 cm</strong> on SPX-2, <strong>0.34 cm</strong> on SNOW-2, <strong>0.26 cm</strong> on EIG-1).
+              </p>
+            </div>
+            <div class="seq-video-grid">
+              <div class="seq-video-card">
+                <div class="seq-video-wrap">
+                  <video class="teaser-video" autoplay controls muted loop playsinline preload="none">
+                    <source src="./static/videos/speed/eig1.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+                <p class="uf-media-caption"><strong>GrandTour · EIG-1.</strong> Hill-to-station descent with long walking and mixed planar/non-planar structures. Ultra-Fusion: <strong>0.26 cm RTE</strong> (Rank 1st). Top-3: Ours 0.26 | Coco-LIC 0.40 | Fast-LIMO 1.10.</p>
+              </div>
+              <div class="seq-video-card">
+                <div class="seq-video-wrap">
+                  <video class="teaser-video" autoplay controls muted loop playsinline preload="none">
+                    <source src="./static/videos/speed/spx2.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+                <p class="uf-media-caption"><strong>GrandTour · SPX-2.</strong> Jungfraujoch research-station sequence with dynamic initialization, thin structures, moving objects, and loop closure. Ultra-Fusion: <strong>0.41 cm RTE</strong> (Rank 1st). Top-3: Ours 0.41 | Coco-LIC 0.44 | Voxel-SLAM 1.03.</p>
+              </div>
+              <div class="seq-video-card">
+                <div class="seq-video-wrap">
+                  <video class="teaser-video" autoplay controls muted loop playsinline preload="none">
+                    <source src="./static/videos/speed/arc2.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+                <p class="uf-media-caption"><strong>GrandTour · ARC-2.</strong> Narrow passages in a rescue training center, with limited visibility and featureless walls challenging both vision and LiDAR. Ultra-Fusion: <strong>0.90 cm RTE</strong> (Rank 2nd). Top-3: FAST-LIVO2 0.70 | Ours 0.90 | Coco-LIC 1.01.</p>
+              </div>
+              <div class="seq-video-card">
+                <div class="seq-video-wrap">
+                  <video class="teaser-video" autoplay controls muted loop playsinline preload="none">
+                    <source src="./static/videos/speed/snow2.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+                <p class="uf-media-caption"><strong>GrandTour · SNOW-2.</strong> Fast walking on fully snow-covered terrain, with limited planar structures and small-scale loop closures. Ultra-Fusion: <strong>0.34 cm RTE</strong> (Rank 1st). Top-3: Ours 0.34 | Coco-LIC 0.41 | Fast-LIMO 1.16.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="uf-block">
+            <h3 class="uf-subsection-title">MARS-LVIG (UAV)</h3>
+            <div class="content has-text-justified">
+              <p>
+                On the aerial benchmark <strong>MARS-LVIG</strong>, Ultra-Fusion attains the best average rank / RMSE (<strong>1.5 / 1.47</strong>) with strong results across airport, island,
+                town, and valley sequences under large viewpoint and altitude variation.
+              </p>
+            </div>
+            <div class="seq-video-grid">
+              <div class="seq-video-card">
+                <div class="seq-video-wrap">
+                  <video class="teaser-video" autoplay controls muted loop playsinline preload="none">
+                    <source src="./static/images/gs_4x.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+                <p class="uf-media-caption"><strong>MARS-LVIG · HKisland03.</strong> Downward-looking island mapping at about 90 m altitude and 9 m/s flight speed, with large-scale sparse structures. Ultra-Fusion: <strong>0.87 m ATE</strong> (Rank 1st). Top-3: Ours 0.87 | FAST-LIVO2 0.89 | Ground-Fusion++ 1.71.</p>
+              </div>
+              <div class="seq-video-card">
+                <div class="seq-video-wrap">
+                  <video class="teaser-video" autoplay controls muted loop playsinline preload="none">
+                    <source src="./assets/hkairport02.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+                <p class="uf-media-caption"><strong>MARS-LVIG · HKairport02.</strong> Open airfield aerial mapping at about 80 m altitude and 6 m/s flight speed, with weak geometric constraints. Ultra-Fusion: <strong>0.61 m ATE</strong> (Rank 1st). Top-3: Ours 0.61 | R3LIVE 0.82 | AKF-LIO 0.87.</p>
+              </div>
+            </div>
+          </div>
+
+          <p class="ablation-conclusion has-text-justified"><strong>Conclusion.</strong> The same unified estimator transfers from wheeled ITS to legged and aerial platforms without redesigning the core fusion architecture.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section uf-section" id="ablation-evidence">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column is-12 section-content-wrap content-card">
           <h2 class="title is-3 section-title">Evidence Chain: Why Ultra-Fusion Is Robust</h2>
-          <div class="content has-text-justified">
+          <div class="content has-text-justified uf-section-lead">
             <p>
               The experimental story follows the estimator design: first verify that the robustness modules are causal, then stress the system with degraded or miscalibrated factors, and finally test whether the same estimator remains stable over long horizons and different platforms.
             </p>
@@ -936,6 +1223,7 @@
                 Reliability-aware gating keeps informative constraints while suppressing inconsistent factors.
               </p>
             </div>
+
             <div class="evidence-story-card">
               <figure class="evidence-figure">
                 <img src="./static/images/paper/degradation_grid.png" alt="Qualitative robustness across degraded localization scenarios" loading="lazy">
@@ -1086,21 +1374,6 @@
             </div>
           </div>
 
-          <div class="exp-subsection" id="cross-platform-validation">
-            <h3>Cross-Platform Validation (Legged + UAV)</h3>
-            <div class="content has-text-justified">
-              <p>
-                <strong>GrandTour (quadruped):</strong> Ultra-Fusion (LVIO) achieves the lowest RTE on 3/4 representative sequences
-                (e.g., <strong>0.41</strong> on SPX-2, <strong>0.34</strong> on SNOW-2, <strong>0.26</strong> on EIG-1).
-              </p>
-              <p>
-                <strong>MARS-LVIG (UAV):</strong> Ultra-Fusion attains best average rank / RMSE (<strong>1.5 / 1.47</strong>) with strong results across airport, island,
-                town, and valley sequences under large viewpoint and altitude variation.
-              </p>
-              <p class="ablation-conclusion"><strong>Conclusion.</strong> The same unified estimator transfers from wheeled ITS to legged and aerial platforms without redesigning the core fusion architecture.</p>
-            </div>
-          </div>
-
           <div class="exp-subsection" id="mapping-runtime">
             <h3>Mapping Results and Runtime</h3>
             <div class="content has-text-justified">
@@ -1115,155 +1388,6 @@
               <p class="ablation-conclusion"><strong>Condensed conclusion.</strong> Ultra-Fusion combines robustness and real-time feasibility: reliable localization under degradation and perturbation, plus consistent mapping quality across large outdoor scenes.</p>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="benchmark-highlights">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-four-fifths content-card">
-          <h2 class="title is-3 section-title">Benchmark Results on M3DGR and M2DGR-Plus</h2>
-          <div class="content has-text-justified">
-            <p>
-              The primary benchmark asks whether one estimator can cover different sensor configurations without changing the optimization core.
-              On <strong>M3DGR</strong>, Ultra-Fusion variants lead their compatible sensor groups; on <strong>M2DGR-Plus</strong>, the LVWIO configuration obtains the lowest average drift rate and RMSE among the compared methods.
-            </p>
-          </div>
-
-          <div class="ablation-summary-grid">
-            <div class="ablation-summary-card">
-              <span class="ablation-card-label">M3DGR WIO</span>
-              <strong>1.3 / 26.99</strong>
-              <p>Avg. rank / ATE, improving over raw wheel odometry and Ground-Fusion WIO.</p>
-            </div>
-            <div class="ablation-summary-card">
-              <span class="ablation-card-label">M3DGR VWIO</span>
-              <strong>2.1 / 2.23</strong>
-              <p>Best visual-compatible aggregate among evaluated visual fusion baselines.</p>
-            </div>
-            <div class="ablation-summary-card">
-              <span class="ablation-card-label">M3DGR LWIO</span>
-              <strong>3.5 / 0.17</strong>
-              <p>Best LiDAR-compatible aggregate in the paper's grouped comparison.</p>
-            </div>
-            <div class="ablation-summary-card">
-              <span class="ablation-card-label">M3DGR LVWIO</span>
-              <strong>1.4 / 0.15</strong>
-              <p>Best LiDAR-visual-wheel-inertial aggregate across ten M3DGR sequences.</p>
-            </div>
-          </div>
-
-          <details class="ablation-detail" open>
-            <summary>M2DGR-Plus campus-scale wheeled routes (ATE RMSE / drift rate)</summary>
-            <div class="ablation-detail-body">
-              <div class="ablation-table-wrap">
-                <table class="ablation-table">
-                  <thead>
-                    <tr>
-                      <th>Method</th>
-                      <th>Anomaly</th>
-                      <th>Switch</th>
-                      <th>Tree</th>
-                      <th>Building1</th>
-                      <th>Parking1</th>
-                      <th>Street2</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr><td>FAST-LIVO2</td><td>0.10 / 1.36%</td><td>1.60 / 1.86%</td><td>2.70 / 3.73%</td><td>1.62 / 3.51%</td><td>0.81 / 2.90%</td><td>0.57 / 1.56%</td></tr>
-                    <tr><td>Ground-Fusion</td><td>0.29 / 3.96%</td><td>1.80 / 2.09%</td><td>Fail</td><td>0.60 / 1.29%</td><td>0.48 / 1.73%</td><td>0.23 / 0.63%</td></tr>
-                    <tr><td>Ground-Fusion++</td><td>Fail</td><td>Fail</td><td>3.40 / 4.70%</td><td>Fail</td><td>Fail</td><td>Fail</td></tr>
-                    <tr class="ablation-best-row"><td>Ultra-Fusion (LVWIO)</td><td>0.09 / 1.23%</td><td>0.23 / 0.27%</td><td>0.16 / 0.21%</td><td>0.32 / 0.69%</td><td>0.10 / 0.36%</td><td>0.12 / 0.33%</td></tr>
-                  </tbody>
-                </table>
-              </div>
-              <p class="ablation-conclusion"><strong>Conclusion.</strong> Ultra-Fusion achieves the lowest average drift/RMSE on M2DGR-Plus: <strong>0.59% / 0.24 m</strong>, compared with <strong>2.32% / 1.48 m</strong> for FAST-LIVO2 and <strong>1.71% / 0.75 m</strong> for Ground-Fusion.</p>
-            </div>
-          </details>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="cross-platform-overview">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-four-fifths content-card">
-          <h2 class="title is-3 section-title">Robustness Across Platforms</h2>
-          <div class="content has-text-justified">
-            <p>
-              Cross-platform evaluation tests whether the same estimation design transfers beyond the M3DGR ground robot: high-speed driving on <strong>KAIST</strong>, legged locomotion on <strong>GrandTour</strong>, and low-altitude UAV mapping on <strong>MARS-LVIG</strong>.
-            </p>
-          </div>
-
-          <details class="ablation-detail" open>
-            <summary>KAIST high-speed urban driving (ATE RMSE / drift rate)</summary>
-            <div class="ablation-detail-body">
-              <div class="ablation-table-wrap">
-                <table class="ablation-table">
-                  <thead>
-                    <tr>
-                      <th>Method</th>
-                      <th>Urban23<br>3379.7 m / 96.9 km/h</th>
-                      <th>Urban25<br>2505.1 m / 91.4 km/h</th>
-                      <th>Urban26<br>3987.8 m / 25.2 km/h</th>
-                      <th>Urban29<br>3559.0 m / 29.1 km/h</th>
-                      <th>Urban35<br>3187.7 m / 67.0 km/h</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr><td>FAST-LIVO2</td><td>979.40 / 28.98%</td><td>705.77 / 28.17%</td><td>497.03 / 12.46%</td><td>818.37 / 22.99%</td><td>918.62 / 28.82%</td></tr>
-                    <tr><td>Raw Wheel Odom</td><td>284.60 / 8.42%</td><td>14.63 / 0.58%</td><td>36.15 / 0.91%</td><td>19.42 / 0.55%</td><td>4.44 / 0.14%</td></tr>
-                    <tr><td>Ultra-Fusion (WIO)</td><td>279.90 / 8.28%</td><td>14.69 / 0.59%</td><td>36.56 / 0.92%</td><td>19.88 / 0.56%</td><td>4.43 / 0.14%</td></tr>
-                    <tr class="ablation-best-row"><td>Ultra-Fusion (LVWIO)</td><td>12.38 / 0.37%</td><td>14.56 / 0.37%</td><td>32.50 / 0.58%</td><td>16.43 / 0.46%</td><td>4.12 / 0.13%</td></tr>
-                  </tbody>
-                </table>
-              </div>
-              <p class="ablation-conclusion"><strong>Conclusion.</strong> LVWIO reduces average KAIST drift to about <strong>0.38%</strong>, showing why LiDAR/visual correction and wheel-inertial motion support are complementary at city scale.</p>
-            </div>
-          </details>
-
-          <details class="ablation-detail" open>
-            <summary>GrandTour legged robot sequences (RTE, cm)</summary>
-            <div class="ablation-detail-body">
-              <div class="ablation-table-wrap">
-                <table class="ablation-table">
-                  <thead>
-                    <tr><th>Method</th><th>SPX-2</th><th>SNOW-2</th><th>EIG-1</th><th>ARC-2</th></tr>
-                  </thead>
-                  <tbody>
-                    <tr><td>Coco-LIC</td><td>0.44</td><td>0.41</td><td>0.40</td><td>1.01</td></tr>
-                    <tr><td>FAST-LIVO2</td><td>1.05</td><td>1.25</td><td>1.11</td><td>0.70</td></tr>
-                    <tr><td>Fast-LIMO</td><td>1.15</td><td>1.16</td><td>1.10</td><td>2.49</td></tr>
-                    <tr class="ablation-best-row"><td>Ultra-Fusion (LVIO)</td><td>0.41</td><td>0.34</td><td>0.26</td><td>0.90</td></tr>
-                  </tbody>
-                </table>
-              </div>
-              <p class="ablation-conclusion"><strong>Conclusion.</strong> Ultra-Fusion is best on three of four GrandTour sequences and remains competitive on ARC-2, where stair and debris traversal induce strong body oscillation.</p>
-            </div>
-          </details>
-
-          <details class="ablation-detail" open>
-            <summary>MARS-LVIG aerial sequences (ATE, m)</summary>
-            <div class="ablation-detail-body">
-              <div class="ablation-table-wrap">
-                <table class="ablation-table">
-                  <thead>
-                    <tr><th>Method</th><th>Avg. rank / RMSE</th><th>HKairport01</th><th>HKairport02</th><th>HKisland03</th><th>AMtown03</th><th>AMvalley03</th><th>HKGNSS02</th></tr>
-                  </thead>
-                  <tbody>
-                    <tr><td>FAST-LIO2</td><td>4.3 / 2.98</td><td>0.44</td><td>0.96</td><td>2.13</td><td>3.65</td><td>7.77</td><td>2.92</td></tr>
-                    <tr><td>AKF-LIO</td><td>3.0 / 2.15</td><td>0.43</td><td>0.87</td><td>2.03</td><td>2.74</td><td>3.91</td><td>2.94</td></tr>
-                    <tr><td>FAST-LIVO2</td><td>2.7 / 1.42</td><td>0.75</td><td>0.88</td><td>0.89</td><td>3.25</td><td>1.43</td><td>1.32</td></tr>
-                    <tr class="ablation-best-row"><td>Ultra-Fusion (LVIO)</td><td>1.3 / 1.40</td><td>0.43</td><td>0.61</td><td>0.87</td><td>3.01</td><td>2.60</td><td>0.90</td></tr>
-                  </tbody>
-                </table>
-              </div>
-              <p class="ablation-conclusion"><strong>Conclusion.</strong> The UAV results support the same narrative as the ground and legged tests: the estimator is not tied to a wheel-motion prior or a single sensing layout.</p>
-            </div>
-          </details>
         </div>
       </div>
     </div>
