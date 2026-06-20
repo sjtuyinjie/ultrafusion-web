@@ -846,7 +846,7 @@
                 <a href="#degradation-robustness">Sensor Degradation</a>
                 <a href="#miscalibration-robustness">Miscalibration</a>
                 <a href="#longterm-highspeed">Long-Term / High-Speed</a>
-                <a href="#mapping-runtime">Mapping & Runtime</a>
+                <a href="#mapping-runtime">Runtime</a>
               </nav>
             </div>
           </div>
@@ -1261,7 +1261,7 @@
           <h2 class="title is-3 section-title">Evidence Chain: Why Ultra-Fusion Is Robust</h2>
           <div class="content has-text-justified uf-section-lead">
             <p>
-              The experimental story follows the estimator design: first verify that the robustness modules are causal, then stress the system with miscalibrated factors, and finally validate mapping quality and runtime.
+              The experimental story follows the estimator design: first verify that the robustness modules are causal, then stress the system with miscalibrated factors, and finally validate real-time runtime feasibility.
             </p>
           </div>
 
@@ -1382,17 +1382,13 @@
           </div>
 
           <div class="exp-subsection" id="mapping-runtime">
-            <h3>Mapping Results and Runtime</h3>
+            <h3>Runtime</h3>
             <div class="content has-text-justified">
-              <p>
-                Mapping evaluation in the paper shows coherent large-scale colored point-cloud reconstructions on HKisland03 and HKAirport02,
-                with clear road boundaries, building contours, and low ghosting in local zoom-ins.
-              </p>
               <p>
                 Runtime profiling on multiple LiDAR types reports <strong>5.48-10.73 ms</strong> optimization time per scan in the real-time configuration,
                 supporting online operation.
               </p>
-              <p class="ablation-conclusion"><strong>Condensed conclusion.</strong> Ultra-Fusion combines robustness and real-time feasibility: reliable localization under degradation and perturbation, plus consistent mapping quality across large outdoor scenes.</p>
+              <p class="ablation-conclusion"><strong>Conclusion.</strong> Ultra-Fusion combines robustness and real-time feasibility: reliable localization under degradation and perturbation with centimeter-scale optimization latency per scan.</p>
             </div>
           </div>
         </div>
