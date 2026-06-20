@@ -21,12 +21,24 @@ function setInterpolationImage(i) {
 
 
 $(document).ready(function() {
-    // Check for click events on the navbar burger icon
-    $(".navbar-burger").click(function() {
-      // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
-      $(".navbar-burger").toggleClass("is-active");
-      $(".navbar-menu").toggleClass("is-active");
+    function setMobileNavOpen(isOpen) {
+      $(".navbar-burger").toggleClass("is-active", isOpen).attr("aria-expanded", isOpen);
+      $("#uf-nav-menu").toggleClass("is-active", isOpen);
+      $("body").toggleClass("uf-nav-open", isOpen);
+    }
 
+    $(".navbar-burger").click(function() {
+      setMobileNavOpen(!$(this).hasClass("is-active"));
+    });
+
+    $("#uf-nav-menu .navbar-item[href^='#']").on("click", function() {
+      setMobileNavOpen(false);
+    });
+
+    $(document).on("click", function(event) {
+      if (!$(event.target).closest(".uf-nav").length) {
+        setMobileNavOpen(false);
+      }
     });
 
     var options = {

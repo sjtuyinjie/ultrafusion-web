@@ -20,13 +20,6 @@ html {
   align-items: stretch;
 }
 
-.uf-nav .navbar-menu {
-  flex: 1;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
 .uf-nav-links {
   flex-grow: 1;
   justify-content: center;
@@ -50,15 +43,115 @@ html {
   color: #1a5276;
 }
 
-@media (max-width: 768px) {
+@media screen and (min-width: 1024px) {
   .uf-nav .navbar-menu {
-    overflow-x: auto;
-    white-space: nowrap;
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  body {
+    scroll-padding-top: 3rem;
+  }
+
+  .uf-nav > .container {
+    display: block;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+
+  .uf-nav .navbar-brand {
+    width: 100%;
+  }
+
+  .uf-nav .navbar-menu {
+    flex: none;
+    max-height: calc(100dvh - 3.25rem);
+    overflow-y: auto;
+    background: rgba(255, 255, 255, 0.98);
+    border-top: 1px solid #e4ebf0;
+    box-shadow: 0 8px 24px rgba(26, 82, 118, 0.08);
+  }
+
+  .uf-nav .navbar-menu.is-active {
+    display: block;
+  }
+
+  .uf-nav-links,
+  .uf-nav .navbar-start.uf-nav-links,
+  .uf-nav .navbar-end {
+    display: block;
+    width: 100%;
+  }
+
+  .uf-nav .navbar-burger {
+    color: #1a5276;
+  }
+
+  .uf-nav .navbar-burger:hover {
+    background: #eef4f8;
   }
 
   .uf-nav-links {
     flex-wrap: nowrap;
   }
+
+  .uf-nav-links .navbar-item,
+  .uf-nav-more .navbar-dropdown .navbar-item {
+    justify-content: flex-start;
+    padding: 0.72rem 1rem;
+    border-bottom: 1px solid #edf2f6;
+    white-space: normal;
+  }
+
+  .uf-nav-more {
+    width: 100%;
+    border-top: 1px solid #dce6ee;
+  }
+
+  .uf-nav-more .navbar-item.has-dropdown {
+    display: block;
+    width: 100%;
+    padding: 0;
+  }
+
+  .uf-nav-more .navbar-link {
+    padding: 0.72rem 1rem;
+    font-weight: 700;
+    color: #0f4d70;
+    background: #f4f9fc;
+    border-bottom: 1px solid #edf2f6;
+    pointer-events: none;
+  }
+
+  .uf-nav-more .navbar-link::after {
+    display: none;
+  }
+
+  .uf-nav-more .navbar-dropdown {
+    display: block !important;
+    position: static;
+    min-width: 0;
+    width: 100%;
+    box-shadow: none;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    background: #fafcfd;
+  }
+
+  .uf-nav-more .navbar-dropdown .navbar-item {
+    font-size: 0.88rem;
+    padding-left: 1.25rem;
+    color: #2a607f;
+  }
+}
+
+body.uf-nav-open {
+  overflow: hidden;
 }
 
 :root {
