@@ -608,48 +608,57 @@
 
 <body>
 
-  <nav class="navbar" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand">
-      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-      </a>
-    </div>
-    <div class="navbar-menu">
-      <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
-        <a class="navbar-item" href="https://sjtuyinjie.github.io/">
+  <nav class="navbar is-fixed-top uf-nav" role="navigation" aria-label="main navigation">
+    <div class="container is-max-desktop">
+      <div class="navbar-brand">
+        <a class="navbar-item uf-nav-home" href="https://sjtuyinjie.github.io/" aria-label="Home">
           <span class="icon">
             <i class="fas fa-home"></i>
           </span>
         </a>
-
-        <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link">
-            More Research
-          </a>
-          <div class="navbar-dropdown">
-            <a class="navbar-item" href="https://sjtuyinjie.github.io/M3DGR-website/" target="_blank" rel="noopener">
-              M3DGR(IROS2025)
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="uf-nav-menu">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+      <div id="uf-nav-menu" class="navbar-menu">
+        <div class="navbar-start uf-nav-links">
+          <a class="navbar-item" href="#overview">Overview</a>
+          <a class="navbar-item" href="#online-demo">Demo</a>
+          <a class="navbar-item" href="#benchmark-highlights">Benchmark</a>
+          <a class="navbar-item" href="#cross-platform-overview">Cross-Platform</a>
+          <a class="navbar-item" href="#ablation-evidence">Evidence</a>
+          <a class="navbar-item" href="#BibTeX">BibTeX</a>
+        </div>
+        <div class="navbar-end">
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link">
+              More Research
             </a>
-            <a class="navbar-item" href="https://github.com/SJTU-ViSYS/M2DGR" target="_blank" rel="noopener">
-              M2DGR(ICRA2022&RAL2021)
-            </a>
-            <a class="navbar-item" href="https://github.com/SJTU-ViSYS/Ground-Fusion" target="_blank" rel="noopener">
-              Ground-Fusion(ICRA2024)
-            </a>
-            <a class="navbar-item" href="https://github.com/sjtuyinjie/DAF" target="_blank" rel="noopener">
-              DAF(IROS2024)
-            </a>
-            <a class="navbar-item" href="https://github.com/Joanna-HE/LIGO." target="_blank" rel="noopener">
-              LIGO(TRO2025&IROS2025)
-            </a>
-            <a class="navbar-item" href="https://delinqu.github.io/EN-SLAM/" target="_blank" rel="noopener">
-              EN-SLAM(CVPR2024)
-            </a>
-            <a class="navbar-item" href="https://link.springer.com/article/10.1007/s10291-024-01623-9" target="_blank" rel="noopener">
-              Innovation-KF(GPS Solutions2024)
-            </a>
+            <div class="navbar-dropdown is-right">
+              <a class="navbar-item" href="https://sjtuyinjie.github.io/M3DGR-website/" target="_blank" rel="noopener">
+                M3DGR(IROS2025)
+              </a>
+              <a class="navbar-item" href="https://github.com/SJTU-ViSYS/M2DGR" target="_blank" rel="noopener">
+                M2DGR(ICRA2022&RAL2021)
+              </a>
+              <a class="navbar-item" href="https://github.com/SJTU-ViSYS/Ground-Fusion" target="_blank" rel="noopener">
+                Ground-Fusion(ICRA2024)
+              </a>
+              <a class="navbar-item" href="https://github.com/sjtuyinjie/DAF" target="_blank" rel="noopener">
+                DAF(IROS2024)
+              </a>
+              <a class="navbar-item" href="https://github.com/Joanna-HE/LIGO." target="_blank" rel="noopener">
+                LIGO(TRO2025&IROS2025)
+              </a>
+              <a class="navbar-item" href="https://delinqu.github.io/EN-SLAM/" target="_blank" rel="noopener">
+                EN-SLAM(CVPR2024)
+              </a>
+              <a class="navbar-item" href="https://link.springer.com/article/10.1007/s10291-024-01623-9" target="_blank" rel="noopener">
+                Innovation-KF(GPS Solutions2024)
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -837,16 +846,17 @@
           <div class="uf-block">
             <div class="compact-toc-wrap">
               <div class="compact-toc-label">Quick Navigation</div>
-              <nav class="compact-toc" aria-label="Ultra-Fusion experiments">
+              <nav class="compact-toc" aria-label="Ultra-Fusion page sections">
                 <a href="#overview">Overview</a>
-                <a href="#online-demo">Online Demo</a>
-                <a href="#benchmark-highlights">Wheeled Benchmark</a>
+                <a href="#online-demo">Demo</a>
+                <a href="#benchmark-highlights">Benchmark</a>
+                <a href="#degradation-robustness">Degradation</a>
+                <a href="#longterm-highspeed">Long-Term</a>
                 <a href="#cross-platform-overview">Cross-Platform</a>
-                <a href="#ablation-evidence">Evidence Chain</a>
-                <a href="#degradation-robustness">Sensor Degradation</a>
-                <a href="#miscalibration-robustness">Miscalibration</a>
-                <a href="#longterm-highspeed">Long-Term / High-Speed</a>
+                <a href="#ablation-evidence">Evidence</a>
+                <a href="#miscalibration-robustness">Calibration</a>
                 <a href="#runtime">Runtime</a>
+                <a href="#BibTeX">BibTeX</a>
               </nav>
             </div>
           </div>
