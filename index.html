@@ -603,6 +603,47 @@
       margin-right: auto;
     }
 
+    .kaist-sequence-showcase {
+      margin-top: 0.35rem;
+    }
+
+    .kaist-sequence-pair {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.15rem;
+      margin-top: 0.85rem;
+    }
+
+    .kaist-sequence-item .uf-media-caption {
+      margin-top: 0.55rem;
+    }
+
+    .kaist-sequence-item .evidence-figure {
+      margin: 0;
+    }
+
+    .kaist-sequence-item .evidence-figure img {
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.12);
+    }
+
+    .kaist-sequence-note {
+      margin: 0.85rem 0 0;
+      padding: 0.7rem 0.9rem;
+      border-radius: 8px;
+      background: #f7fcff;
+      border: 1px solid rgba(0, 100, 150, 0.14);
+      color: #204a66;
+      font-size: 0.94rem;
+      line-height: 1.45;
+      text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      .kaist-sequence-pair {
+        grid-template-columns: 1fr;
+      }
+    }
+
     @media (max-width: 900px) {
       .ablation-summary-grid {
         grid-template-columns: 1fr 1fr;
@@ -721,6 +762,12 @@
                 <a href="https://github.com/sjtuyinjie/M3DGR" class="external-link button is-normal is-rounded is-dark" target="_blank" rel="noopener">
                   <span class="icon"><i class="fas fa-database"></i></span>
                   <span>M3DGR Dataset</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://youtu.be/ekzD9ovd1SQ" class="external-link button is-normal is-rounded is-dark" target="_blank" rel="noopener">
+                  <span class="icon"><i class="fab fa-youtube"></i></span>
+                  <span>Video</span>
                 </a>
               </span>
             </div>
@@ -1156,28 +1203,32 @@
               <p class="uf-subblock-lead has-text-justified">
                 Urban driving on KAIST stresses wheel-inertial prediction, LiDAR geometry, visual correction, and calibration consistency under high-speed motion.
               </p>
-              <div class="evidence-story-card compact-evidence">
-                <figure class="evidence-figure">
-                  <img src="./static/images/paper/kaist_overview.png" alt="Large-scale KAIST urban driving localization and mapping" loading="lazy">
-                </figure>
-                <div class="evidence-copy">
-                  <span class="evidence-kicker">Scale test</span>
-                  <h4>The same estimator remains coherent on city-scale driving routes.</h4>
-                  <p>The KAIST benchmark presents the deployment scale behind the drift-rate numbers on long urban trajectories.</p>
+              <div class="kaist-sequence-showcase">
+                <p class="uf-subblock-lead has-text-justified" style="margin-bottom: 0;">
+                  <strong>KAIST · Urban 29</strong> exceeds <strong>29 km/h</strong> peak speed and <strong>3.5 km</strong> route length. Ultra-Fusion maintains stable localization and accurate mapping on this sequence.
+                </p>
+                <div class="kaist-sequence-pair">
+                  <div class="kaist-sequence-item">
+                    <div class="seq-video-wrap">
+                      <video class="teaser-video" autoplay controls muted loop playsinline preload="none">
+                        <source src="./static/videos/speed/kaist.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                      </video>
+                    </div>
+                    <p class="uf-media-caption"><strong>Onboard running.</strong> Localization and mapping during the Urban 29 drive.</p>
+                  </div>
+                  <div class="kaist-sequence-item">
+                    <figure class="evidence-figure">
+                      <img src="./static/images/paper/kaist_overview.png" alt="KAIST Urban 29 trajectory overlaid on Google Maps" loading="lazy">
+                    </figure>
+                    <p class="uf-media-caption"><strong>Google Maps overlay.</strong> The same Urban 29 run after completion, with the estimated trajectory projected onto the satellite map.</p>
+                  </div>
                 </div>
-              </div>
-              <div class="seq-video-feature">
-                <div class="seq-video-wrap">
-                  <video class="teaser-video" autoplay controls muted loop playsinline preload="none">
-                    <source src="./static/videos/speed/kaist.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                  </video>
-                </div>
-                <p class="uf-media-caption"><strong>KAIST · Urban 29.</strong> Urban driving sequence with peak speed over <strong>29 km/h</strong> and route length over <strong>3.5 km</strong>. Ultra-Fusion maintains stable localization and accurate mapping throughout the trajectory.</p>
+                <p class="kaist-sequence-note">Both panels visualize the same KAIST Urban 29 sequence: the left panel replays the onboard run; the right panel shows the post-run trajectory on Google Maps.</p>
               </div>
               <div class="content has-text-justified" style="margin-top: 0.85rem;">
                 <p>
-                  On KAIST Urban 29 and related urban routes (up to <strong>96.9 km/h</strong> on the full benchmark), Ultra-Fusion (LVWIO) reaches average drift around <strong>0.38%</strong> with strong stability across high-speed driving sequences.
+                  Across the full KAIST benchmark (up to <strong>96.9 km/h</strong>), Ultra-Fusion (LVWIO) reaches average drift around <strong>0.38%</strong> with strong stability on high-speed urban sequences.
                 </p>
               </div>
             </div>
