@@ -101,6 +101,31 @@
       text-align: left;
     }
 
+    .uf-subblock {
+      margin-top: 0.35rem;
+    }
+
+    .uf-subblock + .uf-subblock {
+      margin-top: 1.65rem;
+      padding-top: 1.45rem;
+      border-top: 1px solid rgba(0, 100, 150, 0.1);
+    }
+
+    .uf-subblock-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #1a5775;
+      margin: 0 0 0.75rem;
+      letter-spacing: 0.01em;
+    }
+
+    .uf-subblock-lead {
+      margin-bottom: 0.85rem;
+      color: #204a66;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
     .uf-media-grid,
     .seq-video-grid {
       display: grid;
@@ -561,6 +586,21 @@
       height: auto;
       border-radius: 8px;
       box-shadow: 0 10px 26px rgba(0, 0, 0, 0.12);
+    }
+
+    .seq-video-feature {
+      margin: 1.35rem 0 0.25rem;
+    }
+
+    .seq-video-feature .seq-video-wrap {
+      max-width: min(920px, 100%);
+      margin: 0 auto;
+    }
+
+    .seq-video-feature .uf-media-caption {
+      max-width: min(920px, 100%);
+      margin-left: auto;
+      margin-right: auto;
     }
 
     @media (max-width: 900px) {
@@ -1085,38 +1125,61 @@
 
           <div class="uf-block" id="longterm-highspeed">
             <h3 class="uf-subsection-title">Long-Term and High-Speed Operation</h3>
-            <div class="evidence-story-card compact-evidence">
-              <figure class="evidence-figure">
-                <img src="./static/images/paper/kaist_overview.png" alt="Large-scale KAIST urban driving localization and mapping" loading="lazy">
-              </figure>
-              <div class="evidence-copy">
-                <span class="evidence-kicker">Scale test</span>
-                <h4>The same estimator remains coherent on city-scale driving routes.</h4>
-                <p>High-speed urban motion stresses wheel-inertial prediction, LiDAR geometry, visual correction, and calibration consistency at once. The KAIST result presents the deployment scale behind the drift-rate numbers.</p>
-              </div>
+
+            <div class="uf-subblock" id="longterm-operation">
+              <h4 class="uf-subblock-title">Long-Term Operation</h4>
+              <p class="uf-subblock-lead has-text-justified">
+                Extended M3DGR trajectories evaluate whether localization drift stays bounded over long-duration wheeled routes.
+              </p>
+              <details class="ablation-detail" open>
+                <summary>Long-duration M3DGR sequences (ATE RMSE, m)</summary>
+                <div class="ablation-detail-body">
+                  <div class="ablation-table-wrap">
+                    <table class="ablation-table">
+                      <thead>
+                        <tr><th>Method</th><th>Longtime01</th><th>Longtime02</th></tr>
+                      </thead>
+                      <tbody>
+                        <tr><td>FAST-LIVO</td><td>20.5</td><td>27.5</td></tr>
+                        <tr><td>FAST-LIVO2</td><td>5.13</td><td>8.4</td></tr>
+                        <tr><td>Ground-Fusion++</td><td>7.5</td><td>15.9</td></tr>
+                        <tr class="ablation-best-row"><td>Ultra-Fusion (LVWIO)</td><td>4.3</td><td>2.8</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </details>
             </div>
-            <details class="ablation-detail" open>
-              <summary>Long-duration M3DGR sequences (ATE RMSE, m)</summary>
-              <div class="ablation-detail-body">
-                <div class="ablation-table-wrap">
-                  <table class="ablation-table">
-                    <thead>
-                      <tr><th>Method</th><th>Longtime01</th><th>Longtime02</th></tr>
-                    </thead>
-                    <tbody>
-                      <tr><td>FAST-LIVO</td><td>20.5</td><td>27.5</td></tr>
-                      <tr><td>FAST-LIVO2</td><td>5.13</td><td>8.4</td></tr>
-                      <tr><td>Ground-Fusion++</td><td>7.5</td><td>15.9</td></tr>
-                      <tr class="ablation-best-row"><td>Ultra-Fusion (LVWIO)</td><td>4.3</td><td>2.8</td></tr>
-                    </tbody>
-                  </table>
+
+            <div class="uf-subblock" id="highspeed-operation">
+              <h4 class="uf-subblock-title">High-Speed Operation</h4>
+              <p class="uf-subblock-lead has-text-justified">
+                Urban driving on KAIST stresses wheel-inertial prediction, LiDAR geometry, visual correction, and calibration consistency under high-speed motion.
+              </p>
+              <div class="evidence-story-card compact-evidence">
+                <figure class="evidence-figure">
+                  <img src="./static/images/paper/kaist_overview.png" alt="Large-scale KAIST urban driving localization and mapping" loading="lazy">
+                </figure>
+                <div class="evidence-copy">
+                  <span class="evidence-kicker">Scale test</span>
+                  <h4>The same estimator remains coherent on city-scale driving routes.</h4>
+                  <p>The KAIST benchmark presents the deployment scale behind the drift-rate numbers on long urban trajectories.</p>
                 </div>
               </div>
-            </details>
-            <div class="content has-text-justified" style="margin-top: 0.7rem;">
-              <p>
-                On KAIST (up to <strong>96.9 km/h</strong>), Ultra-Fusion (LVWIO) reaches average drift around <strong>0.38%</strong> with strong stability across urban sequences.
-              </p>
+              <div class="seq-video-feature">
+                <div class="seq-video-wrap">
+                  <video class="teaser-video" autoplay controls muted loop playsinline preload="none">
+                    <source src="./static/videos/speed/kaist.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+                <p class="uf-media-caption"><strong>KAIST · Urban 29.</strong> Urban driving sequence with peak speed over <strong>29 km/h</strong> and route length over <strong>3.5 km</strong>. Ultra-Fusion maintains stable localization and accurate mapping throughout the trajectory.</p>
+              </div>
+              <div class="content has-text-justified" style="margin-top: 0.85rem;">
+                <p>
+                  On KAIST Urban 29 and related urban routes (up to <strong>96.9 km/h</strong> on the full benchmark), Ultra-Fusion (LVWIO) reaches average drift around <strong>0.38%</strong> with strong stability across high-speed driving sequences.
+                </p>
+              </div>
             </div>
           </div>
         </div>
