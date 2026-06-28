@@ -537,26 +537,34 @@
     }
 
     .ablation-table-wrap {
-      overflow-x: auto;
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
     }
 
     .ablation-table {
       width: 100%;
+      max-width: 100%;
       border-collapse: collapse;
-      font-size: 0.9rem;
-      min-width: 560px;
+      font-size: 0.82rem;
+      table-layout: fixed;
     }
 
     .ablation-table th,
     .ablation-table td {
       border: 1px solid rgba(0, 100, 150, 0.16);
-      padding: 0.35rem 0.5rem;
+      padding: 0.3rem 0.35rem;
       text-align: center;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+      line-height: 1.3;
+      vertical-align: middle;
     }
 
     .ablation-table th:first-child,
     .ablation-table td:first-child {
-      min-width: 180px;
+      width: 22%;
+      min-width: 0;
     }
 
     .ablation-table td:first-child {
@@ -567,6 +575,8 @@
       background: #f3faff;
       color: #1f5777;
       text-align: center;
+      font-size: 0.78rem;
+      font-weight: 700;
     }
 
     .ablation-best-row {
@@ -1556,12 +1566,18 @@
   <div class="container is-max-desktop">
     <div class="column is-four-fifths content-card" style="margin: 0 auto;">
       <h2 class="title is-3 section-title">BibTeX</h2>
-      <pre class="bibtex-block"><code>@article{tian2026ultrafusion,
+      <div class="bibtex-panel">
+        <button type="button" class="bibtex-copy-button" id="bibtex-copy-button" aria-label="Copy BibTeX to clipboard">
+          <i class="fas fa-copy" aria-hidden="true"></i>
+          <span>Copy</span>
+        </button>
+        <pre class="bibtex-block" id="bibtex-block"><code>@article{tian2026ultrafusion,
   author  = {Yihong Tian and Junjie Zhang and Liuyang Li and Deteng Zhang and Yunfei Zuo and Jie Yin},
   title   = {Ultra-Fusion: A Resilient Tightly-Coupled Multi-Sensor Fusion SLAM Framework under Sensor Degradation and Spatiotemporal Perturbation for Intelligent Transportation Systems},
   journal = {arXiv preprint arXiv:2606.21223},
   year    = {2026},
 }</code></pre>
+      </div>
     </div>
   </div>
 </section>

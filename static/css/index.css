@@ -326,9 +326,47 @@ body.uf-nav-open {
   border-bottom-color: var(--uf-primary-deep);
 }
 
+.uf-bibtex-section .bibtex-panel {
+  position: relative;
+}
+
+.uf-bibtex-section .bibtex-copy-button {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.7rem;
+  border: 1px solid rgba(0, 100, 150, 0.22);
+  border-radius: 999px;
+  background: #ffffff;
+  color: var(--uf-primary-deep);
+  font-family: 'Google Sans', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.uf-bibtex-section .bibtex-copy-button:hover {
+  color: var(--uf-primary);
+  background: #f7fcff;
+  border-color: rgba(0, 100, 150, 0.35);
+  transform: translateY(-1px);
+}
+
+.uf-bibtex-section .bibtex-copy-button.is-copied {
+  color: #0f6b52;
+  background: #eefaf5;
+  border-color: rgba(15, 107, 82, 0.28);
+}
+
 .uf-bibtex-section .bibtex-block {
   margin: 0;
-  padding: 1rem 1.1rem;
+  padding: 2.65rem 1.1rem 1rem;
   border-radius: 0;
   background: #f4fafd;
   border: 1px solid var(--uf-border-soft);

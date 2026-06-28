@@ -110,4 +110,56 @@ $(document).ready(function() {
       interpolationSlider.prop('max', NUM_INTERP_FRAMES - 1);
     }
 
+    var bibtexCopyButton = document.getElementById("bibtex-copy-button");
+    var bibtexBlock = document.getElementById("bibtex-block");
+    if (bibtexCopyButton && bibtexBlock) {
+      var bibtexCopyLabel = bibtexCopyButton.querySelector("span");
+
+      function setBibtexCopyState(copied) {
+        bibtexCopyButton.classList.toggle("is-copied", copied);
+        if (bibtexCopyLabel) {
+          bibtexCopyLabel.textContent = copied ? "Copied!" : "Copy";
+        }
+      }
+
+      function copyBibtexFallback(text) {
+        var textarea = document.createElement("textarea");
+        textarea.value = text;
+        textarea.setAttribute("readonly", "");
+        textarea.style.position = "absolute";
+        textarea.style.left = "-9999px";
+        document.body.appendChild(textarea);
+        textarea.select();
+        var copied = false;
+        try {
+          copied = document.execCommand("copy");
+        } catch (error) {
+          copied = false;
+        }
+        document.body.removeChild(textarea);
+        return copied;
+      }
+
+      bibtexCopyButton.addEventListener("click", function() {
+        var text = (bibtexBlock.textContent || "").trim();
+        if (!text) return;
+
+        function handleSuccess() {
+          setBibtexCopyState(true);
+          window.setTimeout(function() {
+            setBibtexCopyState(false);
+          }, 2000);
+        }
+
+        if (navigator.clipboard && window.isSecureContext) {
+          navigator.clipboard.writeText(text).then(handleSuccess).catch(function() {
+            if (copyBibtexFallback(text)) handleSuccess();
+          });
+          return;
+        }
+
+        if (copyBibtexFallback(text)) handleSuccess();
+      });
+    }
+
 })
