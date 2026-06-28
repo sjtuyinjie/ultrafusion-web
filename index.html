@@ -213,6 +213,24 @@
       border: 1px solid rgba(0, 100, 150, 0.14);
     }
 
+    .evidence-figure video {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 8px;
+      border: 1px solid rgba(0, 100, 150, 0.14);
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.12);
+    }
+
+    #d360-multi-camera .evidence-story-card {
+      grid-template-columns: minmax(0, 0.62fr) minmax(0, 1.38fr);
+    }
+
+    #d360-multi-camera .evidence-figure {
+      max-width: 380px;
+      justify-self: start;
+    }
+
     .evidence-kicker {
       display: inline-block;
       font-size: 0.78rem;
@@ -682,6 +700,7 @@
           <a class="navbar-item" href="#online-demo">Demo</a>
           <a class="navbar-item" href="#benchmark-highlights">Benchmark</a>
           <a class="navbar-item" href="#cross-platform-overview">Cross-Platform</a>
+          <a class="navbar-item" href="#d360-multi-camera">Multi-Cam</a>
           <a class="navbar-item" href="#ablation-evidence">Evidence</a>
           <a class="navbar-item" href="#BibTeX">BibTeX</a>
         </div>
@@ -1334,6 +1353,33 @@
           </div>
 
           <p class="ablation-conclusion has-text-justified"><strong>Conclusion.</strong> The same unified estimator transfers from wheeled ITS to legged and aerial platforms without redesigning the core fusion architecture.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section uf-section" id="d360-multi-camera">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column is-12 section-content-wrap content-card">
+          <h2 class="title is-3 section-title">Multi-Camera LVIO on the D360 Rig</h2>
+          <div class="evidence-story-card compact-evidence">
+            <figure class="evidence-figure">
+              <video class="teaser-video" autoplay controls muted loop playsinline preload="none">
+                <source src="./static/videos/speed/multicam.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </figure>
+            <div class="evidence-copy">
+              <span class="evidence-kicker">Custom rig, one estimator</span>
+              <h4>Three fisheye cameras and Livox LiDAR are fused in one LVIO sliding-window estimator.</h4>
+              <p>
+                Recorded on the <strong>D360</strong> platform — three fisheye cameras, a Livox LiDAR, and an IMU — using the
+                <a href="https://github.com/sjtuyinjie/Ultra-Fusion/blob/main/docs/visual_life_d360.md" target="_blank" rel="noopener">cv_life D360 profile</a>.
+                Ultra-Fusion produces dense colored reconstruction along the route, with the estimated trajectory closing the loop at the end of the session.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
