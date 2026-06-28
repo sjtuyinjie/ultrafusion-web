@@ -629,13 +629,41 @@
 
     .kaist-sequence-showcase {
       margin-top: 0.35rem;
+      width: 100%;
     }
 
     .kaist-sequence-pair {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: minmax(0, 1.778fr) minmax(0, 2.549fr);
       gap: 1.15rem;
+      width: 100%;
       margin-top: 0.85rem;
+      align-items: start;
+    }
+
+    .kaist-sequence-item {
+      min-width: 0;
+    }
+
+    .kaist-sequence-item .seq-video-wrap,
+    .kaist-sequence-item .evidence-figure {
+      width: 100%;
+      margin: 0;
+      overflow: hidden;
+      border-radius: 8px;
+      border: 1px solid rgba(0, 100, 150, 0.14);
+      background: #eef6fb;
+      line-height: 0;
+    }
+
+    .kaist-sequence-item .seq-video-wrap .teaser-video,
+    .kaist-sequence-item .evidence-figure img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border: none;
+      border-radius: 0;
+      box-shadow: none;
     }
 
     .kaist-sequence-item .uf-media-caption {
@@ -644,10 +672,6 @@
 
     .kaist-sequence-item .evidence-figure {
       margin: 0;
-    }
-
-    .kaist-sequence-item .evidence-figure img {
-      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.12);
     }
 
     .kaist-sequence-note {
@@ -1262,7 +1286,7 @@
                     <p class="uf-media-caption"><strong>Google Maps overlay.</strong> The same Urban 29 run after completion, with the estimated trajectory projected onto the satellite map.</p>
                   </div>
                 </div>
-                <p class="kaist-sequence-note">Both panels visualize the same KAIST Urban 29 sequence: the left panel replays the onboard run; the right panel shows the post-run trajectory on Google Maps.</p>
+                <!-- <p class="kaist-sequence-note">Both panels visualize the same KAIST Urban 29 sequence: the left panel replays the onboard run; the right panel shows the post-run trajectory on Google Maps.</p> -->
               </div>
               <div class="content has-text-justified" style="margin-top: 0.85rem;">
                 <p>
