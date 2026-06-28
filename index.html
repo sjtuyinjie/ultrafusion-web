@@ -231,6 +231,15 @@
       justify-self: start;
     }
 
+    #gnss-anchor-evidence.evidence-story-card {
+      grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
+    }
+
+    #gnss-anchor-evidence .evidence-figure {
+      max-width: 420px;
+      justify-self: start;
+    }
+
     .evidence-kicker {
       display: inline-block;
       font-size: 0.78rem;
@@ -1219,7 +1228,7 @@
                 while GNSS-denial trajectories remain continuous through denied segments; wheel reliability checks reduce average ATE versus raw wheel and Ground-Fusion WIO baselines.
               </p>
             </div>
-            <div class="evidence-story-card compact-evidence">
+            <div class="evidence-story-card compact-evidence" id="gnss-anchor-evidence">
               <figure class="evidence-figure">
                 <img src="./static/images/paper/gnss_routes.png" alt="GNSS augmentation and GNSS-denial trajectory evidence" loading="lazy">
               </figure>
