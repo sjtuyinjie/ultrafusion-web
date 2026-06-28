@@ -975,7 +975,7 @@
               <p>
                 <strong><a href="https://github.com/sjtuyinjie/Ultra-Fusion">Ultra-Fusion</a></strong> is a resilient tightly-coupled multi-sensor fusion SLAM framework for intelligent transportation systems.
                 A <span class="term-accent">Unified Sliding-Window Estimator</span> orders asynchronous measurements by timestamp and supports WIO, VIO, LIO, and LVIO with optional wheel and/or GNSS augmentation.
-                <span class="term-emphasis">Observability-Aware Initialization</span>, <span class="term-emphasis">Factor-Wise Reliability Scheduling</span>, and <span class="term-emphasis">Online Spatiotemporal Calibration</span> improve robustness under sensor degradation and calibration perturbation.
+                <span class="term-emphasis term-evidence">Observability-Aware Initialization<a class="term-evidence-link" href="#ablation-init">see ablation evidence</a></span>, <span class="term-emphasis term-evidence">Factor-Wise Reliability Scheduling<a class="term-evidence-link" href="#ablation-frs">see ablation evidence</a></span>, and <span class="term-emphasis term-evidence">Online Spatiotemporal Calibration<a class="term-evidence-link" href="#miscalibration-robustness">see ablation evidence</a></span> improve robustness under sensor degradation and calibration perturbation.
               </p>
             </div>
           </div>
@@ -1458,7 +1458,7 @@
                 reliability-aware factor gating and adaptive bootstrap, rather than adding sensors alone.
               </p>
             </div>
-            <div class="ablation-summary-grid">
+            <div class="ablation-summary-grid" id="ablation-frs">
               <div class="ablation-summary-card">
                 <span class="ablation-card-label">LiDAR FRS gain</span>
                 <strong>ATE -75.3%</strong>
@@ -1481,7 +1481,7 @@
               </div>
             </div>
 
-            <details class="ablation-detail" open>
+            <details class="ablation-detail" id="ablation-init" open>
               <summary>Initialization ablation (18 sequences with complete first-20s outputs)</summary>
               <div class="ablation-detail-body">
                 <div class="ablation-table-wrap">
